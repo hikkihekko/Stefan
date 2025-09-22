@@ -97,7 +97,7 @@ const HomePage: React.FC = () => {
           </div>
         </div>
                 <div className="justify-self-end">
-         <div className="rounded-[24px] bg-white text-slate-900" style={{width:392, height:448, marginTop: 24, marginRight: 24}}>
+         <div className="rounded-[24px] bg-white text-slate-900" style={{width:392, height:440, marginTop: 24, marginRight: 24}}>
            <div className="h-full flex flex-col px-6" style={{paddingTop: 24, paddingBottom: 24}}>
              <div className="flex flex-col items-center">
                <h3 className="font-baron font-bold text-center" style={{fontSize: 28, margin: 0, marginBottom: 24, lineHeight: 1}}>подобрать технику</h3>
