@@ -214,13 +214,14 @@ const TrucksPage: React.FC = () => {
                 style={{height: 460}}
               >
                 {/* Изображение */}
-                <div className="relative" style={{height: 240}}>
+                <div className="relative bg-white" style={{height: 240}}>
                   <img 
                     src={truck.image}
                     alt={truck.name}
-                    className="absolute inset-0 w-full h-full object-cover object-center"
+                    className="absolute inset-0 w-full h-full"
                     style={{
-                      imageRendering: '-webkit-optimize-contrast'
+                      objectFit: 'fill',
+                      imageRendering: 'high-quality'
                     }}
                     decoding="sync"
                   />

@@ -218,10 +218,10 @@ const AutoCranesPage: React.FC = () => {
 
   const weightCategories = [
     { id: 'all', name: 'Все автокраны', count: autoCranes.length },
-    { id: '14-16', name: '14-16 т.', count: autoCranes.filter(c => c.category === '14-16').length },
-    { id: '25-30', name: '25-30 т.', count: autoCranes.filter(c => c.category === '25-30').length },
-    { id: '32-50', name: '32-50 т.', count: autoCranes.filter(c => c.category === '32-50').length },
-    { id: '55-100', name: '55-100 т.', count: autoCranes.filter(c => c.category === '55-100').length }
+    { id: '14-16', name: '14-16 тонн', count: autoCranes.filter(c => c.category === '14-16').length },
+    { id: '25-30', name: '25-30 тонн', count: autoCranes.filter(c => c.category === '25-30').length },
+    { id: '32-50', name: '32-50 тонн', count: autoCranes.filter(c => c.category === '32-50').length },
+    { id: '55-100', name: '55-100 тонн', count: autoCranes.filter(c => c.category === '55-100').length }
   ]
 
   const generateWhatsAppMessage = (crane: any) => {
@@ -290,13 +290,14 @@ const AutoCranesPage: React.FC = () => {
                 style={{height: 460}}
               >
                 {/* Изображение */}
-                <div className="relative" style={{height: 240}}>
+                <div className="relative bg-white" style={{height: 240}}>
                   <img 
                     src={crane.image}
                     alt={crane.name}
-                    className="absolute inset-0 w-full h-full object-cover object-center"
+                    className="absolute inset-0 w-full h-full"
                     style={{
-                      imageRendering: '-webkit-optimize-contrast'
+                      objectFit: 'fill',
+                      imageRendering: 'high-quality'
                     }}
                     decoding="sync"
                   />
