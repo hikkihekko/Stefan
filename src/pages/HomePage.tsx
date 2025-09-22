@@ -240,6 +240,15 @@ const HomePage: React.FC = () => {
                   >
                     {cardContent}
                   </Link>
+                ) : item.name === 'Экскаваторы-погрузчики' ? (
+                  <Link 
+                    key={index}
+                    to="/excavator-loaders"
+                    className="relative rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 block"
+                    style={{height: 200}}
+                  >
+                    {cardContent}
+                  </Link>
                 ) : item.name === 'Манипуляторы' ? (
                   <Link 
                     key={index}
@@ -253,6 +262,15 @@ const HomePage: React.FC = () => {
                   <Link 
                     key={index}
                     to="/trucks"
+                    className="relative rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 block"
+                    style={{height: 200}}
+                  >
+                    {cardContent}
+                  </Link>
+                ) : item.name === 'Экскаваторы гусеничные' ? (
+                  <Link 
+                    key={index}
+                    to="/excavator-tracked"
                     className="relative rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 block"
                     style={{height: 200}}
                   >

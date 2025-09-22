@@ -194,16 +194,17 @@ const ManipulatorsPage: React.FC = () => {
               <div 
                 key={manipulator.id}
                 className="bg-white rounded-[24px] shadow-lg overflow-hidden flex flex-col"
-                style={{height: 460}}
+                style={{height: 520}}
               >
                 {/* Изображение */}
-                <div className="relative" style={{height: 240}}>
+                <div className="relative bg-white" style={{height: 280}}>
                   <img 
                     src={manipulator.image}
                     alt={manipulator.name}
-                    className="absolute inset-0 w-full h-full object-cover object-center"
+                    className="absolute inset-0 w-full h-full"
                     style={{
-                      imageRendering: '-webkit-optimize-contrast'
+                      objectFit: 'fill',
+                      imageRendering: 'high-quality'
                     }}
                     decoding="sync"
                   />
@@ -222,19 +223,19 @@ const ManipulatorsPage: React.FC = () => {
 
                   {/* Характеристики */}
                   <div className="space-y-2 mb-4">
-                    <div className="flex justify-between text-[14px] font-manrope">
+                    <div className="flex justify-between text-[16px] font-manrope">
                       <span className="text-slate-500">Грузоподъемность стрелы:</span>
                       <span className="text-slate-900 font-medium">{manipulator.specs.craneCapacity} т</span>
                     </div>
-                    <div className="flex justify-between text-[14px] font-manrope">
+                    <div className="flex justify-between text-[16px] font-manrope">
                       <span className="text-slate-500">Грузоподъемность борта:</span>
                       <span className="text-slate-900 font-medium">{manipulator.specs.bedCapacity} т</span>
                     </div>
-                    <div className="flex justify-between text-[14px] font-manrope">
+                    <div className="flex justify-between text-[16px] font-manrope">
                       <span className="text-slate-500">Вылет стрелы:</span>
                       <span className="text-slate-900 font-medium">{manipulator.specs.reach} м</span>
                     </div>
-                    <div className="flex justify-between text-[14px] font-manrope">
+                    <div className="flex justify-between text-[16px] font-manrope">
                       <span className="text-slate-500">Длина борта:</span>
                       <span className="text-slate-900 font-medium">{manipulator.specs.bedLength} м</span>
                     </div>

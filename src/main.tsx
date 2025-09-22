@@ -7,6 +7,8 @@ import './styles/articles.css'
 import RootLayout from './shared/RootLayout'
 import HomePage from './pages/HomePage'
 import AutoCranesPage from './pages/AutoCranesPage'
+import ExcavatorLoadersPage from './pages/ExcavatorLoadersPage'
+import ExcavatorTrackedPage from './pages/ExcavatorTrackedPage'
 import ManipulatorsPage from './pages/ManipulatorsPage'
 import TrucksPage from './pages/TrucksPage'
 
@@ -23,6 +25,8 @@ const router = createBrowserRouter([
       { path: 'articles', element: <ArticlesList /> },
       { path: 'articles/:slug', element: <ArticleDetail /> },
       { path: 'autocranes', element: <AutoCranesPage /> },
+      { path: 'excavator-loaders', element: <ExcavatorLoadersPage /> },
+      { path: 'excavator-tracked', element: <ExcavatorTrackedPage /> },
       { path: 'manipulators', element: <ManipulatorsPage /> },
       { path: 'trucks', element: <TrucksPage /> },
     ],
