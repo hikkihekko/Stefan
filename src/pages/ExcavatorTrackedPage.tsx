@@ -271,3 +271,4 @@ const ExcavatorTrackedPage: React.FC = () => {
 }
 
 export default ExcavatorTrackedPage
+
