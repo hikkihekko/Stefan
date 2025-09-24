@@ -204,11 +204,11 @@ const HomePage: React.FC = () => {
                           <span className="text-white/80 font-manrope font-medium" style={{fontSize: 18}}>
                             {(() => {
                               const prices: {[key: string]: string} = {
-                                'Экскаваторы гусеничные': 'от 19 000 ₽/смена',
-                                'Самосвалы': 'от 15 000 ₽/смена',
-                                'Манипуляторы': 'от 15 000 ₽/смена',
-                                'Экскаваторы-погрузчики': 'от 19 000 ₽/смена',
-                                'Мини экскаваторы': 'от 16 000 ₽/смена',
+                                'Экскаваторы гусеничные': 'от 25 000 ₽/смена',
+                                'Самосвалы': 'от 20 000 ₽/смена',
+                                'Манипуляторы': 'от 20 000 ₽/смена',
+                                'Экскаваторы-погрузчики': 'от 25 000 ₽/смена',
+                                'Мини экскаваторы': 'от 20 000 ₽/смена',
                                 'Фронтальные погрузчики': 'от 20 000 ₽/смена',
                                 'Автовышки': 'от 20 000 ₽/смена',
                                 'Автокраны': 'от 16 000 ₽/смена',
@@ -271,24 +271,6 @@ const HomePage: React.FC = () => {
                   <Link 
                     key={index}
                     to="/excavator-tracked"
-                    className="relative rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 block"
-                    style={{height: 200}}
-                  >
-                    {cardContent}
-                  </Link>
-                ) : item.name === 'Мини экскаваторы' ? (
-                  <Link 
-                    key={index}
-                    to="/mini-excavators"
-                    className="relative rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 block"
-                    style={{height: 200}}
-                  >
-                    {cardContent}
-                  </Link>
-                ) : item.name === 'Фронтальные погрузчики' ? (
-                  <Link 
-                    key={index}
-                    to="/front-loaders"
                     className="relative rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 block"
                     style={{height: 200}}
                   >
