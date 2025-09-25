@@ -244,6 +244,21 @@ const ExcavatorTrackedPage: React.FC = () => {
             <h3 className="font-baron font-bold text-slate-900 mb-4" style={{fontSize: 24}}>
               Почему стоит арендовать экскаватор гусеничный у нас?
             </h3>
+            
+            <div className="mt-6 p-4 bg-white rounded-[16px] border border-slate-200">
+              <h4 className="font-manrope font-semibold text-slate-900 mb-2" style={{fontSize: 18}}>
+                Ключевые факторы скорости земляных работ
+              </h4>
+              <p className="font-manrope text-slate-600 mb-3" style={{fontSize: 16}}>
+                От чего зависит скорость работы экскаватора? Разбираем 7 главных факторов: от выбора модели и навески до квалификации оператора
+              </p>
+              <Link
+                to="/articles/arenda-ekskavatora-moskva-2025-faktory-skorosti-zemlyanyh-rabot"
+                className="inline-flex items-center text-[#3535B9] hover:text-[#2929A3] font-manrope font-medium text-[16px] transition-colors"
+              >
+                Читать статью →
+              </Link>
+            </div>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <h4 className="font-manrope font-semibold text-slate-900 mb-2" style={{fontSize: 18}}>

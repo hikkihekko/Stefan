@@ -447,14 +447,20 @@ const HomePage: React.FC = () => {
          <h2 className="font-baron text-3xl">Недавние статьи</h2>
          <Link to="/articles" className="text-white/80 hover:text-white underline">Все статьи</Link>
        </div>
-       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-         {['Как выбрать автокран','Правила безопасности','ТО техники'].map((t,i)=> (
-           <a key={i} href="/articles" className="glass rounded-2xl p-5 block hover:bg-white/15 transition-colors">
-             <div className="font-semibold">{t}</div>
-             <div className="text-white/75 text-sm mt-2">Краткое описание статьи...</div>
-           </a>
-         ))}
-       </div>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Link to="/articles/top-5-vostrebovannyh-vidov-spectehniki-moskva-2025" className="glass rounded-2xl p-5 block hover:bg-white/15 transition-colors">
+          <div className="font-semibold">Топ-5 востребованной спецтехники 2025</div>
+          <div className="text-white/75 text-sm mt-2">Рейтинг самых популярных видов техники в Москве и МО</div>
+        </Link>
+        <Link to="/articles/arenda-samosvala-moskva-2025-vybor-tehniki-gruntov" className="glass rounded-2xl p-5 block hover:bg-white/15 transition-colors">
+          <div className="font-semibold">Как выбрать самосвал</div>
+          <div className="text-white/75 text-sm mt-2">Подбор техники для различных грунтов и типов работ</div>
+        </Link>
+        <Link to="/articles/arenda-mini-ekskavatora-moskva-2025-razresheniya-stoimost" className="glass rounded-2xl p-5 block hover:bg-white/15 transition-colors">
+          <div className="font-semibold">Мини-экскаватор в городе</div>
+          <div className="text-white/75 text-sm mt-2">Разрешения, ограничения и реальная стоимость аренды</div>
+        </Link>
+      </div>
      </section>
 
      {/* Футер */}
