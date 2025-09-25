@@ -352,6 +352,21 @@ const AutoCranesPage: React.FC = () => {
             <h3 className="font-baron font-bold text-slate-900 mb-4" style={{fontSize: 24}}>
               Почему стоит арендовать автокран у нас?
             </h3>
+            
+            <div className="mt-6 p-4 bg-white rounded-[16px] border border-slate-200">
+              <h4 className="font-manrope font-semibold text-slate-900 mb-2" style={{fontSize: 18}}>
+                Завоз материала на этаж: сравнение техники
+              </h4>
+              <p className="font-manrope text-slate-600 mb-3" style={{fontSize: 16}}>
+                Сравниваем автовышку, телепогрузчик и автокран с гуськом по цене, скорости и безопасности в 2025 году
+              </p>
+              <Link
+                to="/articles/zavoz-materiala-na-etazh-avtovyshka-telepogruzchik-avtokran-sravnenie-2025"
+                className="inline-flex items-center text-[#3535B9] hover:text-[#2929A3] font-manrope font-medium text-[16px] transition-colors"
+              >
+                Читать статью →
+              </Link>
+            </div>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <h4 className="font-manrope font-semibold text-slate-900 mb-2" style={{fontSize: 18}}>

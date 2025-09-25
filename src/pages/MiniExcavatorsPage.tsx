@@ -352,6 +352,22 @@ const MiniExcavatorsPage: React.FC = () => {
                 </p>
               </div>
             </div>
+            
+            {/* Ссылка на статью */}
+            <div className="mt-6 p-4 bg-white rounded-[16px] border border-slate-200">
+              <h4 className="font-manrope font-semibold text-slate-900 mb-2" style={{fontSize: 18}}>
+                Разрешения и ограничения для работы в городе
+              </h4>
+              <p className="font-manrope text-slate-600 mb-3" style={{fontSize: 16}}>
+                Полное руководство по аренде мини-экскаватора в Москве и МО: разрешения, ограничения, реальная стоимость и кейсы применения
+              </p>
+              <Link 
+                to="/articles/arenda-mini-ekskavatora-moskva-2025-razresheniya-stoimost"
+                className="inline-flex items-center text-[#3535B9] hover:text-[#2929A3] font-manrope font-medium text-[16px] transition-colors"
+              >
+                Читать статью →
+              </Link>
+            </div>
           </div>
 
         </div>
