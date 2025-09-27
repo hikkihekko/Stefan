@@ -16,6 +16,9 @@ import TrucksPage from './pages/TrucksPage'
 import ArticlesList from './pages/Articles/ArticlesList'
 import ArticleDetail from './pages/Articles/ArticleDetail'
 
+// Sitemap
+import SitemapPage from './pages/SitemapPage'
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -29,6 +32,7 @@ const router = createBrowserRouter([
       { path: 'excavator-tracked', element: <ExcavatorTrackedPage /> },
       { path: 'manipulators', element: <ManipulatorsPage /> },
       { path: 'trucks', element: <TrucksPage /> },
+      { path: 'sitemap', element: <SitemapPage /> },
     ],
   },
 ])
