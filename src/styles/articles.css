@@ -299,10 +299,11 @@ img {
 
 /* Изображения в статьях */
 .article-content img {
-  width: 100%;
+  width: 50%;
   height: auto;
   border-radius: 12px;
-  margin: 32px 0;
+  margin: 32px auto;
+  display: block;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
   transition: transform 0.3s ease;
 }
@@ -312,13 +313,17 @@ img {
 }
 
 .article-content .article-hero-image img {
-  margin: 0 0 24px 0;
+  width: 50%;
+  margin: 0 auto 24px auto;
+  display: block;
   border-radius: 16px;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
 .article-content .article-image img {
-  margin: 40px 0;
+  width: 50%;
+  margin: 40px auto;
+  display: block;
   border-radius: 16px;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
@@ -330,6 +335,53 @@ img {
   margin-top: -16px;
   margin-bottom: 32px;
   font-style: italic;
+}
+
+/* Адаптивность для изображений */
+@media (max-width: 768px) {
+  .article-content img {
+    width: 80%;
+    margin: 24px auto;
+  }
+  
+  .article-content .article-hero-image img {
+    width: 80%;
+    margin: 0 auto 20px auto;
+  }
+  
+  .article-content .article-image img {
+    width: 80%;
+    margin: 32px auto;
+  }
+  
+  .article-content .image-caption {
+    font-size: 16px;
+    margin-top: -12px;
+    margin-bottom: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .article-content img {
+    width: 90%;
+    margin: 20px auto;
+  }
+  
+  .article-content .article-hero-image img {
+    width: 90%;
+    margin: 0 auto 16px auto;
+  }
+  
+  .article-content .article-image img {
+    width: 90%;
+    margin: 28px auto;
+  }
+  
+  .article-content .image-caption {
+    font-size: 14px;
+    margin-top: -8px;
+    margin-bottom: 20px;
+  }
 }
 
 /* Выделенные блоки информации */
