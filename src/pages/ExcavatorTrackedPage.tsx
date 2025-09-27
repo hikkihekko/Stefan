@@ -8,193 +8,97 @@ const ExcavatorTrackedPage: React.FC = () => {
   const excavatorTracked = [
     {
       id: 1,
-      name: 'экскаватор гусеничный hitachi 180',
+      name: 'Экскаватор гусеничный 20т',
       capacity: '1.0',
-      image: '/images/экс гуси/hitachi 180.webp',
-      price: 'от 32 000 ₽/смена',
-      description: 'Объем ковша: 1.0 м³. Глубина копания: 5.3 м',
-      category: '18-22',
+      image: '/images/экск гус.jpg',
+      price: 'от 25 000 ₽/смена',
+      description: 'Объем ковша: 1.0 м³. Глубина копания: 6.5 м',
+      category: '20-25',
       specs: {
         bucketVolume: 1.0,
-        maxDepth: 5.3,
-        maxHeight: 6.0,
-        weight: 18
+        maxDepth: 6.5,
+        maxHeight: 7.2,
+        weight: 20000
       },
       phone: '+7 (921) 571-20-79'
     },
     {
       id: 2,
-      name: 'экскаватор гусеничный hyundai r180lc-7',
-      capacity: '0.8',
-      image: '/images/экс гуси/hyondai r180lc.webp',
-      price: 'от 32 000 ₽/смена',
-      description: 'Объем ковша: 0.8 м³. Глубина копания: 6.0 м',
-      category: '18-22',
+      name: 'Экскаватор гусеничный 25т',
+      capacity: '1.2',
+      image: '/images/экск гус.jpg',
+      price: 'от 28 000 ₽/смена',
+      description: 'Объем ковша: 1.2 м³. Глубина копания: 7.0 м',
+      category: '20-25',
       specs: {
-        bucketVolume: 0.8,
-        maxDepth: 6.0,
-        maxHeight: 6.8,
-        weight: 18.2
+        bucketVolume: 1.2,
+        maxDepth: 7.0,
+        maxHeight: 7.8,
+        weight: 25000
       },
       phone: '+7 (921) 571-20-79'
     },
     {
       id: 3,
-      name: 'экскаватор гусеничный hitachi zaxis 200',
-      capacity: '1.1',
-      image: '/images/экс гуси/hitachi zaxis 200.webp',
+      name: 'Экскаватор гусеничный 30т',
+      capacity: '1.5',
+      image: '/images/экск гус.jpg',
       price: 'от 32 000 ₽/смена',
-      description: 'Объем ковша: 1.1 м³. Глубина копания: 8.0 м',
-      category: '18-22',
+      description: 'Объем ковша: 1.5 м³. Глубина копания: 7.5 м',
+      category: '30-35',
       specs: {
-        bucketVolume: 1.1,
-        maxDepth: 8.0,
-        maxHeight: 8.8,
-        weight: 20
+        bucketVolume: 1.5,
+        maxDepth: 7.5,
+        maxHeight: 8.2,
+        weight: 30000
       },
       phone: '+7 (921) 571-20-79'
     },
     {
       id: 4,
-      name: 'экскаватор гусеничный jcb 205',
-      capacity: '1.0',
-      image: '/images/экс гуси/jcb 205.webp',
-      price: 'от 33 000 ₽/смена',
-      description: 'Объем ковша: 1.0 м³. Глубина копания: 5.8 м',
-      category: '18-22',
+      name: 'Экскаватор гусеничный 35т',
+      capacity: '1.8',
+      image: '/images/экск гус.jpg',
+      price: 'от 35 000 ₽/смена',
+      description: 'Объем ковша: 1.8 м³. Глубина копания: 8.0 м',
+      category: '30-35',
       specs: {
-        bucketVolume: 1.0,
-        maxDepth: 5.8,
-        maxHeight: 6.5,
-        weight: 21
+        bucketVolume: 1.8,
+        maxDepth: 8.0,
+        maxHeight: 8.8,
+        weight: 35000
       },
       phone: '+7 (921) 571-20-79'
     },
     {
       id: 5,
-      name: 'экскаватор гусеничный komatsu pc220',
-      capacity: '1.9',
-      image: '/images/экс гуси/komatsupc220.webp',
-      price: 'от 33 000 ₽/смена',
-      description: 'Объем ковша: 1.9 м³. Глубина копания: 6.9 м',
-      category: '18-22',
+      name: 'Экскаватор гусеничный 40т',
+      capacity: '2.0',
+      image: '/images/экск гус.jpg',
+      price: 'от 40 000 ₽/смена',
+      description: 'Объем ковша: 2.0 м³. Глубина копания: 8.5 м',
+      category: '40-45',
       specs: {
-        bucketVolume: 1.9,
-        maxDepth: 6.9,
-        maxHeight: 7.6,
-        weight: 22
+        bucketVolume: 2.0,
+        maxDepth: 8.5,
+        maxHeight: 9.2,
+        weight: 40000
       },
       phone: '+7 (921) 571-20-79'
     },
     {
       id: 6,
-      name: 'экскаватор гусеничный jcb 220',
-      capacity: '1.25',
-      image: '/images/экс гуси/jcb220.webp',
-      price: 'от 33 000 ₽/смена',
-      description: 'Объем ковша: 1.25 м³. Глубина копания: 6.5 м',
-      category: '18-22',
+      name: 'Экскаватор гусеничный 45т',
+      capacity: '2.2',
+      image: '/images/экск гус.jpg',
+      price: 'от 45 000 ₽/смена',
+      description: 'Объем ковша: 2.2 м³. Глубина копания: 9.0 м',
+      category: '40-45',
       specs: {
-        bucketVolume: 1.25,
-        maxDepth: 6.5,
-        maxHeight: 7.2,
-        weight: 22
-      },
-      phone: '+7 (921) 571-20-79'
-    },
-    {
-      id: 7,
-      name: 'экскаватор гусеничный volvo ec240b',
-      capacity: '1.1',
-      image: '/images/экс гуси/volvo240.webp',
-      price: 'от 33 000 ₽/смена',
-      description: 'Объем ковша: 1.1 м³. Глубина копания: 6.5 м',
-      category: '24-30',
-      specs: {
-        bucketVolume: 1.1,
-        maxDepth: 6.5,
-        maxHeight: 7.2,
-        weight: 24
-      },
-      phone: '+7 (921) 571-20-79'
-    },
-    {
-      id: 8,
-      name: 'экскаватор гусеничный cat 322 cln',
-      capacity: '1.4',
-      image: '/images/экс гуси/cat322cl.webp',
-      price: 'от 33 000 ₽/смена',
-      description: 'Объем ковша: 1.4 м³. Глубина копания: 2.5 м',
-      category: '24-30',
-      specs: {
-        bucketVolume: 1.4,
-        maxDepth: 2.5,
-        maxHeight: 3.2,
-        weight: 24
-      },
-      phone: '+7 (921) 571-20-79'
-    },
-    {
-      id: 9,
-      name: 'экскаватор гусеничный hitachi zx270',
-      capacity: '1.6',
-      image: '/images/экс гуси/hitachi270.webp',
-      price: 'от 33 000 ₽/смена',
-      description: 'Объем ковша: 1.6 м³. Глубина копания: 6.9 м',
-      category: '24-30',
-      specs: {
-        bucketVolume: 1.6,
-        maxDepth: 6.9,
-        maxHeight: 7.6,
-        weight: 28
-      },
-      phone: '+7 (921) 571-20-79'
-    },
-    {
-      id: 10,
-      name: 'экскаватор гусеничный volvo 290',
-      capacity: '1.5',
-      image: '/images/экс гуси/volvo290.webp',
-      price: 'от 34 000 ₽/смена',
-      description: 'Объем ковша: 1.5 м³. Глубина копания: 6.0 м',
-      category: '24-30',
-      specs: {
-        bucketVolume: 1.5,
-        maxDepth: 6.0,
-        maxHeight: 6.7,
-        weight: 30
-      },
-      phone: '+7 (921) 571-20-79'
-    },
-    {
-      id: 11,
-      name: 'экскаватор гусеничный hyundai r330lc-9s',
-      capacity: '1.6',
-      image: '/images/экс гуси/hyundai 330lc.webp',
-      price: 'от 35 000 ₽/смена',
-      description: 'Объем ковша: 1.6 м³. Глубина копания: 7.3 м',
-      category: '32-38',
-      specs: {
-        bucketVolume: 1.6,
-        maxDepth: 7.3,
-        maxHeight: 8.0,
-        weight: 32
-      },
-      phone: '+7 (921) 571-20-79'
-    },
-    {
-      id: 12,
-      name: 'экскаватор гусеничный hyundai r380lc-9sh',
-      capacity: '2.0',
-      image: '/images/экс гуси/hyundai-r380lc-9sh.webp',
-      price: 'от 35 000 ₽/смена',
-      description: 'Объем ковша: 2.0 м³. Глубина копания: 7.5 м',
-      category: '32-38',
-      specs: {
-        bucketVolume: 2.0,
-        maxDepth: 7.5,
-        maxHeight: 8.2,
-        weight: 38
+        bucketVolume: 2.2,
+        maxDepth: 9.0,
+        maxHeight: 9.8,
+        weight: 45000
       },
       phone: '+7 (921) 571-20-79'
     }
@@ -207,13 +111,13 @@ const ExcavatorTrackedPage: React.FC = () => {
 
   const weightCategories = [
     { id: 'all', name: 'Все экскаваторы гусеничные', count: excavatorTracked.length },
-    { id: '18-22', name: '18-22 тонн', count: excavatorTracked.filter(c => c.category === '18-22').length },
-    { id: '24-30', name: '24-30 тонн', count: excavatorTracked.filter(c => c.category === '24-30').length },
-    { id: '32-38', name: '32-38 тонн', count: excavatorTracked.filter(c => c.category === '32-38').length }
+    { id: '20-25', name: '20-25 тонн', count: excavatorTracked.filter(c => c.category === '20-25').length },
+    { id: '30-35', name: '30-35 тонн', count: excavatorTracked.filter(c => c.category === '30-35').length },
+    { id: '40-45', name: '40-45 тонн', count: excavatorTracked.filter(c => c.category === '40-45').length }
   ]
 
   const generateWhatsAppMessage = (excavator: any) => {
-    const message = `Здравствуйте! Хочу заказать ${excavator.name} (ковш ${excavator.specs.bucketVolume}м³, вес ${excavator.specs.weight}т)`
+    const message = `Здравствуйте! Хочу заказать ${excavator.name} (ковш ${excavator.specs.bucketVolume}м³, вес ${excavator.specs.weight/1000}т)`
     return encodeURIComponent(message)
   }
 
@@ -275,7 +179,7 @@ const ExcavatorTrackedPage: React.FC = () => {
               <div 
                 key={excavator.id}
                 className="bg-white rounded-[24px] shadow-lg overflow-hidden flex flex-col"
-                style={{height: 500}}
+                style={{height: 460}}
               >
                 {/* Изображение */}
                 <div className="relative bg-white" style={{height: 240}}>
@@ -312,10 +216,6 @@ const ExcavatorTrackedPage: React.FC = () => {
                        <span className="text-slate-500">Глубина копания:</span>
                        <span className="text-slate-900 font-medium">{excavator.specs.maxDepth} м</span>
                      </div>
-                     <div className="flex justify-between text-[16px] font-manrope">
-                       <span className="text-slate-500">Масса:</span>
-                       <span className="text-slate-900 font-medium">{excavator.specs.weight} т</span>
-                     </div>
                    </div>
 
                   {/* Цена */}
@@ -344,6 +244,21 @@ const ExcavatorTrackedPage: React.FC = () => {
             <h3 className="font-baron font-bold text-slate-900 mb-4" style={{fontSize: 24}}>
               Почему стоит арендовать экскаватор гусеничный у нас?
             </h3>
+            
+            <div className="mt-6 p-4 bg-white rounded-[16px] border border-slate-200">
+              <h4 className="font-manrope font-semibold text-slate-900 mb-2" style={{fontSize: 18}}>
+                Ключевые факторы скорости земляных работ
+              </h4>
+              <p className="font-manrope text-slate-600 mb-3" style={{fontSize: 16}}>
+                От чего зависит скорость работы экскаватора? Разбираем 7 главных факторов: от выбора модели и навески до квалификации оператора
+              </p>
+              <Link
+                to="/articles/arenda-ekskavatora-moskva-2025-faktory-skorosti-zemlyanyh-rabot"
+                className="inline-flex items-center text-[#3535B9] hover:text-[#2929A3] font-manrope font-medium text-[16px] transition-colors"
+              >
+                Читать статью →
+              </Link>
+            </div>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <h4 className="font-manrope font-semibold text-slate-900 mb-2" style={{fontSize: 18}}>
