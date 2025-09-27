@@ -56,7 +56,7 @@ const HomePage: React.FC = () => {
   return (
     <div className="container mx-auto px-6">
              <section className="grid md:grid-cols-2 items-start" style={{columnGap: 24, marginTop: 48}}>
-        <div className="py-10" style={{paddingLeft: 24}}>
+        <div style={{paddingLeft: 24, paddingTop: 48, paddingBottom: 48}}>
           <h1 className="font-baron font-extrabold leading-tight normal-case" style={{fontSize: 72, textTransform: 'none'}}>
             спецтехника<br/>
             <span style={{whiteSpace: 'nowrap'}}>
@@ -145,7 +145,7 @@ const HomePage: React.FC = () => {
      </section>
 
      {/* Большая белая подложка для каталога, отзывов, о компании */}
-     <section className="py-20">
+     <section style={{marginTop: 48}}>
        <div className="bg-white rounded-[24px]" style={{padding: 0}}>
          
          {/* Каталог техники */}
@@ -204,18 +204,20 @@ const HomePage: React.FC = () => {
                           <span className="text-white/80 font-manrope font-medium" style={{fontSize: 18}}>
                             {(() => {
                               const prices: {[key: string]: string} = {
-                                'Экскаваторы гусеничные': 'от 19 000 ₽/смена',
+                                'Экскаваторы гусеничные': 'от 32 000 ₽/смена',
+                                'Экскаваторы колёсные': 'от 20 000 ₽/смена',
                                 'Самосвалы': 'от 15 000 ₽/смена',
-                                'Манипуляторы': 'от 15 000 ₽/смена',
+                                'Манипуляторы': 'от 18 000 ₽/смена',
                                 'Экскаваторы-погрузчики': 'от 19 000 ₽/смена',
                                 'Мини экскаваторы': 'от 16 000 ₽/смена',
                                 'Фронтальные погрузчики': 'от 20 000 ₽/смена',
-                                'Автовышки': 'от 20 000 ₽/смена',
+                                'Автовышки': 'от 15 000 ₽/смена',
                                 'Автокраны': 'от 16 000 ₽/смена',
-                                'Мини погрузчики': 'от 20 000 ₽/смена',
-                                'Тралы': 'от 24 000 ₽/смена',
-                                'Бульдозеры': 'от 20 000 ₽/смена',
-                                'Грейдеры': 'от 40 000 ₽/смена'
+                                'Мини погрузчики': 'от 14 000 ₽/смена',
+                                'Тралы': 'от 19 000 ₽/смена',
+                                'Бульдозеры': 'от 19 500 ₽/смена',
+                                'Длинномеры': 'от 15 000 ₽/смена',
+                                'Грейдеры': 'от 30 000 ₽/смена'
                               };
                               return prices[item.name] || 'от 15 000 ₽/смена';
                             })()}
@@ -294,6 +296,87 @@ const HomePage: React.FC = () => {
                   >
                     {cardContent}
                   </Link>
+                ) : item.name === 'Автовышки' ? (
+                  <Link 
+                    key={index}
+                    to="/auto-towers"
+                    className="relative rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 block"
+                    style={{height: 200}}
+                  >
+                    {cardContent}
+                  </Link>
+                ) : item.name === 'Мини погрузчики' ? (
+                  <Link 
+                    key={index}
+                    to="/mini-loaders"
+                    className="relative rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 block"
+                    style={{height: 200}}
+                  >
+                    {cardContent}
+                  </Link>
+                ) : item.name === 'Экскаваторы колёсные' ? (
+                  <Link 
+                    key={index}
+                    to="/excavator-wheeled"
+                    className="relative rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 block"
+                    style={{height: 200}}
+                  >
+                    {cardContent}
+                  </Link>
+                ) : item.name === 'Тралы' ? (
+                  <Link 
+                    key={index}
+                    to="/trailers"
+                    className="relative rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 block"
+                    style={{height: 200}}
+                  >
+                    {cardContent}
+                  </Link>
+                ) : item.name === 'Бульдозеры' ? (
+                  <Link 
+                    key={index}
+                    to="/bulldozers"
+                    className="relative rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 block"
+                    style={{height: 200}}
+                  >
+                    {cardContent}
+                  </Link>
+                ) : item.name === 'Катки' ? (
+                  <Link 
+                    key={index}
+                    to="/rollers"
+                    className="relative rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 block"
+                    style={{height: 200}}
+                  >
+                    {cardContent}
+                  </Link>
+                ) : item.name === 'Бортовые автомобили' ? (
+                  <Link 
+                    key={index}
+                    to="/board-trucks"
+                    className="relative rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 block"
+                    style={{height: 200}}
+                  >
+                    {cardContent}
+                  </Link>
+                ) : item.name === 'Длинномеры' ? (
+                  <Link 
+                    key={index}
+                    to="/long-trucks"
+                    className="relative rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 block"
+                    style={{height: 200}}
+                  >
+                    {cardContent}
+                  </Link>
+                ) : item.name === 'Грейдеры' ? (
+                  <Link 
+                    key={index}
+                    to="/graders"
+                    className="relative rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 block"
+                    style={{height: 200}}
+                  >
+                    {cardContent}
+                  </Link>
                 ) : (
                   <div 
                     key={index}
@@ -308,7 +391,7 @@ const HomePage: React.FC = () => {
          </div>
 
                  {/* Блок отзывов */}
-       <div style={{marginTop: 32}}>
+       <div style={{marginTop: 48}}>
          <div className="flex items-center justify-between" style={{marginBottom: 24, paddingLeft: 24}}>
            <h2 className="font-baron font-extrabold text-slate-900" style={{fontSize: 48, lineHeight: 1, margin: 0}}>почему выбирают нас</h2>
            <p className="font-manrope font-medium" style={{fontSize: 20, color: '#525252', lineHeight: 1, margin: 0}}>Тут отзывы Яндекса</p>
@@ -320,164 +403,149 @@ const HomePage: React.FC = () => {
            </div>
          </div>
 
-         {/* Блок о компании */}
-         <div style={{marginTop: 48, paddingLeft: 24, paddingRight: 24, marginBottom: 32}}>
-           <div className="flex items-center justify-between">
-             <h2 className="font-baron font-extrabold text-slate-900" style={{fontSize: 48, lineHeight: 1, margin: 0}}>о компании</h2>
-           </div>
-           
-           {/* Auto Layout контейнер с отступом 48px от заголовка */}
-           <div style={{marginTop: 48, paddingBottom: 32}}>
-             {/* Сетка преимуществ с auto layout */}
-             <div className="grid grid-cols-3 gap-6">
-               {/* Команда профи */}
-               <div className="relative rounded-2xl p-6 text-white flex flex-col items-center justify-center text-center overflow-hidden" style={{height: 200}}>
-                 {/* Фоновое изображение с отражением по вертикали */}
-                 <div 
-                   className="absolute inset-0 bg-cover bg-center"
-                   style={{
-                     backgroundImage: "url('/images/карточка 4.jpg')",
-                     transform: "scaleY(-1)"
-                   }}
-                 />
-                 
-                 {/* Контент */}
-                 <div className="relative z-10 flex flex-col items-center justify-center text-center">
-                   <div className="rounded-full flex items-center justify-center flex-shrink-0" style={{width: 50, height: 50, backgroundColor: '#ffffff', marginBottom: 10}}>
-                     <img src={people} alt="Люди" width={24} height={25} />
-                   </div>
-                   <h3 className="font-manrope font-semibold text-white" style={{fontSize: 24, marginBottom: 8}}>Команда профи</h3>
-                   <p className="font-manrope font-medium text-white/90" style={{fontSize: 20}}>Водители РФ с многолетним опытом</p>
-                 </div>
-               </div>
+        {/* Блок о компании */}
+        <div style={{marginTop: 48, paddingLeft: 24, paddingRight: 24, marginBottom: 48}}>
+          <div className="flex items-center justify-between">
+            <h2 className="font-baron font-extrabold text-slate-900" style={{fontSize: 48, lineHeight: 1, margin: 0}}>о компании</h2>
+          </div>
+          
+          {/* Auto Layout контейнер с отступом 48px от заголовка */}
+          <div style={{marginTop: 48, paddingBottom: 32}}>
+            {/* Сетка преимуществ с auto layout */}
+            <div className="grid grid-cols-3 gap-6">
+              {/* Команда профи */}
+              <div className="relative rounded-2xl p-6 text-white flex flex-col items-center justify-center text-center overflow-hidden" style={{height: 200}}>
+                {/* Фоновое изображение с отражением по вертикали */}
+                <div 
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{
+                    backgroundImage: "url('/images/карточка 4.jpg')",
+                    transform: "scaleY(-1)"
+                  }}
+                />
+                
+                {/* Контент */}
+                <div className="relative z-10 flex flex-col items-center justify-center text-center">
+                  <div className="rounded-full flex items-center justify-center flex-shrink-0" style={{width: 50, height: 50, backgroundColor: '#ffffff', marginBottom: 10}}>
+                    <img src={people} alt="Люди" width={24} height={25} />
+                  </div>
+                  <h3 className="font-manrope font-semibold text-white" style={{fontSize: 24, marginBottom: 8}}>Команда профи</h3>
+                  <p className="font-manrope font-medium text-white/90" style={{fontSize: 20}}>Водители РФ с многолетним опытом</p>
+                </div>
+              </div>
 
-               {/* Опыт более 20 лет */}
-               <div className="relative rounded-2xl p-6 text-white flex flex-col items-center justify-center text-center overflow-hidden" style={{height: 200}}>
-                 {/* Фоновое изображение */}
-                 <div 
-                   className="absolute inset-0 bg-cover bg-center"
-                   style={{
-                     backgroundImage: "url('/images/карточка 2.jpg')"
-                   }}
-                 />
-                 
-                 {/* Контент */}
-                 <div className="relative z-10 flex flex-col items-center justify-center text-center">
-                 <div className="rounded-full flex items-center justify-center flex-shrink-0" style={{width: 50, height: 50, backgroundColor: '#ffffff', marginBottom: 10}}>
-                   <img src={medal} alt="Медаль" width={24} height={24} />
-                 </div>
-                 <h3 className="font-manrope font-semibold text-white" style={{fontSize: 24, marginBottom: 8}}>Опыт более 20 лет</h3>
-                   <p className="font-manrope font-medium text-white/90" style={{fontSize: 20}}>Наша компания на рынке с 2005 года</p>
-                 </div>
-               </div>
+              {/* Опыт более 20 лет */}
+              <div className="relative rounded-2xl p-6 text-white flex flex-col items-center justify-center text-center overflow-hidden" style={{height: 200}}>
+                {/* Фоновое изображение */}
+                <div 
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{
+                    backgroundImage: "url('/images/карточка 2.jpg')"
+                  }}
+                />
+                
+                {/* Контент */}
+                <div className="relative z-10 flex flex-col items-center justify-center text-center">
+                <div className="rounded-full flex items-center justify-center flex-shrink-0" style={{width: 50, height: 50, backgroundColor: '#ffffff', marginBottom: 10}}>
+                  <img src={medal} alt="Медаль" width={24} height={24} />
+                </div>
+                <h3 className="font-manrope font-semibold text-white" style={{fontSize: 24, marginBottom: 8}}>Опыт более 20 лет</h3>
+                  <p className="font-manrope font-medium text-white/90" style={{fontSize: 20}}>Наша компания на рынке с 2005 года</p>
+                </div>
+              </div>
 
-               {/* Поддержка 24/7 */}
-               <div className="relative rounded-2xl p-6 text-white flex flex-col items-center justify-center text-center overflow-hidden" style={{height: 200}}>
-                 {/* Фоновое изображение с поворотом на 180 градусов */}
-                 <div 
-                   className="absolute inset-0 bg-cover bg-center"
-                   style={{
-                     backgroundImage: "url('/images/карточка 4.jpg')",
-                     transform: "rotate(180deg)"
-                   }}
-                 />
-                 
-                 {/* Контент */}
-                 <div className="relative z-10 flex flex-col items-center justify-center text-center">
-                   <div className="rounded-full flex items-center justify-center flex-shrink-0" style={{width: 50, height: 50, backgroundColor: '#ffffff', marginBottom: 10}}>
-                     <img src={shield} alt="Щит" width={18} height={23} />
-                   </div>
-                   <h3 className="font-manrope font-semibold text-white" style={{fontSize: 24, marginBottom: 8}}>Поддержка 24/7</h3>
-                   <p className="font-manrope font-medium text-white/90" style={{fontSize: 20}}>Мы всегда с Вами на связи</p>
-                 </div>
-               </div>
+              {/* Поддержка 24/7 */}
+              <div className="relative rounded-2xl p-6 text-white flex flex-col items-center justify-center text-center overflow-hidden" style={{height: 200}}>
+                {/* Фоновое изображение с поворотом на 180 градусов */}
+                <div 
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{
+                    backgroundImage: "url('/images/карточка 4.jpg')",
+                    transform: "rotate(180deg)"
+                  }}
+                />
+                
+                {/* Контент */}
+                <div className="relative z-10 flex flex-col items-center justify-center text-center">
+                  <div className="rounded-full flex items-center justify-center flex-shrink-0" style={{width: 50, height: 50, backgroundColor: '#ffffff', marginBottom: 10}}>
+                    <img src={shield} alt="Щит" width={18} height={23} />
+                  </div>
+                  <h3 className="font-manrope font-semibold text-white" style={{fontSize: 24, marginBottom: 8}}>Поддержка 24/7</h3>
+                  <p className="font-manrope font-medium text-white/90" style={{fontSize: 20}}>Мы всегда с Вами на связи</p>
+                </div>
+              </div>
 
-               {/* Быстрая подача */}
-               <div className="relative rounded-2xl p-6 text-white flex flex-col items-center justify-center text-center overflow-hidden" style={{height: 200}}>
-                 {/* Фоновое изображение */}
-                 <div 
-                   className="absolute inset-0 bg-cover bg-center"
-                   style={{
-                     backgroundImage: "url('/images/карточка 4.jpg')"
-                   }}
-                 />
-                 
-                 {/* Контент */}
-                 <div className="relative z-10 flex flex-col items-center justify-center text-center">
-                 <div className="rounded-full flex items-center justify-center flex-shrink-0" style={{width: 50, height: 50, backgroundColor: '#ffffff', marginBottom: 10}}>
-                   <img src={lightning} alt="Молния" width={24} height={25} />
-                 </div>
-                 <h3 className="font-manrope font-semibold text-white" style={{fontSize: 24, marginBottom: 8}}>Быстрая подача</h3>
-                   <p className="font-manrope font-medium text-white/90" style={{fontSize: 20}}>По Москве и Московской области</p>
-                 </div>
-               </div>
+              {/* Быстрая подача */}
+              <div className="relative rounded-2xl p-6 text-white flex flex-col items-center justify-center text-center overflow-hidden" style={{height: 200}}>
+                {/* Фоновое изображение */}
+                <div 
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{
+                    backgroundImage: "url('/images/карточка 4.jpg')"
+                  }}
+                />
+                
+                {/* Контент */}
+                <div className="relative z-10 flex flex-col items-center justify-center text-center">
+                <div className="rounded-full flex items-center justify-center flex-shrink-0" style={{width: 50, height: 50, backgroundColor: '#ffffff', marginBottom: 10}}>
+                  <img src={lightning} alt="Молния" width={24} height={25} />
+                </div>
+                <h3 className="font-manrope font-semibold text-white" style={{fontSize: 24, marginBottom: 8}}>Быстрая подача</h3>
+                  <p className="font-manrope font-medium text-white/90" style={{fontSize: 20}}>По Москве и Московской области</p>
+                </div>
+              </div>
 
-               {/* Техобслуживание */}
-               <div className="relative rounded-2xl p-6 text-white flex flex-col items-center justify-center text-center overflow-hidden" style={{height: 200}}>
-                 {/* Фоновое изображение с отражением по вертикали */}
-                 <div 
-                   className="absolute inset-0 bg-cover bg-center"
-                   style={{
-                     backgroundImage: "url('/images/карточка 2.jpg')",
-                     transform: "scaleY(-1)"
-                   }}
-                 />
-                 
-                 {/* Контент */}
-                 <div className="relative z-10 flex flex-col items-center justify-center text-center">
-                   <div className="rounded-full flex items-center justify-center flex-shrink-0" style={{width: 50, height: 50, backgroundColor: '#ffffff', marginBottom: 10}}>
-                     <img src={wrench} alt="Отвертка" width={22} height={21} />
-                   </div>
-                   <h3 className="font-manrope font-semibold text-white" style={{fontSize: 24, marginBottom: 8}}>Техобслуживание</h3>
-                   <p className="font-manrope font-medium text-white/90" style={{fontSize: 20}}>Регулярная диагностика оборудования</p>
-                 </div>
-               </div>
+              {/* Техобслуживание */}
+              <div className="relative rounded-2xl p-6 text-white flex flex-col items-center justify-center text-center overflow-hidden" style={{height: 200}}>
+                {/* Фоновое изображение с отражением по вертикали */}
+                <div 
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{
+                    backgroundImage: "url('/images/карточка 2.jpg')",
+                    transform: "scaleY(-1)"
+                  }}
+                />
+                
+                {/* Контент */}
+                <div className="relative z-10 flex flex-col items-center justify-center text-center">
+                  <div className="rounded-full flex items-center justify-center flex-shrink-0" style={{width: 50, height: 50, backgroundColor: '#ffffff', marginBottom: 10}}>
+                    <img src={wrench} alt="Отвертка" width={22} height={21} />
+                  </div>
+                  <h3 className="font-manrope font-semibold text-white" style={{fontSize: 24, marginBottom: 8}}>Техобслуживание</h3>
+                  <p className="font-manrope font-medium text-white/90" style={{fontSize: 20}}>Регулярная диагностика оборудования</p>
+                </div>
+              </div>
 
-               {/* Гибкие тарифы */}
-               <div className="relative rounded-2xl p-6 text-white flex flex-col items-center justify-center text-center overflow-hidden" style={{height: 200}}>
-                 {/* Фоновое изображение с отражением по горизонтали */}
-                 <div 
-                   className="absolute inset-0 bg-cover bg-center"
-                   style={{
-                     backgroundImage: "url('/images/карточка 4.jpg')",
-                     transform: "scaleX(-1)"
-                   }}
-                 />
-                 
-                 {/* Контент */}
-                 <div className="relative z-10 flex flex-col items-center justify-center text-center">
-                   <div className="rounded-full flex items-center justify-center flex-shrink-0" style={{width: 50, height: 50, backgroundColor: '#ffffff', marginBottom: 10}}>
-                     <img src={chart} alt="График" width={24} height={15} />
-                   </div>
-                   <h3 className="font-manrope font-semibold text-white" style={{fontSize: 24, marginBottom: 8}}>Гибкие тарифы</h3>
-                   <p className="font-manrope font-medium text-white/90" style={{fontSize: 20}}>Скидка постоянным клиентам</p>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
+              {/* Гибкие тарифы */}
+              <div className="relative rounded-2xl p-6 text-white flex flex-col items-center justify-center text-center overflow-hidden" style={{height: 200}}>
+                {/* Фоновое изображение с отражением по горизонтали */}
+                <div 
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{
+                    backgroundImage: "url('/images/карточка 4.jpg')",
+                    transform: "scaleX(-1)"
+                  }}
+                />
+                
+                {/* Контент */}
+                <div className="relative z-10 flex flex-col items-center justify-center text-center">
+                  <div className="rounded-full flex items-center justify-center flex-shrink-0" style={{width: 50, height: 50, backgroundColor: '#ffffff', marginBottom: 10}}>
+                    <img src={chart} alt="График" width={24} height={15} />
+                  </div>
+                  <h3 className="font-manrope font-semibold text-white" style={{fontSize: 24, marginBottom: 8}}>Гибкие тарифы</h3>
+                  <p className="font-manrope font-medium text-white/90" style={{fontSize: 20}}>Скидка постоянным клиентам</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-       </div>
-     </section>
-
-     <section className="py-20">
-       <div className="flex items-center justify-between mb-6">
-         <h2 className="font-baron text-3xl">Недавние статьи</h2>
-         <Link to="/articles" className="text-white/80 hover:text-white underline">Все статьи</Link>
-       </div>
-       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-         {['Как выбрать автокран','Правила безопасности','ТО техники'].map((t,i)=> (
-           <a key={i} href="/articles" className="glass rounded-2xl p-5 block hover:bg-white/15 transition-colors">
-             <div className="font-semibold">{t}</div>
-             <div className="text-white/75 text-sm mt-2">Краткое описание статьи...</div>
-           </a>
-         ))}
-       </div>
-     </section>
+      </div>
+    </section>
 
      {/* Футер */}
-     <footer className="py-16">
-       <div className="container mx-auto px-6">
+      <footer style={{paddingTop: 48, paddingBottom: 48}}>
+        <div className="container mx-auto" style={{paddingLeft: 24, paddingRight: 24}}>
          <div className="flex justify-between items-start mb-8">
            {/* Логотип и описание */}
            <div className="flex-1">
@@ -489,25 +557,25 @@ const HomePage: React.FC = () => {
              </p>
            </div>
            
-           {/* Контакты */}
-           <div style={{marginRight: 24}}>
-             <h3 className="font-baron font-bold text-white" style={{fontSize: 48, marginBottom: 66, lineHeight: 1}}>наши контакты</h3>
-             <div className="space-y-4">
-               <div className="flex items-center space-x-3">
+            {/* Контакты */}
+            <div>
+              <h3 className="font-baron font-bold text-white" style={{fontSize: 48, lineHeight: 1, textAlign: 'right', margin: '0 0 60px 0'}}>наши контакты</h3>
+             <div className="space-y-4" style={{textAlign: 'right'}}>
+               <div className="flex items-center justify-end space-x-3">
+                 <span className="text-white font-manrope" style={{fontSize: 20}}>+7 (985) 767-15-00</span>
                  <div className="w-6 h-6 flex items-center justify-center">
                    <svg className="text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24" height="24">
                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                    </svg>
                  </div>
-                 <span className="text-white font-manrope" style={{fontSize: 20}}>+7 (985) 767-15-00</span>
                </div>
-               <div className="flex items-center space-x-3">
+               <div className="flex items-center justify-end space-x-3">
+                 <span className="text-white font-manrope" style={{fontSize: 20}}>info@stefan-cranes.ru</span>
                  <div className="w-6 h-6 flex items-center justify-center">
                    <svg className="text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24" height="24">
                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                    </svg>
                  </div>
-                 <span className="text-white font-manrope" style={{fontSize: 20}}>info@stefan-cranes.ru</span>
                </div>
              </div>
            </div>

@@ -8,10 +8,10 @@ const ExcavatorTrackedPage: React.FC = () => {
   const excavatorTracked = [
     {
       id: 1,
-      name: 'Экскаватор гусеничный hitachi 180',
+      name: 'экскаватор гусеничный hitachi 180',
       capacity: '1.0',
       image: '/images/экс гуси/hitachi 180.webp',
-      price: 'от 19 000 ₽/смена',
+      price: 'от 32 000 ₽/смена',
       description: 'Объем ковша: 1.0 м³. Глубина копания: 5.3 м',
       category: '18-22',
       specs: {
@@ -24,10 +24,10 @@ const ExcavatorTrackedPage: React.FC = () => {
     },
     {
       id: 2,
-      name: 'Экскаватор гусеничный hyundai r180lc-7',
+      name: 'экскаватор гусеничный hyundai r180lc-7',
       capacity: '0.8',
       image: '/images/экс гуси/hyondai r180lc.webp',
-      price: 'от 19 000 ₽/смена',
+      price: 'от 32 000 ₽/смена',
       description: 'Объем ковша: 0.8 м³. Глубина копания: 6.0 м',
       category: '18-22',
       specs: {
@@ -40,10 +40,10 @@ const ExcavatorTrackedPage: React.FC = () => {
     },
     {
       id: 3,
-      name: 'Экскаватор гусеничный hitachi zaxis 200',
+      name: 'экскаватор гусеничный hitachi zaxis 200',
       capacity: '1.1',
       image: '/images/экс гуси/hitachi zaxis 200.webp',
-      price: 'от 19 000 ₽/смена',
+      price: 'от 32 000 ₽/смена',
       description: 'Объем ковша: 1.1 м³. Глубина копания: 8.0 м',
       category: '18-22',
       specs: {
@@ -56,10 +56,10 @@ const ExcavatorTrackedPage: React.FC = () => {
     },
     {
       id: 4,
-      name: 'Экскаватор гусеничный jcb 205',
+      name: 'экскаватор гусеничный jcb 205',
       capacity: '1.0',
       image: '/images/экс гуси/jcb 205.webp',
-      price: 'от 20 000 ₽/смена',
+      price: 'от 33 000 ₽/смена',
       description: 'Объем ковша: 1.0 м³. Глубина копания: 5.8 м',
       category: '18-22',
       specs: {
@@ -72,10 +72,10 @@ const ExcavatorTrackedPage: React.FC = () => {
     },
     {
       id: 5,
-      name: 'Экскаватор гусеничный komatsu pc220',
+      name: 'экскаватор гусеничный komatsu pc220',
       capacity: '1.9',
       image: '/images/экс гуси/komatsupc220.webp',
-      price: 'от 20 000 ₽/смена',
+      price: 'от 33 000 ₽/смена',
       description: 'Объем ковша: 1.9 м³. Глубина копания: 6.9 м',
       category: '18-22',
       specs: {
@@ -88,10 +88,10 @@ const ExcavatorTrackedPage: React.FC = () => {
     },
     {
       id: 6,
-      name: 'Экскаватор гусеничный jcb 220',
+      name: 'экскаватор гусеничный jcb 220',
       capacity: '1.25',
       image: '/images/экс гуси/jcb220.webp',
-      price: 'от 20 000 ₽/смена',
+      price: 'от 33 000 ₽/смена',
       description: 'Объем ковша: 1.25 м³. Глубина копания: 6.5 м',
       category: '18-22',
       specs: {
@@ -104,10 +104,10 @@ const ExcavatorTrackedPage: React.FC = () => {
     },
     {
       id: 7,
-      name: 'Экскаватор гусеничный volvo ec240b',
+      name: 'экскаватор гусеничный volvo ec240b',
       capacity: '1.1',
       image: '/images/экс гуси/volvo240.webp',
-      price: 'от 20 000 ₽/смена',
+      price: 'от 33 000 ₽/смена',
       description: 'Объем ковша: 1.1 м³. Глубина копания: 6.5 м',
       category: '24-30',
       specs: {
@@ -120,10 +120,10 @@ const ExcavatorTrackedPage: React.FC = () => {
     },
     {
       id: 8,
-      name: 'Экскаватор гусеничный cat 322 cln',
+      name: 'экскаватор гусеничный cat 322 cln',
       capacity: '1.4',
       image: '/images/экс гуси/cat322cl.webp',
-      price: 'от 20 000 ₽/смена',
+      price: 'от 33 000 ₽/смена',
       description: 'Объем ковша: 1.4 м³. Глубина копания: 2.5 м',
       category: '24-30',
       specs: {
@@ -136,10 +136,10 @@ const ExcavatorTrackedPage: React.FC = () => {
     },
     {
       id: 9,
-      name: 'Экскаватор гусеничный hitachi zx270',
+      name: 'экскаватор гусеничный hitachi zx270',
       capacity: '1.6',
       image: '/images/экс гуси/hitachi270.webp',
-      price: 'от 20 000 ₽/смена',
+      price: 'от 33 000 ₽/смена',
       description: 'Объем ковша: 1.6 м³. Глубина копания: 6.9 м',
       category: '24-30',
       specs: {
@@ -152,10 +152,10 @@ const ExcavatorTrackedPage: React.FC = () => {
     },
     {
       id: 10,
-      name: 'Экскаватор гусеничный volvo 290',
+      name: 'экскаватор гусеничный volvo 290',
       capacity: '1.5',
       image: '/images/экс гуси/volvo290.webp',
-      price: 'от 21 000 ₽/смена',
+      price: 'от 34 000 ₽/смена',
       description: 'Объем ковша: 1.5 м³. Глубина копания: 6.0 м',
       category: '24-30',
       specs: {
@@ -168,10 +168,10 @@ const ExcavatorTrackedPage: React.FC = () => {
     },
     {
       id: 11,
-      name: 'Экскаватор гусеничный hyundai r330lc-9s',
+      name: 'экскаватор гусеничный hyundai r330lc-9s',
       capacity: '1.6',
       image: '/images/экс гуси/hyundai 330lc.webp',
-      price: 'от 24 000 ₽/смена',
+      price: 'от 35 000 ₽/смена',
       description: 'Объем ковша: 1.6 м³. Глубина копания: 7.3 м',
       category: '32-38',
       specs: {
@@ -184,10 +184,10 @@ const ExcavatorTrackedPage: React.FC = () => {
     },
     {
       id: 12,
-      name: 'Экскаватор гусеничный hyundai r380lc-9sh',
+      name: 'экскаватор гусеничный hyundai r380lc-9sh',
       capacity: '2.0',
       image: '/images/экс гуси/hyundai-r380lc-9sh.webp',
-      price: 'от 25 000 ₽/смена',
+      price: 'от 35 000 ₽/смена',
       description: 'Объем ковша: 2.0 м³. Глубина копания: 7.5 м',
       category: '32-38',
       specs: {

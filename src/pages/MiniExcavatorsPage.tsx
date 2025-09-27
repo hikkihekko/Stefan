@@ -195,10 +195,12 @@ const MiniExcavatorsPage: React.FC = () => {
     }
   ]
 
-  // Фильтрация по весовой категории
+  // Фильтрация по весовой категории и сортировка по весу
   const filteredExcavators = selectedWeightCategory === 'all' 
-    ? miniExcavators 
-    : miniExcavators.filter(excavator => excavator.category === selectedWeightCategory)
+    ? miniExcavators.sort((a, b) => parseFloat(a.weight) - parseFloat(b.weight))
+    : miniExcavators
+        .filter(excavator => excavator.category === selectedWeightCategory)
+        .sort((a, b) => parseFloat(a.weight) - parseFloat(b.weight))
 
   const weightCategories = [
     { id: 'all', name: 'Все мини экскаваторы', count: miniExcavators.length },
@@ -345,10 +347,10 @@ const MiniExcavatorsPage: React.FC = () => {
               </div>
               <div>
                 <h4 className="font-manrope font-semibold text-slate-900 mb-2" style={{fontSize: 18}}>
-                  Экономичность
+                  Широкий спектр работ
                 </h4>
                 <p className="font-manrope text-slate-600" style={{fontSize: 16}}>
-                  Низкое потребление топлива и доступная стоимость аренды делают их выгодным выбором
+                  Подходят для копки траншей, фундаментов, демонтажа, планировки и других земляных работ
                 </p>
               </div>
             </div>

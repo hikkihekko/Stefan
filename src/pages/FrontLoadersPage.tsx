@@ -11,7 +11,7 @@ const FrontLoadersPage: React.FC = () => {
       name: 'фронтальный погрузчик sdlg 953',
       capacity: '5',
       image: '/images/фронтпогруз/sdlg 953.webp',
-      price: 'от 17 000 ₽/смена',
+      price: 'от 20 000 ₽/смена',
       description: 'Грузоподъемность т: 5. Ковш, м³: 1.7',
       category: '1.5-2.0',
       specs: {
@@ -29,7 +29,7 @@ const FrontLoadersPage: React.FC = () => {
       name: 'фронтальный погрузчик liebherr l522',
       capacity: '3',
       image: '/images/фронтпогруз/iebherr522.webp',
-      price: 'от 17 000 ₽/смена',
+      price: 'от 20 000 ₽/смена',
       description: 'Грузоподъемность т: 3. Ковш, м³: 1.8',
       category: '1.5-2.0',
       specs: {
@@ -47,7 +47,7 @@ const FrontLoadersPage: React.FC = () => {
       name: 'фронтальный погрузчик sdlg lg933l',
       capacity: '3',
       image: '/images/фронтпогруз/sdlglg933.webp',
-      price: 'от 17 000 ₽/смена',
+      price: 'от 20 000 ₽/смена',
       description: 'Грузоподъемность т: 3. Ковш, м³: 2.0',
       category: '2.1-3.5',
       specs: {
@@ -65,7 +65,7 @@ const FrontLoadersPage: React.FC = () => {
       name: 'фронтальный погрузчик jcb 426 zx',
       capacity: '4',
       image: '/images/фронтпогруз/jcb426.webp',
-      price: 'от 19 000 ₽/смена',
+      price: 'от 21 000 ₽/смена',
       description: 'Грузоподъемность т: 4. Ковш, м³: 2.1',
       category: '2.1-3.5',
       specs: {
@@ -83,7 +83,7 @@ const FrontLoadersPage: React.FC = () => {
       name: 'фронтальный погрузчик амкодор 342b',
       capacity: '4',
       image: '/images/фронтпогруз/amkodor342b.webp',
-      price: 'от 19 000 ₽/смена',
+      price: 'от 21 000 ₽/смена',
       description: 'Грузоподъемность т: 4. Ковш, м³: 2.3',
       category: '2.1-3.5',
       specs: {
@@ -101,7 +101,7 @@ const FrontLoadersPage: React.FC = () => {
       name: 'фронтальный погрузчик mitsuber ml541n',
       capacity: '5',
       image: '/images/фронтпогруз/mitsuberml541n.webp',
-      price: 'от 19 000 ₽/смена',
+      price: 'от 21 000 ₽/смена',
       description: 'Грузоподъемность т: 5. Ковш, м³: 3.0',
       category: '2.1-3.5',
       specs: {
@@ -119,7 +119,7 @@ const FrontLoadersPage: React.FC = () => {
       name: 'фронтальный погрузчик john deere wl56',
       capacity: '5',
       image: '/images/фронтпогруз/johndeerewl56.webp',
-      price: 'от 19 000 ₽/смена',
+      price: 'от 21 000 ₽/смена',
       description: 'Грузоподъемность т: 5. Ковш, м³: 3.1',
       category: '2.1-3.5',
       specs: {
@@ -137,7 +137,7 @@ const FrontLoadersPage: React.FC = () => {
       name: 'фронтальный погрузчик liebherr l544',
       capacity: '3',
       image: '/images/фронтпогруз/liebherrl544.webp',
-      price: 'от 19 000 ₽/смена',
+      price: 'от 22 000 ₽/смена',
       description: 'Грузоподъемность т: 3. Ковш, м³: 3.3',
       category: '2.1-3.5',
       specs: {
@@ -155,7 +155,7 @@ const FrontLoadersPage: React.FC = () => {
       name: 'фронтальный погрузчик komatsu wa420',
       capacity: '6.5',
       image: '/images/фронтпогруз/komatsuwa420.webp',
-      price: 'от 19 000 ₽/смена',
+      price: 'от 22 000 ₽/смена',
       description: 'Грузоподъемность т: 6.5. Ковш, м³: 3.5',
       category: '2.1-3.5',
       specs: {
@@ -173,7 +173,7 @@ const FrontLoadersPage: React.FC = () => {
       name: 'фронтальный погрузчик sdlg lg936l',
       capacity: '3',
       image: '/images/фронтпогруз/sdlg936.webp',
-      price: 'от 17 210 ₽/смена',
+      price: 'от 20 000 ₽/смена',
       description: 'Грузоподъемность т: 3. Ковш, м³: 1.7',
       category: '1.5-2.0',
       specs: {
@@ -188,10 +188,10 @@ const FrontLoadersPage: React.FC = () => {
     }
   ]
 
-  // Фильтрация по весовой категории
+  // Фильтрация по весовой категории и сортировка по объему ковша
   const filteredLoaders = selectedWeightCategory === 'all' 
-    ? frontLoaders 
-    : frontLoaders.filter(loader => loader.category === selectedWeightCategory)
+    ? frontLoaders.sort((a, b) => a.specs.bucket - b.specs.bucket)
+    : frontLoaders.filter(loader => loader.category === selectedWeightCategory).sort((a, b) => a.specs.bucket - b.specs.bucket)
 
   const weightCategories = [
     { id: 'all', name: 'Все погрузчики', count: frontLoaders.length },

@@ -143,8 +143,8 @@ const TrucksPage: React.FC = () => {
 
   const volumeCategories = [
     { id: 'all', name: 'Все самосвалы', count: trucks.length },
-    { id: '10-12', name: '10-12 куб.м', count: trucks.filter(t => t.category === '10-12').length },
-    { id: '15-18', name: '15-18 куб.м', count: trucks.filter(t => t.category === '15-18').length },
+    { id: '10-12', name: '10 куб.м', count: trucks.filter(t => t.category === '10-12').length },
+    { id: '15-18', name: '16-18 куб.м', count: trucks.filter(t => t.category === '15-18').length },
     { id: '20-32', name: '20-32 куб.м', count: trucks.filter(t => t.category === '20-32').length }
   ]
 
