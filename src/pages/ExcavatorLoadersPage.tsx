@@ -8,10 +8,10 @@ const ExcavatorLoadersPage: React.FC = () => {
   const excavatorLoaders = [
     {
       id: 1,
-      name: 'Экскаватор-погрузчик jcb 3cx',
+      name: 'экскаватор-погрузчик jcb 3cx',
       capacity: '1.0',
       image: '/images/экскаваторыпогруз/jcb 3cx cool pic.webp',
-      price: 'от 21 000 ₽/смена',
+      price: 'от 19 000 ₽/смена',
       description: 'Объем ковша погрузчика: 0.11 м³. Объем ковша экскаватора: 1.0 м³',
       category: '1.0-1.15',
       specs: {
@@ -25,7 +25,7 @@ const ExcavatorLoadersPage: React.FC = () => {
     },
     {
       id: 2,
-      name: 'Экскаватор-погрузчик volvo bl71b',
+      name: 'экскаватор-погрузчик volvo bl71b',
       capacity: '1.0',
       image: '/images/экскаваторыпогруз/volvo bl71b.webp',
       price: 'от 19 500 ₽/смена',
@@ -42,7 +42,7 @@ const ExcavatorLoadersPage: React.FC = () => {
     },
     {
       id: 3,
-      name: 'Экскаватор-погрузчик jcb 3cx super',
+      name: 'экскаватор-погрузчик jcb 3cx super',
       capacity: '1.1',
       image: '/images/экскаваторыпогруз/jcb 3cx super.webp',
       price: 'от 20 000 ₽/смена',
@@ -59,7 +59,7 @@ const ExcavatorLoadersPage: React.FC = () => {
     },
     {
       id: 4,
-      name: 'Экскаватор-погрузчик cat 444f',
+      name: 'экскаватор-погрузчик cat 444f',
       capacity: '1.15',
       image: '/images/экскаваторыпогруз/cat 44f.webp',
       price: 'от 20 000 ₽/смена',
@@ -76,7 +76,7 @@ const ExcavatorLoadersPage: React.FC = () => {
     },
     {
       id: 5,
-      name: 'Экскаватор-погрузчик Terex 860SX',
+      name: 'экскаватор-погрузчик Terex 860SX',
       capacity: '1.2',
       image: '/images/экскаваторыпогруз/terex 860.webp',
       price: 'от 20 000 ₽/смена',
@@ -93,7 +93,7 @@ const ExcavatorLoadersPage: React.FC = () => {
     },
     {
       id: 6,
-      name: 'Экскаватор-погрузчик jcb 4cx',
+      name: 'экскаватор-погрузчик jcb 4cx',
       capacity: '1.3',
       image: '/images/экскаваторыпогруз/jcb 4cx.webp',
       price: 'от 21 000 ₽/смена',
