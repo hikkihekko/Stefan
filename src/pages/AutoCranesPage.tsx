@@ -8,7 +8,7 @@ const AutoCranesPage: React.FC = () => {
   const autoCranes = [
     {
       id: 1,
-      name: 'Автокран Ивановец КС-3577-3',
+      name: 'автокран ивановец кс-3577-3',
       capacity: '14',
       image: '/images/ивановец кс35773.webp',
       price: 'от 16 000 ₽/смена',
@@ -25,7 +25,7 @@ const AutoCranesPage: React.FC = () => {
     },
     {
       id: 2,
-      name: 'Автокран Ивановец КС-35714К-3',
+      name: 'автокран ивановец кс-35714к-3',
       capacity: '16',
       image: '/images/автокраны/ivan16twebp.webp',
       price: 'от 17 000 ₽/смена',
@@ -42,7 +42,7 @@ const AutoCranesPage: React.FC = () => {
     },
     {
       id: 3,
-      name: 'Автокран КС-45719-8А',
+      name: 'автокран кс-45719-8а',
       capacity: '25',
       image: '/images/автокраны/klincy-25t_6.jpg',
       price: 'от 18 000 ₽/смена',
@@ -59,7 +59,7 @@ const AutoCranesPage: React.FC = () => {
     },
     {
       id: 4,
-      name: 'Автокран Ивановец КС-45717К-1, 21 м',
+      name: 'автокран ивановец кс-45717к-1, 21 м',
       capacity: '25',
       image: '/images/автокраны/иван2521.webp',
       price: 'от 18 000 ₽/смена',
@@ -76,7 +76,7 @@ const AutoCranesPage: React.FC = () => {
     },
     {
       id: 5,
-      name: 'Автокран Галичанин КС-55713-1B',
+      name: 'автокран галичанин кс-55713-1b',
       capacity: '25',
       image: '/images/автокраны/галичанин2521.webp',
       price: 'от 19 000 ₽/смена',
@@ -110,7 +110,7 @@ const AutoCranesPage: React.FC = () => {
     },
     {
       id: 7,
-      name: 'Автокран Галичанин КС 55729-1B',
+      name: 'автокран галичанин кс 55729-1b',
       capacity: '32',
       image: '/images/автокраны/галичанин3221.webp',
       price: 'от 22 000 ₽/смена',
@@ -127,10 +127,10 @@ const AutoCranesPage: React.FC = () => {
     },
     {
       id: 8,
-      name: 'Автокран Галичанин KC-65713-7',
+      name: 'автокран галичанин кс-65713-7',
       capacity: '50',
       image: '/images/автокраны/галичанин50т.webp',
-      price: 'от 35 000 ₽/смена',
+      price: 'от 32 000 ₽/смена',
       description: 'Грузоподъемность т: 50. Длина стрелы, м: 34',
       category: '32-50',
       specs: {
@@ -144,10 +144,10 @@ const AutoCranesPage: React.FC = () => {
     },
     {
       id: 9,
-      name: 'Автокран Liebherr LTM 1050-3.1',
+      name: 'автокран liebherr ltm 1050-3.1',
       capacity: '50',
       image: '/images/автокраны/либхер50тjpg.webp',
-      price: 'от 35 000 ₽/смена',
+      price: 'от 32 000 ₽/смена',
       description: 'Грузоподъемность т: 50. Длина стрелы, м: 40',
       category: '32-50',
       specs: {
@@ -161,10 +161,10 @@ const AutoCranesPage: React.FC = () => {
     },
     {
       id: 10,
-      name: 'Автокран SANY QY50C',
+      name: 'автокран sany qy50c',
       capacity: '55',
       image: '/images/автокраны/сани qy50.webp',
-      price: 'от 30 000 ₽/смена',
+      price: 'от 32 000 ₽/смена',
       description: 'Грузоподъемность т: 55. Длина стрелы, м: 42.5',
       category: '55-100',
       specs: {
@@ -178,7 +178,7 @@ const AutoCranesPage: React.FC = () => {
     },
     {
       id: 11,
-      name: 'Автокран Liebherr LTM 1070',
+      name: 'автокран liebherr ltm 1070',
       capacity: '70',
       image: '/images/liebherr 1070.webp',
       price: 'от 40 000 ₽/смена',
@@ -195,10 +195,10 @@ const AutoCranesPage: React.FC = () => {
     },
     {
       id: 12,
-      name: 'Автокран Liebherr LTM 1100-4.2',
+      name: 'автокран liebherr ltm 1100-4.2',
       capacity: '100',
       image: '/images/автокраны/liebherr1100.webp',
-      price: 'от 85 000 ₽/смена',
+      price: 'от 80 000 ₽/смена',
       description: 'Грузоподъемность т: 100. Длина стрелы, м: 60',
       category: '55-100',
       specs: {

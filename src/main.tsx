@@ -11,6 +11,17 @@ import ExcavatorLoadersPage from './pages/ExcavatorLoadersPage'
 import ExcavatorTrackedPage from './pages/ExcavatorTrackedPage'
 import ManipulatorsPage from './pages/ManipulatorsPage'
 import TrucksPage from './pages/TrucksPage'
+import FrontLoadersPage from './pages/FrontLoadersPage'
+import AutoTowersPage from './pages/AutoTowersPage'
+import MiniLoadersPage from './pages/MiniLoadersPage'
+import ExcavatorWheeledPage from './pages/ExcavatorWheeledPage'
+import TrailersPage from './pages/TrailersPage'
+import BulldozersPage from './pages/BulldozersPage'
+import RollersPage from './pages/RollersPage'
+import BoardTrucksPage from './pages/BoardTrucksPage'
+import LongTrucksPage from './pages/LongTrucksPage'
+import GradersPage from './pages/GradersPage'
+import MiniExcavatorsPage from './pages/MiniExcavatorsPage'
 
 // Статьи
 import ArticlesList from './pages/Articles/ArticlesList'
@@ -27,8 +38,19 @@ const router = createBrowserRouter([
       { path: 'autocranes', element: <AutoCranesPage /> },
       { path: 'excavator-loaders', element: <ExcavatorLoadersPage /> },
       { path: 'excavator-tracked', element: <ExcavatorTrackedPage /> },
+      { path: 'excavator-wheeled', element: <ExcavatorWheeledPage /> },
+      { path: 'mini-excavators', element: <MiniExcavatorsPage /> },
       { path: 'manipulators', element: <ManipulatorsPage /> },
       { path: 'trucks', element: <TrucksPage /> },
+      { path: 'front-loaders', element: <FrontLoadersPage /> },
+      { path: 'auto-towers', element: <AutoTowersPage /> },
+      { path: 'mini-loaders', element: <MiniLoadersPage /> },
+      { path: 'trailers', element: <TrailersPage /> },
+      { path: 'bulldozers', element: <BulldozersPage /> },
+      { path: 'rollers', element: <RollersPage /> },
+      { path: 'board-trucks', element: <BoardTrucksPage /> },
+      { path: 'long-trucks', element: <LongTrucksPage /> },
+      { path: 'graders', element: <GradersPage /> },
     ],
   },
 ])

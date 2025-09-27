@@ -11,7 +11,7 @@ const ManipulatorsPage: React.FC = () => {
       name: 'манипулятор kanglim на базе daewoo',
       capacity: '3',
       image: '/images/манипуляторы/daewoo 3tonn.webp',
-      price: 'от 15 000 ₽/смена',
+      price: 'от 18 000 ₽/смена',
       description: 'Грузоподъемность стрелы: 3т, Грузоподъемность борта: 5т',
       category: '3-5',
       specs: {
@@ -27,7 +27,7 @@ const ManipulatorsPage: React.FC = () => {
       name: 'манипулятор kanglim ks 1056 на базе hyundai',
       capacity: '5',
       image: '/images/манипуляторы/kanglim1056 hyondai.webp',
-      price: 'от 16 000 ₽/смена',
+      price: 'от 19 000 ₽/смена',
       description: 'Грузоподъемность стрелы: 5т, Грузоподъемность борта: 7т',
       category: '3-5',
       specs: {
@@ -43,7 +43,7 @@ const ManipulatorsPage: React.FC = () => {
       name: 'манипулятор вездеход unic ur-v500 камаз-43118',
       capacity: '5',
       image: '/images/манипуляторы/камаз и500 43118.webp',
-      price: 'от 16 000 ₽/смена',
+      price: 'от 19 000 ₽/смена',
       description: 'Грузоподъемность стрелы: 5т, Грузоподъемность борта: 10т',
       category: '3-5',
       specs: {
@@ -59,7 +59,7 @@ const ManipulatorsPage: React.FC = () => {
       name: 'манипулятор вездеход kanglim ks 2056 камаз-43118',
       capacity: '7',
       image: '/images/манипуляторы/kanglim ks2056 kamaz.webp',
-      price: 'от 17 000 ₽/смена',
+      price: 'от 20 000 ₽/смена',
       description: 'Грузоподъемность стрелы: 7т, Грузоподъемность борта: 10т',
       category: '7-12',
       specs: {
@@ -75,7 +75,7 @@ const ManipulatorsPage: React.FC = () => {
       name: 'манипулятор soosan scs 746l на базе daewoo',
       capacity: '7',
       image: '/images/манипуляторы/дэву сусан.webp',
-      price: 'от 17 000 ₽/смена',
+      price: 'от 20 000 ₽/смена',
       description: 'Грузоподъемность стрелы: 7т, Грузоподъемность борта: 10т',
       category: '7-12',
       specs: {
@@ -91,7 +91,7 @@ const ManipulatorsPage: React.FC = () => {
       name: 'манипулятор soosan scs866ls на базе камаз',
       capacity: '7',
       image: '/images/манипуляторы/oosan 866 kamax.webp',
-      price: 'от 18 000 ₽/смена',
+      price: 'от 21 000 ₽/смена',
       description: 'Грузоподъемность стрелы: 7т, Грузоподъемность борта: 15т',
       category: '7-12',
       specs: {
@@ -107,7 +107,7 @@ const ManipulatorsPage: React.FC = () => {
       name: 'манипулятор palfinger pk 42502',
       capacity: '12',
       image: '/images/манипуляторы/palfinger pk42502.webp',
-      price: 'от 19 000 ₽/смена',
+      price: 'от 22 000 ₽/смена',
       description: 'Грузоподъемность стрелы: 12т, Грузоподъемность борта: 20т',
       category: '7-12',
       specs: {
