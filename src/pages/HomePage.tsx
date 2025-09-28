@@ -9,12 +9,14 @@ import medal from '../icons/медалька.svg'
 import chart from '../icons/график.svg'
 import people from '../icons/люди.svg'
 import stefanLogo from '../icons/stefan.svg'
+import Reviews from '../components/Reviews/Reviews'
 
 const HomePage: React.FC = () => {
   const [techType, setTechType] = useState('')
   const [location, setLocation] = useState('')
   const [workType, setWorkType] = useState('')
   const [searchQuery, setSearchQuery] = useState('')
+  const [openFAQ, setOpenFAQ] = useState<number | null>(null)
   
   // Анимированный текст
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
@@ -39,6 +41,41 @@ const HomePage: React.FC = () => {
     }
   }
 
+  const toggleFAQ = (index: number) => {
+    setOpenFAQ(openFAQ === index ? null : index)
+  }
+
+  const faqData = [
+    {
+      question: "Сколько стоит аренда спецтехники в Москве?",
+      answer: "Стоимость зависит от типа техники, её мощности, срока аренды, расстояния доставки и необходимости оператора. Мы дадим точную цену после уточнения всех параметров."
+    },
+    {
+      question: "Минимальный срок аренды — сколько времени?",
+      answer: "Мы сдаём спецтехнику минимум на одну рабочую смену (обычно 8 часов), также возможна почасовая аренда и аренда на длительный срок."
+    },
+    {
+      question: "Предоставляете ли вы технику с оператором (машинистом)?",
+      answer: "Да — большинство наших машин сдаются с квалифицированным оператором. Если вам нужна техника без оператора, уточните, возможно ли это для конкретной модели."
+    },
+    {
+      question: "Как осуществляется доставка техники на объект и сколько времени это займёт?",
+      answer: "Мы доставляем технику собственным транспортом — тралами или эвакуаторами, в зависимости от габаритов. В пределах Москвы доставка обычно занимает от 1 до 2 часов после заказа и согласования."
+    },
+    {
+      question: "Что происходит, если техника ломается во время аренды?",
+      answer: "В случае неисправности мы заменяем технику на аналогичную или производим ремонт на объекте, если это возможно, за наш счёт."
+    },
+    {
+      question: "Как происходит оплата, и какие способы вы принимаете?",
+      answer: "Принимаем как безналичный расчёт (для компаний), так и наличный. Возможна предоплата. Счёт и договор предоставляются заранее."
+    },
+    {
+      question: "Действуете ли вы за пределами МКАД / Московская область?",
+      answer: "Да — мы доставляем технику также в области, но ее стоимость и условия аренды лучше согласовать индивидуально. Пожалуйста, свяжитесь с нами для получения более точного расчета."
+    }
+  ]
+
   // Анимация смены слов
   useEffect(() => {
     const interval = setInterval(() => {
@@ -54,11 +91,11 @@ const HomePage: React.FC = () => {
     return () => clearInterval(interval)
   }, [words.length])
   return (
-    <div className="container mx-auto px-4 sm:px-6">
+    <div className="container mx-auto px-4 sm:px-6" style={{scrollMarginTop: '120px'}}>
       {/* Hero Section */}
       <section className="grid lg:grid-cols-2 items-start gap-4 lg:gap-6 mt-8 lg:mt-12">
-        <div className="py-6 lg:py-10 px-6 lg:px-0">
-          <h1 className="font-baron font-extrabold leading-tight normal-case text-4xl sm:text-5xl md:text-6xl lg:text-7xl" style={{textTransform: 'none'}}>
+        <div className="py-6 lg:py-10 px-6" style={{paddingLeft: '24px'}}>
+          <h1 id="top" className="font-baron font-extrabold leading-tight normal-case text-4xl sm:text-5xl md:text-6xl lg:text-7xl" style={{textTransform: 'none'}}>
             спецтехника<br/>
             <span className="whitespace-nowrap">
               в аренду: <span 
@@ -74,7 +111,7 @@ const HomePage: React.FC = () => {
               </span>
             </span>
           </h1>
-          <p className="mt-4 lg:mt-6 text-white/85 max-w-xl font-medium text-base lg:text-lg">Собственный парк техники, проверенные операторы, выгодные условия. Просто супер, самая лучшая компания, ручаемся за результат.</p>
+          <p className="mt-4 lg:mt-6 text-white/85 max-w-xl font-medium text-base lg:text-lg">Собственный парк, оперативная подача, прозрачные цены.<br/>От мини до тяжёлой техники — всё в наличии под вашу задачу.</p>
           
           {/* Поисковая строка */}
           <div className="mt-4 lg:mt-6">
@@ -151,7 +188,7 @@ const HomePage: React.FC = () => {
        <div className="bg-white rounded-[24px]" style={{padding: 0}}>
          
          {/* Каталог техники */}
-         <div className="px-6 lg:px-6 py-6 lg:py-12">
+         <div id="catalog" className="px-6 lg:px-6 py-6 lg:py-12" style={{paddingTop: '32px', scrollMarginTop: '220px'}}>
            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6 lg:mb-6">
              <h2 className="font-baron font-extrabold text-slate-900 text-3xl sm:text-4xl lg:text-5xl mb-2 lg:mb-0" style={{lineHeight: 1}}>каталог техники</h2>
              <p className="font-manrope font-medium text-base lg:text-xl text-[#525252]" style={{lineHeight: 1}}>Любая техника под Ваш запрос</p>
@@ -278,15 +315,15 @@ const HomePage: React.FC = () => {
          </div>
 
                  {/* Блок отзывов */}
-       <div className="mt-8 lg:mt-8">
+       <div id="about" className="mt-8 lg:mt-8" style={{scrollMarginTop: '250px'}}>
          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6 lg:mb-6 px-6 lg:px-6">
            <h2 className="font-baron font-extrabold text-slate-900 text-3xl sm:text-4xl lg:text-5xl mb-2 lg:mb-0" style={{lineHeight: 1, margin: 0}}>почему выбирают нас</h2>
-           <p className="font-manrope font-medium text-base lg:text-xl text-[#525252]" style={{lineHeight: 1, margin: 0}}>Тут отзывы Яндекса</p>
+           <p className="font-manrope font-medium text-base lg:text-xl text-[#525252]" style={{lineHeight: 1, margin: 0}}>Отзывы наших клиентов</p>
          </div>
            
-           {/* Место для отзывов - пока пустое */}
-           <div className="flex items-center justify-center bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200 mx-6 lg:mx-6 h-64 sm:h-80 lg:h-96">
-             <p className="text-gray-400 font-manrope text-base lg:text-lg">Отзывы будут добавлены позже</p>
+           {/* Компонент отзывов */}
+           <div className="px-6 lg:px-6" style={{marginTop: '32px'}}>
+             <Reviews />
            </div>
          </div>
 
@@ -384,6 +421,51 @@ const HomePage: React.FC = () => {
            </div>
          </div>
 
+         {/* Блок FAQ */}
+         <div className="mt-8 lg:mt-12 px-6 lg:px-6" style={{paddingBottom: '32px'}}>
+           <div className="flex items-center justify-between mb-6 lg:mb-8">
+             <h2 className="font-baron font-extrabold text-slate-900 text-3xl sm:text-4xl lg:text-5xl" style={{lineHeight: 1, margin: 0}}>часто задаваемые вопросы</h2>
+           </div>
+           
+           <div className="space-y-4">
+             {faqData.map((faq, index) => (
+               <div 
+                 key={index}
+                 className="rounded-2xl overflow-hidden bg-white/80 backdrop-blur-sm hover:bg-white transition-all duration-300"
+                 style={{border: '1px solid #ADB8FF'}}
+               >
+                 <button
+                   onClick={() => toggleFAQ(index)}
+                   className="w-full text-left flex items-center justify-between hover:bg-slate-50 transition-colors"
+                   style={{
+                     paddingTop: '24px',
+                     paddingBottom: openFAQ === index ? '0px' : '24px',
+                     paddingLeft: '24px', 
+                     paddingRight: '24px'
+                   }}
+                 >
+                   <h3 className="font-manrope font-semibold text-lg lg:text-xl pr-4" style={{fontSize: '20px', lineHeight: 1.3, color: '#3535B9'}}>
+                     {faq.question}
+                   </h3>
+                   <div className={`flex-shrink-0 w-6 h-6 flex items-center justify-center transition-transform duration-300 ${openFAQ === index ? 'rotate-180' : ''}`}>
+                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{color: '#3535B9'}}>
+                       <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                     </svg>
+                   </div>
+                 </button>
+                 
+                 <div className={`transition-all duration-300 overflow-hidden ${openFAQ === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+                   <div style={{paddingTop: '24px', paddingLeft: '24px', paddingRight: '24px', paddingBottom: '24px'}}>
+                     <p className="font-manrope font-normal text-slate-700" style={{fontSize: '18px', lineHeight: 1}}>
+                       {faq.answer}
+                     </p>
+                   </div>
+                 </div>
+               </div>
+             ))}
+           </div>
+         </div>
+
        </div>
      </section>
 
@@ -393,15 +475,15 @@ const HomePage: React.FC = () => {
          <Link to="/articles" className="text-white/80 hover:text-white underline font-manrope font-medium text-xl">Все статьи</Link>
        </div>
      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
-       <Link to="/articles/top-5-vostrebovannyh-vidov-spectehniki-moskva-2025" className="glass rounded-2xl p-5 block hover:bg-white/15 transition-colors">
+       <Link to="/articles/top-5-vostrebovannyh-vidov-spectehniki-moskva-2025" className="bg-white/25 border border-white/40 rounded-2xl p-5 block hover:bg-white/35 hover:border-white/60 transition-all">
          <div className="font-semibold text-lg">Топ-5 самых востребованных видов спецтехники в Москве и МО в 2025 году</div>
          <div className="text-white/75 text-sm mt-2">Рейтинг самых популярных видов техники в Москве и МО</div>
        </Link>
-       <Link to="/articles/arenda-samosvala-moskva-2025-vybor-tehniki-gruntov" className="glass rounded-2xl p-5 block hover:bg-white/15 transition-colors">
+       <Link to="/articles/arenda-samosvala-moskva-2025-vybor-tehniki-gruntov" className="bg-white/25 border border-white/40 rounded-2xl p-5 block hover:bg-white/35 hover:border-white/60 transition-all">
          <div className="font-semibold text-lg">Аренда самосвала в Москве и МО 2025: выбор техники для различных грунтов и задач</div>
          <div className="text-white/75 text-sm mt-2">Подбор техники для различных грунтов и типов работ</div>
        </Link>
-       <Link to="/articles/arenda-mini-ekskavatora-moskva-2025-razresheniya-stoimost" className="glass rounded-2xl p-5 block hover:bg-white/15 transition-colors">
+       <Link to="/articles/arenda-mini-ekskavatora-moskva-2025-razresheniya-stoimost" className="bg-white/25 border border-white/40 rounded-2xl p-5 block hover:bg-white/35 hover:border-white/60 transition-all">
          <div className="font-semibold text-lg">Аренда мини-экскаватора в Москве и МО: разрешения и реальная стоимость в 2025</div>
          <div className="text-white/75 text-sm mt-2">Разрешения, ограничения и реальная стоимость аренды</div>
        </Link>
@@ -409,30 +491,33 @@ const HomePage: React.FC = () => {
     </section>
 
      {/* Футер */}
-     <footer className="py-8 lg:py-16">
+     <footer id="contacts" className="py-8 lg:py-16" style={{scrollMarginTop: '220px'}}>
        <div className="container mx-auto px-4 sm:px-6">
          <div className="flex flex-col lg:flex-row lg:justify-between lg:items-end mb-8">
            {/* Логотип и описание */}
            <div className="flex-1 mb-8 lg:mb-0">
              <img src={stefanLogo} alt="СТЕФАН" className="h-10 lg:h-12 mb-6 lg:mb-14" />
-             <p className="text-white/90 font-manrope text-base lg:text-lg leading-relaxed">
-               Надежная аренда спецтехники в Москве и Московской области.<br/>
-               Полный спектр подъемной техники для любых задач.
-             </p>
+            <p className="text-white/90 font-manrope text-base lg:text-lg leading-relaxed">
+              Надежная аренда спецтехники в Москве и Московской области.<br/>
+              Полный спектр техники для любых задач.
+            </p>
            </div>
            
            {/* Контакты */}
-           <div className="lg:mr-6">
-             <h3 className="font-baron font-bold text-white text-3xl lg:text-5xl mb-8 lg:mb-16 text-right" style={{lineHeight: 1}}>наши контакты</h3>
-             <div className="flex justify-end">
-               <div className="flex items-center space-x-3">
+           <div className="lg:mr-6" style={{transform: 'translateY(-20px) translateX(24px)'}}>
+             <h3 className="font-baron font-bold text-white text-3xl lg:text-5xl mb-8 lg:mb-16 text-right" style={{lineHeight: 1, transform: 'translateY(-12px)'}}>наши контакты</h3>
+             <div className="flex justify-end" style={{transform: 'translateY(-12px)'}}>
+               <a 
+                 href="tel:+79857671500" 
+                 className="flex items-center space-x-3 hover:opacity-80 transition-opacity cursor-pointer"
+               >
                  <div className="w-5 h-5 lg:w-6 lg:h-6 flex items-center justify-center">
                    <svg className="text-white w-5 h-5 lg:w-6 lg:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                    </svg>
                  </div>
                  <span className="text-white font-manrope text-base lg:text-xl">+7 (985) 767-15-00</span>
-               </div>
+               </a>
              </div>
            </div>
          </div>
@@ -446,12 +531,9 @@ const HomePage: React.FC = () => {
              © 2025 ООО "СТЕФАН". Все права защищены.
            </p>
            <div className="flex flex-col sm:flex-row gap-4 sm:gap-12">
-             <a href="#" className="text-white/80 hover:text-white font-manrope transition-colors text-sm lg:text-base">
-               Пользовательское соглашение
-             </a>
-             <a href="#" className="text-white/80 hover:text-white font-manrope transition-colors text-sm lg:text-base">
-               Политика конфиденциальности
-             </a>
+             <p className="text-white/80 font-manrope text-sm lg:text-base">
+               Все модели техники представлены исключительно для ознакомления
+             </p>
            </div>
          </div>
        </div>

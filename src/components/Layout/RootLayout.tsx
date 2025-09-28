@@ -4,6 +4,7 @@ import logo from '../../icons/stefan.svg'
 import chatIcon from '../../icons/svg chat bubble.svg'
 
 const NavBar: React.FC = () => {
+
   return (
     <div className="fixed top-6 z-50" style={{left: '50%', transform: 'translateX(-50%)', width: '100%'}}>
       <div className="container mx-auto px-6">
@@ -17,7 +18,7 @@ const NavBar: React.FC = () => {
             <div className="rounded-full bg-white text-slate-900 h-[50px] w-[507px] flex items-center justify-center px-4">
               <ul className="flex items-center justify-center gap-8 font-manrope text-[16px] leading-[12px] whitespace-nowrap">
                 <li>
-                  <NavLink to="/" className={({isActive}) => `${isActive ? 'text-black font-medium' : 'text-[#3535B9] font-normal'} hover:opacity-80`}>Главная</NavLink>
+                  <a href="#top" className="text-[#3535B9] font-normal hover:opacity-80">Главная</a>
                 </li>
                 <li>
                   <a href="#catalog" className="text-[#3535B9] font-normal hover:opacity-80">Каталог</a>
