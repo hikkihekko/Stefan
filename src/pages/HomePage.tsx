@@ -233,42 +233,34 @@ const HomePage: React.FC = () => {
                   </>
                 );
 
-                return item.name === 'Автокраны' ? (
+                const getLinkPath = (name: string) => {
+                  const pathMap: {[key: string]: string} = {
+                    'Автокраны': '/autocranes',
+                    'Экскаваторы-погрузчики': '/excavator-loaders',
+                    'Манипуляторы': '/manipulators',
+                    'Самосвалы': '/trucks',
+                    'Экскаваторы гусеничные': '/excavator-tracked',
+                    'Мини экскаваторы': '/mini-excavators',
+                    'Фронтальные погрузчики': '/front-loaders',
+                    'Автовышки': '/auto-towers',
+                    'Мини погрузчики': '/mini-loaders',
+                    'Экскаваторы колёсные': '/excavator-wheeled',
+                    'Тралы': '/trailers',
+                    'Бульдозеры': '/bulldozers',
+                    'Катки': '/rollers',
+                    'Бортовые автомобили': '/board-trucks',
+                    'Длинномеры': '/long-trucks',
+                    'Грейдеры': '/graders'
+                  };
+                  return pathMap[name];
+                };
+
+                const linkPath = getLinkPath(item.name);
+                
+                return linkPath ? (
                   <Link 
                     key={index}
-                    to="/autocranes"
-                    className="relative rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 block h-32 sm:h-40 lg:h-48"
-                  >
-                    {cardContent}
-                  </Link>
-                ) : item.name === 'Экскаваторы-погрузчики' ? (
-                  <Link 
-                    key={index}
-                    to="/excavator-loaders"
-                    className="relative rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 block h-32 sm:h-40 lg:h-48"
-                  >
-                    {cardContent}
-                  </Link>
-                ) : item.name === 'Манипуляторы' ? (
-                  <Link 
-                    key={index}
-                    to="/manipulators"
-                    className="relative rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 block h-32 sm:h-40 lg:h-48"
-                  >
-                    {cardContent}
-                  </Link>
-                ) : item.name === 'Самосвалы' ? (
-                  <Link 
-                    key={index}
-                    to="/trucks"
-                    className="relative rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 block h-32 sm:h-40 lg:h-48"
-                  >
-                    {cardContent}
-                  </Link>
-                ) : item.name === 'Экскаваторы гусеничные' ? (
-                  <Link 
-                    key={index}
-                    to="/excavator-tracked"
+                    to={linkPath}
                     className="relative rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 block h-32 sm:h-40 lg:h-48"
                   >
                     {cardContent}
