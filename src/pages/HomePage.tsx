@@ -93,90 +93,184 @@ const HomePage: React.FC = () => {
   return (
     <div className="container mx-auto px-4 sm:px-6" style={{scrollMarginTop: '120px'}}>
       {/* Hero Section */}
-      <section className="grid lg:grid-cols-2 items-start gap-4 lg:gap-6 mt-8 lg:mt-12">
-        <div className="py-6 lg:py-10 px-6" style={{paddingLeft: '24px'}}>
-          <h1 id="top" className="font-baron font-extrabold leading-tight normal-case text-4xl sm:text-5xl md:text-6xl lg:text-7xl" style={{textTransform: 'none'}}>
-            спецтехника<br/>
-            <span className="whitespace-nowrap">
-              в аренду: <span 
-                className="text-white/70 inline-block transition-all duration-300 ease-in-out" 
-                style={{
-                  opacity: isVisible ? 1 : 0,
-                  transform: isVisible ? 'translateY(0)' : 'translateY(-10px)',
-                  minWidth: '280px',
-                  textAlign: 'left'
-                }}
-              >
-                {words[currentWordIndex]}
+      <section className="mt-8 lg:mt-12">
+        {/* Mobile Layout: Stack vertically */}
+        <div className="lg:hidden">
+          <div className="py-6 px-6">
+            <h1 id="top" className="font-baron font-extrabold leading-tight normal-case text-4xl sm:text-5xl md:text-6xl" style={{textTransform: 'none'}}>
+              спецтехника<br/>
+              <span className="block sm:inline">
+                в аренду: <span 
+                  className="text-white/70 inline-block transition-all duration-300 ease-in-out" 
+                  style={{
+                    opacity: isVisible ? 1 : 0,
+                    transform: isVisible ? 'translateY(0)' : 'translateY(-10px)',
+                    minWidth: 'auto',
+                    textAlign: 'left'
+                  }}
+                >
+                  {words[currentWordIndex]}
+                </span>
               </span>
-            </span>
-          </h1>
-          <p className="mt-4 lg:mt-6 text-white/85 max-w-xl font-medium text-base lg:text-lg">Собственный парк, оперативная подача, прозрачные цены.<br/>От мини до тяжёлой техники — всё в наличии под вашу задачу.</p>
-          
-          {/* Поисковая строка */}
-          <div className="mt-4 lg:mt-6">
-            <form onSubmit={handleSearch}>
-              <div className="relative max-w-md">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center justify-center pointer-events-none">
-                  <svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <path d="m21 21-4.35-4.35"></path>
-                  </svg>
+            </h1>
+            <p className="mt-4 text-white/85 max-w-xl font-medium text-base">Собственный парк техники, проверенные операторы, выгодные условия. Просто супер, самая лучшая компания, ручаемся за результат.</p>
+            
+            {/* Поисковая строка */}
+            <div className="mt-4">
+              <form onSubmit={handleSearch}>
+                <div className="relative max-w-md mx-auto">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center justify-center pointer-events-none">
+                    <svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                      <circle cx="11" cy="11" r="8"></circle>
+                      <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                  </div>
+                  <input
+                    type="text"
+                    className="w-full h-[50px] pl-12 pr-4 rounded-full bg-white/25 border border-white/40 text-white placeholder-white/70 text-[16px] font-manrope focus:bg-white/35 focus:border-white/60 focus:outline-none transition-all"
+                    placeholder="Поиск техники в каталоге..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
                 </div>
-                <input
-                  type="text"
-                  className="w-full h-[50px] pl-12 pr-4 rounded-full bg-white/25 border border-white/40 text-white placeholder-white/70 text-[16px] font-manrope focus:bg-white/35 focus:border-white/60 focus:outline-none transition-all"
-                  placeholder="Поиск техники в каталоге..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
+              </form>
+            </div>
+          </div>
+          
+          {/* Form Card - Centered on mobile */}
+          <div className="flex justify-center px-6 pb-6">
+            <div className="rounded-[24px] bg-white text-slate-900 w-full max-w-md h-auto">
+              <div className="h-full flex flex-col px-6 py-6">
+                <div className="flex flex-col items-center">
+                  <h3 className="font-baron font-bold text-center text-xl mb-6" style={{lineHeight: 1}}>подобрать технику</h3>
+                  <div className="w-full flex flex-col items-center mb-6">
+                    <div className="mb-4 w-full max-w-[344px]">
+                      <label className="block text-[#2D3748] font-manrope font-medium text-sm mb-2" style={{lineHeight: 1}}>Тип техники</label>
+                      <input 
+                        className="w-full h-[48px] rounded-[24px] bg-slate-100 border border-slate-200 px-4 text-sm font-manrope font-normal focus:border-[#ADB8FF] focus:outline-none" 
+                        placeholder="Желаемые характеристики техники"
+                        value={techType}
+                        onChange={(e) => setTechType(e.target.value)}
+                      />
+                    </div>
+                    <div className="mb-4 w-full max-w-[344px]">
+                      <label className="block text-[#2D3748] font-manrope font-medium text-sm mb-2" style={{lineHeight: 1}}>Местоположение</label>
+                      <input 
+                        className="w-full h-[48px] rounded-[24px] bg-slate-100 border border-slate-200 px-4 text-sm font-manrope font-normal focus:border-[#ADB8FF] focus:outline-none" 
+                        placeholder="Адрес работ"
+                        value={location}
+                        onChange={(e) => setLocation(e.target.value)}
+                      />
+                    </div>
+                    <div className="w-full max-w-[344px]">
+                      <label className="block text-[#2D3748] font-manrope font-medium text-sm mb-2" style={{lineHeight: 1}}>Фронт работ</label>
+                      <input 
+                        className="w-full h-[48px] rounded-[24px] bg-slate-100 border border-slate-200 px-4 text-sm font-manrope font-normal focus:border-[#ADB8FF] focus:outline-none" 
+                        placeholder="Краткое описание задачи"
+                        value={workType}
+                        onChange={(e) => setWorkType(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <button 
+                    className="w-full max-w-[344px] h-[50px] rounded-[24px] bg-black hover:bg-[#0C1C8F] text-white font-manrope font-medium text-sm transition-colors" 
+                    onClick={handleSubmit}
+                    type="button"
+                  >
+                    Написать менеджеру
+                  </button>
+                </div>
               </div>
-            </form>
+            </div>
           </div>
         </div>
-        
-        {/* Form Card */}
-        <div className="lg:justify-self-end">
-          <div className="rounded-[24px] bg-white text-slate-900 w-full max-w-md mx-auto lg:mx-0 lg:w-[392px] h-auto lg:h-[440px] mt-6 lg:mt-6 mr-0 lg:mr-6">
-            <div className="h-full flex flex-col px-6 py-6 lg:py-6">
-              <div className="flex flex-col items-center">
-                <h3 className="font-baron font-bold text-center text-xl lg:text-3xl mb-6" style={{lineHeight: 1}}>подобрать технику</h3>
-                <div className="w-full flex flex-col items-center mb-6">
-                  <div className="mb-4 lg:mb-6 w-full max-w-[344px]">
-                    <label className="block text-[#2D3748] font-manrope font-medium text-sm lg:text-base mb-2" style={{lineHeight: 1}}>Тип техники</label>
-                    <input 
-                      className="w-full h-[48px] rounded-[24px] bg-slate-100 border border-slate-200 px-4 text-sm lg:text-base font-manrope font-normal focus:border-[#ADB8FF] focus:outline-none" 
-                      placeholder="Желаемые характеристики техники"
-                      value={techType}
-                      onChange={(e) => setTechType(e.target.value)}
-                    />
-                  </div>
-                  <div className="mb-4 lg:mb-6 w-full max-w-[344px]">
-                    <label className="block text-[#2D3748] font-manrope font-medium text-sm lg:text-base mb-2" style={{lineHeight: 1}}>Местоположение</label>
-                    <input 
-                      className="w-full h-[48px] rounded-[24px] bg-slate-100 border border-slate-200 px-4 text-sm lg:text-base font-manrope font-normal focus:border-[#ADB8FF] focus:outline-none" 
-                      placeholder="Адрес работ"
-                      value={location}
-                      onChange={(e) => setLocation(e.target.value)}
-                    />
-                  </div>
-                  <div className="w-full max-w-[344px]">
-                    <label className="block text-[#2D3748] font-manrope font-medium text-sm lg:text-base mb-2" style={{lineHeight: 1}}>Фронт работ</label>
-                    <input 
-                      className="w-full h-[48px] rounded-[24px] bg-slate-100 border border-slate-200 px-4 text-sm lg:text-base font-manrope font-normal focus:border-[#ADB8FF] focus:outline-none" 
-                      placeholder="Краткое описание задачи"
-                      value={workType}
-                      onChange={(e) => setWorkType(e.target.value)}
-                    />
-                  </div>
-                </div>
-                <button 
-                  className="w-full max-w-[344px] h-[50px] rounded-[24px] bg-black hover:bg-[#0C1C8F] text-white font-manrope font-medium text-sm lg:text-base transition-colors" 
-                  onClick={handleSubmit}
-                  type="button"
+
+        {/* Desktop Layout: Side by side */}
+        <div className="hidden lg:grid lg:grid-cols-2 items-start gap-6">
+          <div className="py-10">
+            <h1 id="top" className="font-baron font-extrabold leading-tight normal-case text-7xl" style={{textTransform: 'none'}}>
+              спецтехника<br/>
+              <span className="whitespace-nowrap">
+                в аренду: <span 
+                  className="text-white/70 inline-block transition-all duration-300 ease-in-out" 
+                  style={{
+                    opacity: isVisible ? 1 : 0,
+                    transform: isVisible ? 'translateY(0)' : 'translateY(-10px)',
+                    minWidth: 'auto',
+                    textAlign: 'left'
+                  }}
                 >
-                  Написать менеджеру
-                </button>
+                  {words[currentWordIndex]}
+                </span>
+              </span>
+            </h1>
+            <p className="mt-6 text-white/85 max-w-xl font-medium text-lg">Собственный парк техники, проверенные операторы, выгодные условия. Просто супер, самая лучшая компания, ручаемся за результат.</p>
+            
+            {/* Поисковая строка */}
+            <div className="mt-6">
+              <form onSubmit={handleSearch}>
+                <div className="relative max-w-md">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center justify-center pointer-events-none">
+                    <svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                      <circle cx="11" cy="11" r="8"></circle>
+                      <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                  </div>
+                  <input
+                    type="text"
+                    className="w-full h-[50px] pl-12 pr-4 rounded-full bg-white/25 border border-white/40 text-white placeholder-white/70 text-[16px] font-manrope focus:bg-white/35 focus:border-white/60 focus:outline-none transition-all"
+                    placeholder="Поиск техники в каталоге..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+          
+          {/* Form Card - Desktop */}
+          <div className="justify-self-end">
+            <div className="rounded-[24px] bg-white text-slate-900 w-[392px] h-[440px] mt-6 mr-6">
+              <div className="h-full flex flex-col px-6 py-6">
+                <div className="flex flex-col items-center">
+                  <h3 className="font-baron font-bold text-center text-3xl mb-6" style={{lineHeight: 1}}>подобрать технику</h3>
+                  <div className="w-full flex flex-col items-center mb-6">
+                    <div className="mb-6 w-full max-w-[344px]">
+                      <label className="block text-[#2D3748] font-manrope font-medium text-base mb-2" style={{lineHeight: 1}}>Тип техники</label>
+                      <input 
+                        className="w-full h-[48px] rounded-[24px] bg-slate-100 border border-slate-200 px-4 text-base font-manrope font-normal focus:border-[#ADB8FF] focus:outline-none" 
+                        placeholder="Желаемые характеристики техники"
+                        value={techType}
+                        onChange={(e) => setTechType(e.target.value)}
+                      />
+                    </div>
+                    <div className="mb-6 w-full max-w-[344px]">
+                      <label className="block text-[#2D3748] font-manrope font-medium text-base mb-2" style={{lineHeight: 1}}>Местоположение</label>
+                      <input 
+                        className="w-full h-[48px] rounded-[24px] bg-slate-100 border border-slate-200 px-4 text-base font-manrope font-normal focus:border-[#ADB8FF] focus:outline-none" 
+                        placeholder="Адрес работ"
+                        value={location}
+                        onChange={(e) => setLocation(e.target.value)}
+                      />
+                    </div>
+                    <div className="w-full max-w-[344px]">
+                      <label className="block text-[#2D3748] font-manrope font-medium text-base mb-2" style={{lineHeight: 1}}>Фронт работ</label>
+                      <input 
+                        className="w-full h-[48px] rounded-[24px] bg-slate-100 border border-slate-200 px-4 text-base font-manrope font-normal focus:border-[#ADB8FF] focus:outline-none" 
+                        placeholder="Краткое описание задачи"
+                        value={workType}
+                        onChange={(e) => setWorkType(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <button 
+                    className="w-full max-w-[344px] h-[50px] rounded-[24px] bg-black hover:bg-[#0C1C8F] text-white font-manrope font-medium text-base transition-colors" 
+                    onClick={handleSubmit}
+                    type="button"
+                  >
+                    Написать менеджеру
+                  </button>
+                </div>
               </div>
             </div>
           </div>
