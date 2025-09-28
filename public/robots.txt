@@ -1,0 +1,26 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://spextehnikaru.ru/sitemap.xml
+
+# Disallow admin areas (if any)
+Disallow: /admin/
+Disallow: /api/
+
+# Allow all articles
+Allow: /articles/
+
+# Allow all main pages
+Allow: /autocranes/
+Allow: /excavator-loaders/
+Allow: /excavator-tracked/
+Allow: /manipulators/
+Allow: /trucks/
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+
+
+

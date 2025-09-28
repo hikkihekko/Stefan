@@ -27,6 +27,9 @@ import MiniExcavatorsPage from './pages/MiniExcavatorsPage'
 import ArticlesList from './pages/Articles/ArticlesList'
 import ArticleDetail from './pages/Articles/ArticleDetail'
 
+// Sitemap
+import SitemapPage from './pages/SitemapPage'
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -51,6 +54,7 @@ const router = createBrowserRouter([
       { path: 'board-trucks', element: <BoardTrucksPage /> },
       { path: 'long-trucks', element: <LongTrucksPage /> },
       { path: 'graders', element: <GradersPage /> },
+      { path: 'sitemap', element: <SitemapPage /> },
     ],
   },
 ])
