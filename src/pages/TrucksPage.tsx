@@ -294,6 +294,22 @@ const TrucksPage: React.FC = () => {
                 </p>
               </div>
             </div>
+            
+            {/* Ссылка на статью */}
+            <div className="mt-6 p-4 bg-white rounded-[16px] border border-slate-200">
+              <h4 className="font-manrope font-semibold text-slate-900 mb-2" style={{fontSize: 18}}>
+                Как выбрать самосвал?
+              </h4>
+              <p className="font-manrope text-slate-600 mb-3" style={{fontSize: 16}}>
+                Полное руководство по подбору техники для различных грунтов и типов работ в 2025 году
+              </p>
+              <Link 
+                to="/articles/arenda-samosvala-moskva-2025-vybor-tehniki-gruntov"
+                className="inline-flex items-center text-[#3535B9] hover:text-[#2929A3] font-manrope font-medium text-[16px] transition-colors"
+              >
+                Читать статью →
+              </Link>
+            </div>
           </div>
 
         </div>
