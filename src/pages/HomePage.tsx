@@ -147,7 +147,7 @@ const HomePage: React.FC = () => {
       </section>
 
      {/* Большая белая подложка для каталога, отзывов, о компании */}
-     <section className="py-8 lg:py-20">
+     <section className="pt-8 lg:pt-20">
        <div className="bg-white rounded-[24px]" style={{padding: 0}}>
          
          {/* Каталог техники */}
@@ -290,8 +290,8 @@ const HomePage: React.FC = () => {
            </div>
          </div>
 
-         {/* Блок о компании */}
-         <div className="mt-8 lg:mt-12 px-6 lg:px-6 mb-8 lg:mb-8">
+          {/* Блок о компании */}
+          <div className="mt-8 lg:mt-12 px-6 lg:px-6">
            <div className="flex items-center justify-between">
              <h2 className="font-baron font-extrabold text-slate-900 text-3xl sm:text-4xl lg:text-5xl" style={{lineHeight: 1, margin: 0}}>о компании</h2>
            </div>
@@ -387,43 +387,44 @@ const HomePage: React.FC = () => {
        </div>
      </section>
 
-     <section className="py-8 lg:py-20">
-       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
-         <h2 className="font-baron text-2xl lg:text-3xl">Недавние статьи</h2>
-         <Link to="/articles" className="text-white/80 hover:text-white underline text-sm lg:text-base">Все статьи</Link>
+     <section className="mt-12 px-6">
+       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
+         <h2 className="font-baron font-bold text-white text-3xl sm:text-4xl lg:text-5xl" style={{lineHeight: 1, margin: 0}}>недавние статьи</h2>
+         <Link to="/articles" className="text-white/80 hover:text-white underline font-manrope font-medium text-xl">Все статьи</Link>
        </div>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
-        <Link to="/articles/top-5-vostrebovannyh-vidov-spectehniki-moskva-2025" className="glass rounded-2xl p-5 block hover:bg-white/15 transition-colors">
-          <div className="font-semibold">Топ-5 востребованной спецтехники 2025</div>
-          <div className="text-white/75 text-sm mt-2">Рейтинг самых популярных видов техники в Москве и МО</div>
-        </Link>
-        <Link to="/articles/arenda-samosvala-moskva-2025-vybor-tehniki-gruntov" className="glass rounded-2xl p-5 block hover:bg-white/15 transition-colors">
-          <div className="font-semibold">Как выбрать самосвал</div>
-          <div className="text-white/75 text-sm mt-2">Подбор техники для различных грунтов и типов работ</div>
-        </Link>
-        <Link to="/articles/arenda-mini-ekskavatora-moskva-2025-razresheniya-stoimost" className="glass rounded-2xl p-5 block hover:bg-white/15 transition-colors">
-          <div className="font-semibold">Мини-экскаватор в городе</div>
-          <div className="text-white/75 text-sm mt-2">Разрешения, ограничения и реальная стоимость аренды</div>
-        </Link>
-      </div>
-     </section>
+     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+       <Link to="/articles/top-5-vostrebovannyh-vidov-spectehniki-moskva-2025" className="glass rounded-2xl p-5 block hover:bg-white/15 transition-colors">
+         <div className="font-semibold text-lg">Топ-5 самых востребованных видов спецтехники в Москве и МО в 2025 году</div>
+         <div className="text-white/75 text-sm mt-2">Рейтинг самых популярных видов техники в Москве и МО</div>
+       </Link>
+       <Link to="/articles/arenda-samosvala-moskva-2025-vybor-tehniki-gruntov" className="glass rounded-2xl p-5 block hover:bg-white/15 transition-colors">
+         <div className="font-semibold text-lg">Аренда самосвала в Москве и МО 2025: выбор техники для различных грунтов и задач</div>
+         <div className="text-white/75 text-sm mt-2">Подбор техники для различных грунтов и типов работ</div>
+       </Link>
+       <Link to="/articles/arenda-mini-ekskavatora-moskva-2025-razresheniya-stoimost" className="glass rounded-2xl p-5 block hover:bg-white/15 transition-colors">
+         <div className="font-semibold text-lg">Аренда мини-экскаватора в Москве и МО: разрешения и реальная стоимость в 2025</div>
+         <div className="text-white/75 text-sm mt-2">Разрешения, ограничения и реальная стоимость аренды</div>
+       </Link>
+     </div>
+    </section>
 
      {/* Футер */}
      <footer className="py-8 lg:py-16">
        <div className="container mx-auto px-4 sm:px-6">
-         <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-8">
+         <div className="flex flex-col lg:flex-row lg:justify-between lg:items-end mb-8">
            {/* Логотип и описание */}
            <div className="flex-1 mb-8 lg:mb-0">
              <img src={stefanLogo} alt="СТЕФАН" className="h-10 lg:h-12 mb-6 lg:mb-14" />
              <p className="text-white/90 font-manrope text-base lg:text-lg leading-relaxed">
-               Надежная аренда спецтехники в Москве и Московской области. Полный спектр подъемной техники для любых задач.
+               Надежная аренда спецтехники в Москве и Московской области.<br/>
+               Полный спектр подъемной техники для любых задач.
              </p>
            </div>
            
            {/* Контакты */}
            <div className="lg:mr-6">
-             <h3 className="font-baron font-bold text-white text-3xl lg:text-5xl mb-8 lg:mb-16" style={{lineHeight: 1}}>наши контакты</h3>
-             <div className="space-y-4">
+             <h3 className="font-baron font-bold text-white text-3xl lg:text-5xl mb-8 lg:mb-16 text-right" style={{lineHeight: 1}}>наши контакты</h3>
+             <div className="flex justify-end">
                <div className="flex items-center space-x-3">
                  <div className="w-5 h-5 lg:w-6 lg:h-6 flex items-center justify-center">
                    <svg className="text-white w-5 h-5 lg:w-6 lg:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -431,14 +432,6 @@ const HomePage: React.FC = () => {
                    </svg>
                  </div>
                  <span className="text-white font-manrope text-base lg:text-xl">+7 (985) 767-15-00</span>
-               </div>
-               <div className="flex items-center space-x-3">
-                 <div className="w-5 h-5 lg:w-6 lg:h-6 flex items-center justify-center">
-                   <svg className="text-white w-5 h-5 lg:w-6 lg:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                   </svg>
-                 </div>
-                 <span className="text-white font-manrope text-base lg:text-xl">info@stefan-cranes.ru</span>
                </div>
              </div>
            </div>
