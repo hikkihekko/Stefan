@@ -62,13 +62,13 @@ const HomePage: React.FC = () => {
           <div className="py-6 px-6">
             <h1 className="font-baron font-extrabold leading-tight normal-case text-4xl sm:text-5xl md:text-6xl" style={{textTransform: 'none'}}>
               спецтехника<br/>
-              <span className="whitespace-nowrap">
+              <span className="block sm:inline">
                 в аренду: <span 
                   className="text-white/70 inline-block transition-all duration-300 ease-in-out" 
                   style={{
                     opacity: isVisible ? 1 : 0,
                     transform: isVisible ? 'translateY(0)' : 'translateY(-10px)',
-                    minWidth: '280px',
+                    minWidth: 'auto',
                     textAlign: 'left'
                   }}
                 >
@@ -159,7 +159,7 @@ const HomePage: React.FC = () => {
                   style={{
                     opacity: isVisible ? 1 : 0,
                     transform: isVisible ? 'translateY(0)' : 'translateY(-10px)',
-                    minWidth: '280px',
+                    minWidth: 'auto',
                     textAlign: 'left'
                   }}
                 >

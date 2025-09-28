@@ -83,8 +83,7 @@ const NavBar: React.FC = () => {
           </div>
 
           {/* Mobile Burger Menu */}
-          <div className="md:hidden flex items-center gap-4">
-            <a href="tel:+79857671500" className="text-white font-manrope font-medium hover:opacity-80 transition-opacity" style={{fontSize: 14}}>+7 (985) 767-15-00</a>
+          <div className="md:hidden flex items-center">
             <button
               onClick={toggleMobileMenu}
               className="flex flex-col items-center justify-center w-8 h-8 space-y-1"
@@ -146,17 +145,31 @@ const NavBar: React.FC = () => {
                   Контакты
                 </a>
               </li>
-              <li className="pt-4 border-t border-white/20">
-                <a 
-                  href="https://wa.me/79857671500" 
-                  target="_blank" 
-                  rel="noreferrer" 
-                  className="inline-flex items-center justify-center bg-white rounded-full text-slate-900 font-medium"
-                  style={{width:50,height:50}}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  <img src={new URL('../icons/svg chat bubble.svg', import.meta.url).toString()} alt="Чат" width={18} height={18} />
-                </a>
+              
+              {/* Разделитель с номером телефона */}
+              <li className="pt-4">
+                <div className="flex items-center justify-center">
+                  <div className="flex-1 h-px bg-white/20 mx-4"></div>
+                </div>
+                <div className="flex items-center justify-center mt-4 space-x-4">
+                  <a 
+                    href="tel:+79857671500" 
+                    className="text-white font-manrope font-medium hover:text-white/80 transition-colors text-center"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    +7 (985) 767-15-00
+                  </a>
+                  <a 
+                    href="https://wa.me/79857671500" 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className="inline-flex items-center justify-center bg-white rounded-full text-slate-900 font-medium hover:bg-white/90 transition-colors"
+                    style={{width:50,height:50}}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <img src={new URL('../icons/svg chat bubble.svg', import.meta.url).toString()} alt="Чат" width={18} height={18} />
+                  </a>
+                </div>
               </li>
             </ul>
           </div>
