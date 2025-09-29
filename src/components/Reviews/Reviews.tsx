@@ -12,6 +12,7 @@ interface Review {
 
 const Reviews: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [containerHeight, setContainerHeight] = useState(320) // Начальная высота
 
   // Реальные отзывы клиентов
   const reviews: Review[] = [
@@ -89,14 +90,31 @@ const Reviews: React.FC = () => {
     }
   ]
 
+  // Функция для обновления высоты контейнера
+  const updateContainerHeight = (index: number) => {
+    const reviewElement = document.getElementById(`review-${index}`)
+    if (reviewElement) {
+      const height = reviewElement.offsetHeight
+      setContainerHeight(height + 48) // Добавляем отступы для индикаторов
+    }
+  }
+
   // Автопрокрутка карусели
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % reviews.length)
+      const nextIndex = (currentIndex + 1) % reviews.length
+      setCurrentIndex(nextIndex)
+      // Обновляем высоту после смены индекса
+      setTimeout(() => updateContainerHeight(nextIndex), 100)
     }, 8000) // Смена каждые 8 секунд
 
     return () => clearInterval(interval)
-  }, [reviews.length])
+  }, [currentIndex, reviews.length])
+
+  // Обновляем высоту при изменении индекса
+  useEffect(() => {
+    updateContainerHeight(currentIndex)
+  }, [currentIndex])
 
   const handleReviewClick = (avitoUrl: string) => {
     window.open(avitoUrl, '_blank')
@@ -106,7 +124,7 @@ const Reviews: React.FC = () => {
     return Array.from({ length: 5 }, (_, index) => (
       <svg
         key={index}
-        className={`w-6 h-6 ${index < rating ? 'text-yellow-400' : 'text-gray-300'}`}
+        className={`w-5 h-5 sm:w-6 sm:h-6 ${index < rating ? 'text-yellow-400' : 'text-gray-300'}`}
         fill="currentColor"
         viewBox="0 0 20 20"
       >
@@ -116,51 +134,70 @@ const Reviews: React.FC = () => {
   }
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative">
       <div 
-        className="flex transition-transform duration-1000 ease-in-out"
-        style={{ 
-          transform: `translateX(calc(-${currentIndex * 100}% - ${currentIndex * 24}px))`,
-          gap: '24px'
-        }}
+        className="overflow-hidden transition-all duration-1000 ease-in-out"
+        style={{ height: `${containerHeight}px` }}
       >
-        {reviews.map((review) => (
+        <div 
+          className="flex transition-transform duration-1000 ease-in-out"
+          style={{ 
+            transform: `translateX(calc(-${currentIndex * 100}% - ${currentIndex * 24}px))`,
+            gap: '24px'
+          }}
+        >
+        {reviews.map((review, index) => (
           <div
             key={review.id}
             className="w-full flex-shrink-0"
           >
             <div
-              className="rounded-2xl p-8 cursor-pointer h-64 flex flex-col justify-between transition-all duration-300 hover:shadow-lg"
+              id={`review-${index}`}
+              className="rounded-2xl p-6 sm:p-8 cursor-pointer flex flex-col justify-between transition-all duration-300 hover:shadow-lg"
               style={{
                 background: 'linear-gradient(135deg, rgba(173, 184, 255, 0.15) 0%, rgba(173, 184, 255, 0.25) 100%)',
                 border: '1px solid #ADB8FF'
               }}
               onClick={() => handleReviewClick(review.avitoUrl)}
             >
-              <div className="flex-1">
-                <div className="flex items-center justify-between mb-4">
-                  <h4 className="font-manrope font-semibold text-gray-900" style={{fontSize: '20px'}}>
-                    {review.name}
-                  </h4>
-                  <div className="flex items-center space-x-1">
-                    {renderStars(review.rating)}
-                  </div>
+              {/* Верхняя часть - имя и рейтинг */}
+              <div className="flex items-center justify-between mb-4 sm:mb-6">
+                <h4 className="font-manrope font-semibold text-gray-900 text-lg sm:text-xl">
+                  {review.name}
+                </h4>
+                <div className="flex items-center space-x-1">
+                  {renderStars(review.rating)}
                 </div>
-                <p className="text-gray-700 font-manrope leading-relaxed mb-4" style={{fontSize: '18px'}}>
+              </div>
+              
+              {/* Средняя часть - текст отзыва (расширяется) */}
+              <div className="flex-1 mb-4 sm:mb-6">
+                <p className="text-gray-700 font-manrope leading-relaxed text-base sm:text-lg">
                   {review.text}
                 </p>
               </div>
-              <div className="flex items-center justify-between">
-                <span className="text-gray-500 font-manrope" style={{fontSize: '18px'}}>
-                  {review.date}
-                </span>
-                <span className="text-blue-600 font-manrope hover:text-blue-800 transition-colors" style={{fontSize: '18px'}}>
+              
+              {/* Нижняя часть - дата и ссылка (всегда внизу) */}
+              <div className="flex items-center justify-between pt-2 border-t border-gray-200/50">
+                <div className="text-gray-500 font-manrope text-sm sm:text-base leading-tight">
+                  {(() => {
+                    const [day, month, year] = review.date.split(' ')
+                    return (
+                      <>
+                        <div>{day} {month}</div>
+                        <div>{year}</div>
+                      </>
+                    )
+                  })()}
+                </div>
+                <span className="text-blue-600 font-manrope hover:text-blue-800 transition-colors text-sm sm:text-base">
                   Читать на Авито →
                 </span>
               </div>
             </div>
           </div>
         ))}
+        </div>
       </div>
       
       {/* Индикаторы */}
@@ -171,7 +208,10 @@ const Reviews: React.FC = () => {
             className={`w-2 h-2 rounded-full transition-colors ${
               index === currentIndex ? 'bg-blue-600' : 'bg-gray-300'
             }`}
-            onClick={() => setCurrentIndex(index)}
+            onClick={() => {
+              setCurrentIndex(index)
+              setTimeout(() => updateContainerHeight(index), 100)
+            }}
           />
         ))}
       </div>

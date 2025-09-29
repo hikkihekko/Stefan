@@ -1,9 +1,11 @@
+/* Fonts: user will provide files. For now, load from Google as fallbacks */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Fonts: user will provide files. For now, load from Google as fallbacks */
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+
 
 /* Local font faces */
 @font-face {
@@ -61,16 +63,241 @@
   --ga: 83,134,255;  /* стартовый синий */
   --gb: 30,47,235;   /* конечный синий */
 }
-html, body, #root { height: 100%; }
+html, body, #root { 
+  min-height: 100%; 
+  overscroll-behavior: none;
+}
+
+body {
+  overscroll-behavior: none;
+  overscroll-behavior-y: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Предотвращение overscroll для всех элементов */
+* {
+  overscroll-behavior: none;
+}
 
 /* Global background gradient with same look */
-body::before{
-  content:"";
-  position:fixed; inset:0; z-index:-1;
+html {
   background: linear-gradient(47deg, rgba(var(--ga),0.60) 0%, rgba(var(--gb),0.80) 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  overscroll-behavior: none;
+  overscroll-behavior-y: none;
 }
-@media (max-width:480px){
-  body::before{ position:absolute; }
+
+/* Адаптивные размеры для экранов с высоким DPI (MacBook 13", Retina дисплеи) */
+@media screen and (min-resolution: 2dppx) and (max-width: 1440px) {
+  html {
+    font-size: 14px; /* Уменьшаем базовый размер шрифта */
+  }
+  
+  .container {
+    max-width: 1200px; /* Ограничиваем максимальную ширину контейнера */
+  }
+  
+  /* Уменьшаем размеры заголовков */
+  h1 {
+    font-size: 2.5rem !important;
+  }
+  
+  h2 {
+    font-size: 2rem !important;
+  }
+  
+  h3 {
+    font-size: 1.5rem !important;
+  }
+  
+  /* Уменьшаем отступы */
+  .px-4 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .px-6 {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+  
+  .px-8 {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+}
+
+/* Специальные правила для MacBook 13" и маленьких экранов */
+@media screen and (min-resolution: 2dppx) and (max-width: 1280px) {
+  html {
+    font-size: 13px; /* Еще больше уменьшаем для маленьких экранов */
+  }
+  
+  .container {
+    max-width: 1000px;
+  }
+  
+  /* Уменьшаем размеры кнопок */
+  .w-28, .h-28 {
+    width: 5rem !important;
+    height: 5rem !important;
+  }
+  
+  /* Уменьшаем размеры карточек */
+  .rounded-2xl {
+    border-radius: 1rem !important;
+  }
+  
+  /* Уменьшаем отступы в секциях */
+  .py-12 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  .py-16 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+}
+
+/* Дополнительные правила для очень маленьких экранов с высоким DPI */
+@media screen and (min-resolution: 2dppx) and (max-width: 1024px) {
+  html {
+    font-size: 12px;
+  }
+  
+  .container {
+    max-width: 900px;
+  }
+  
+  /* Уменьшаем размеры заголовков еще больше */
+  h1 {
+    font-size: 2rem !important;
+  }
+  
+  h2 {
+    font-size: 1.75rem !important;
+  }
+  
+  h3 {
+    font-size: 1.25rem !important;
+  }
+}
+
+/* Специальные правила для MacBook 13" (2560x1600) */
+@media screen and (min-resolution: 2dppx) and (min-width: 1280px) and (max-width: 1440px) and (min-height: 800px) and (max-height: 900px) {
+  html {
+    font-size: 13px;
+  }
+  
+  .container {
+    max-width: 1100px;
+  }
+  
+  /* Уменьшаем размеры элементов для MacBook 13" */
+  .text-4xl {
+    font-size: 2.25rem !important;
+  }
+  
+  .text-3xl {
+    font-size: 1.875rem !important;
+  }
+  
+  .text-2xl {
+    font-size: 1.5rem !important;
+  }
+  
+  .text-xl {
+    font-size: 1.25rem !important;
+  }
+  
+  /* Уменьшаем размеры кнопок */
+  .w-28, .h-28 {
+    width: 5.5rem !important;
+    height: 5.5rem !important;
+  }
+  
+  /* Уменьшаем отступы */
+  .py-20 {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+  
+  .py-24 {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+}
+
+/* Дополнительные правила для Retina дисплеев */
+@media screen and (-webkit-min-device-pixel-ratio: 2), screen and (min-resolution: 192dpi) {
+  /* Уменьшаем размеры для всех Retina дисплеев */
+  html {
+    font-size: 14px;
+  }
+  
+  /* Уменьшаем размеры иконок */
+  .w-6, .h-6 {
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+  }
+  
+  .w-8, .h-8 {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+  }
+  
+  .w-10, .h-10 {
+    width: 1.75rem !important;
+    height: 1.75rem !important;
+  }
+  
+  .w-12, .h-12 {
+    width: 2rem !important;
+    height: 2rem !important;
+  }
+}
+
+/* Стили для динамически добавляемых классов */
+.high-dpi-screen {
+  font-size: 13px !important;
+}
+
+.high-dpi-screen .container {
+  max-width: 1100px !important;
+}
+
+.high-dpi-screen h1 {
+  font-size: 2.25rem !important;
+}
+
+.high-dpi-screen h2 {
+  font-size: 1.875rem !important;
+}
+
+.high-dpi-screen h3 {
+  font-size: 1.5rem !important;
+}
+
+.small-high-dpi-screen {
+  font-size: 12px !important;
+}
+
+.small-high-dpi-screen .container {
+  max-width: 1000px !important;
+}
+
+.small-high-dpi-screen h1 {
+  font-size: 2rem !important;
+}
+
+.small-high-dpi-screen h2 {
+  font-size: 1.75rem !important;
+}
+
+.small-high-dpi-screen h3 {
+  font-size: 1.25rem !important;
 }
 
 /* Helpers */

@@ -46,6 +46,7 @@ const NavBar: React.FC = () => {
 
   const handleHomeClick = (e: React.MouseEvent) => {
     e.preventDefault()
+    setIsMobileMenuOpen(false) // Закрываем мобильное меню
     if (location.pathname === '/') {
       // На главной странице - скроллим к якорю #top с отступом 220px
       const element = document.getElementById('top')
@@ -76,6 +77,7 @@ const NavBar: React.FC = () => {
 
   const handleAnchorClick = (anchorId: string) => (e: React.MouseEvent) => {
     e.preventDefault()
+    setIsMobileMenuOpen(false) // Закрываем мобильное меню
     if (location.pathname === '/') {
       // На главной странице - скроллим к якорю
       const element = document.getElementById(anchorId)
@@ -101,9 +103,15 @@ const NavBar: React.FC = () => {
           className="glass flex items-center justify-between relative"
           style={{ width: '100%', height: 98, borderRadius: 24, padding: '24px 24px' }}
         >
-          <img src={logo} alt="Стефан" className="h-8 w-auto select-none" draggable={false} />
+          <img 
+            src={logo} 
+            alt="Стефан" 
+            className="h-8 w-auto select-none cursor-pointer hover:opacity-80 transition-opacity" 
+            draggable={false}
+            onClick={handleHomeClick}
+          />
 
-          <div className="absolute left-1/2 transform -translate-x-1/2">
+          <div className="absolute left-1/2 transform -translate-x-1/2 hidden md:block">
             <div className="rounded-full bg-white text-slate-900 h-[50px] w-[550px] flex items-center justify-center px-4">
               <ul className="flex items-center justify-center gap-8 font-manrope text-[18px] leading-[12px] whitespace-nowrap">
                 <li>
@@ -134,7 +142,7 @@ const NavBar: React.FC = () => {
                   </a>
                 </li>
                 <li>
-                  <NavLink to="/articles" className={({ isActive }) => `text-[#3535B9] font-normal hover:opacity-80 ${isActive ? 'underline' : ''}` } > Статьи </NavLink>
+                  <NavLink to="/articles" className={({ isActive }) => `${isActive ? 'text-black font-medium' : 'text-[#3535B9] font-normal'} hover:opacity-80` } > Статьи </NavLink>
                 </li>
                 <li>
                   <a 

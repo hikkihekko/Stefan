@@ -142,9 +142,9 @@ const ExcavatorTrackedPage: React.FC = () => {
         <div className="bg-white rounded-[24px]" style={{padding: 24}}>
           
           {/* Заголовок страницы */}
-          <div className="flex items-center justify-between" style={{marginBottom: 24}}>
-            <h1 className="font-baron font-extrabold text-slate-900" style={{fontSize: 48, lineHeight: 1}}>экскаваторы гусеничные</h1>
-            <p className="font-manrope font-medium" style={{fontSize: 20, color: '#525252', lineHeight: 1}}>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6" style={{marginBottom: 24}}>
+            <h1 className="font-baron font-extrabold text-slate-900 text-3xl sm:text-4xl lg:text-5xl mb-2 sm:mb-0" style={{lineHeight: 1}}>экскаваторы гусеничные</h1>
+            <p className="font-manrope font-medium text-base sm:text-lg lg:text-xl text-[#525252]" style={{lineHeight: 1}}>
               Выберите желаемую технику
             </p>
           </div>

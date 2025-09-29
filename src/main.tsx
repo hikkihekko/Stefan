@@ -4,6 +4,64 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './styles.css'
 import './styles/articles.css'
 
+// Предотвращение overscroll для устранения белых полос
+document.addEventListener('DOMContentLoaded', () => {
+  // Определение DPI и применение соответствующих стилей
+  const dpr = window.devicePixelRatio || 1;
+  const screenWidth = window.screen.width;
+  const screenHeight = window.screen.height;
+  
+  // Для MacBook 13" и других экранов с высоким DPI
+  if (dpr >= 2 && screenWidth <= 1440 && screenHeight <= 900) {
+    document.documentElement.style.fontSize = '13px';
+    document.documentElement.classList.add('high-dpi-screen');
+  }
+  
+  // Для очень маленьких экранов с высоким DPI
+  if (dpr >= 2 && screenWidth <= 1280) {
+    document.documentElement.style.fontSize = '12px';
+    document.documentElement.classList.add('small-high-dpi-screen');
+  }
+  // Предотвращение overscroll на touch устройствах
+  document.addEventListener('touchmove', (e) => {
+    const target = e.target as HTMLElement;
+    const scrollableParent = target.closest('[data-scrollable]') || document.body;
+    
+    if (scrollableParent === document.body) {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight;
+      const clientHeight = document.documentElement.clientHeight;
+      
+      // Если вверху страницы и пытаемся прокрутить выше
+      if (scrollTop <= 0 && e.touches[0].clientY > e.touches[0].targetTouches?.[0]?.clientY) {
+        e.preventDefault();
+      }
+      
+      // Если внизу страницы и пытаемся прокрутить ниже
+      if (scrollTop + clientHeight >= scrollHeight && e.touches[0].clientY < e.touches[0].targetTouches?.[0]?.clientY) {
+        e.preventDefault();
+      }
+    }
+  }, { passive: false });
+  
+  // Предотвращение overscroll на wheel событиях
+  document.addEventListener('wheel', (e) => {
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight;
+    const clientHeight = document.documentElement.clientHeight;
+    
+    // Если вверху страницы и пытаемся прокрутить выше
+    if (scrollTop <= 0 && e.deltaY < 0) {
+      e.preventDefault();
+    }
+    
+    // Если внизу страницы и пытаемся прокрутить ниже
+    if (scrollTop + clientHeight >= scrollHeight && e.deltaY > 0) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+});
+
 import RootLayout from './shared/RootLayout'
 import HomePage from './pages/HomePage'
 import AutoCranesPage from './pages/AutoCranesPage'
@@ -57,7 +115,11 @@ const router = createBrowserRouter([
       { path: 'sitemap', element: <SitemapPage /> },
     ],
   },
-])
+], {
+  future: {
+    v7_startTransition: true,
+  },
+})
 
 createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

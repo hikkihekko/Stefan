@@ -17,11 +17,35 @@ const HomePage: React.FC = () => {
   const [workType, setWorkType] = useState('')
   const [searchQuery, setSearchQuery] = useState('')
   const [openFAQ, setOpenFAQ] = useState<number | null>(null)
+  const [searchError, setSearchError] = useState('')
+  const [filteredItems, setFilteredItems] = useState<any[]>([])
+  const [isSearchActive, setIsSearchActive] = useState(false)
+  const [showScrollToTop, setShowScrollToTop] = useState(false)
   
   // Анимированный текст
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
   const [isVisible, setIsVisible] = useState(true)
   const words = ['с оператором', 'своя техника', 'в москве и мо', 'точно вовремя']
+
+  // Данные каталога техники
+  const catalogItems = [
+    { name: 'Экскаваторы-погрузчики', type: 'Универсальная техника', image: '/images/экск погруз.webp' },
+    { name: 'Автокраны', type: 'Подъемные работы', image: '/images/автокр.jpg' },
+    { name: 'Манипуляторы', type: 'Погрузка/разгрузка', image: '/images/diploma.jpeg' },
+    { name: 'Самосвалы', type: 'Перевозка грузов', image: '/images/gruzovik.jpg' },
+    { name: 'Экскаваторы гусеничные', type: 'Земляные работы', image: '/images/экск гус.jpg' },
+    { name: 'Мини экскаваторы', type: 'Стесненные условия', image: '/images/миниэк.webp' },
+    { name: 'Фронтальные погрузчики', type: 'Сыпучие материалы', image: '/images/фронтпогр.webp' },
+    { name: 'Автовышки', type: 'Высотные работы', image: '/images/автовышк.webp' },
+    { name: 'Мини погрузчики', type: 'Мелкие работы', image: '/images/минипогрузl.jpg' },
+    { name: 'Экскаваторы колёсные', type: 'Дорожные работы', image: '/images/экск колесный.webp' },
+    { name: 'Тралы', type: 'Перевозка техники', image: '/images/трал.jpg' },
+    { name: 'Бульдозеры', type: 'Планировка грунта', image: '/images/бульдлозер.jpg' },
+    { name: 'Катки', type: 'Уплотнение', image: '/images/катки.jpg' },
+    { name: 'Бортовые автомобили', type: 'Доставка материалов', image: '/images/бортмаш.webp' },
+    { name: 'Длинномеры', type: 'Длинные грузы', image: '/images/длинномер.webp' },
+    { name: 'Грейдеры', type: 'Планировка дорог', image: '/images/грейдеры.webp' }
+  ]
 
   const generateWhatsAppMessage = () => {
     const message = `Здравствуйте, хочу заказать технику. Техника: ${techType || 'не указана'}. Местоположение: ${location || 'не указано'}. Фронт работ: ${workType || 'не указан'}.`
@@ -35,10 +59,41 @@ const HomePage: React.FC = () => {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
-    if (searchQuery.trim()) {
-      // Переход на страницу каталога с поисковым запросом
-      window.location.href = `/catalog?search=${encodeURIComponent(searchQuery.trim())}`
+    setSearchError('')
+    
+    if (!searchQuery.trim()) {
+      setSearchError('Введите название техники для поиска')
+      return
     }
+
+    const query = searchQuery.trim().toLowerCase()
+    const filtered = catalogItems.filter(item => 
+      item.name.toLowerCase().includes(query) || 
+      item.type.toLowerCase().includes(query)
+    )
+
+    if (filtered.length === 0) {
+      setSearchError('Техника не найдена. Попробуйте другие ключевые слова')
+      return
+    }
+
+    setFilteredItems(filtered)
+    setIsSearchActive(true)
+    
+    // Плавный переход к каталогу
+    setTimeout(() => {
+      const catalogElement = document.getElementById('catalog')
+      if (catalogElement) {
+        catalogElement.scrollIntoView({ behavior: 'smooth' })
+      }
+    }, 100)
+  }
+
+  const clearSearch = () => {
+    setSearchQuery('')
+    setSearchError('')
+    setFilteredItems([])
+    setIsSearchActive(false)
   }
 
   const toggleFAQ = (index: number) => {
@@ -90,6 +145,25 @@ const HomePage: React.FC = () => {
 
     return () => clearInterval(interval)
   }, [words.length])
+
+  // Отслеживание прокрутки для кнопки "наверх"
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+      setShowScrollToTop(scrollTop > 300) // Показываем кнопку после прокрутки на 300px
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Функция прокрутки наверх
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
   return (
     <div className="container mx-auto px-4 sm:px-6" style={{scrollMarginTop: '120px'}}>
       {/* Hero Section */}
@@ -218,12 +292,36 @@ const HomePage: React.FC = () => {
                   </div>
                   <input
                     type="text"
-                    className="w-full h-[50px] pl-12 pr-4 rounded-full bg-white/25 border border-white/40 text-white placeholder-white/70 text-[16px] font-manrope focus:bg-white/35 focus:border-white/60 focus:outline-none transition-all"
+                    className={`w-full h-[50px] pl-12 pr-12 rounded-full bg-white/25 border text-white placeholder-white/70 text-[16px] font-manrope focus:bg-white/35 focus:outline-none transition-all ${
+                      searchError ? 'border-red-400 focus:border-red-500' : 'border-white/40 focus:border-white/60'
+                    }`}
                     placeholder="Поиск техники в каталоге..."
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onChange={(e) => {
+                      setSearchQuery(e.target.value)
+                      setSearchError('')
+                    }}
                   />
+                  {searchQuery && (
+                    <button
+                      type="button"
+                      onClick={clearSearch}
+                      className="absolute inset-y-0 right-0 pr-4 flex items-center justify-center text-white/60 hover:text-white transition-colors"
+                    >
+                      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  )}
                 </div>
+                {searchError && (
+                  <p className="mt-2 text-red-400 text-sm font-manrope">{searchError}</p>
+                )}
+                {isSearchActive && filteredItems.length > 0 && (
+                  <p className="mt-2 text-white/80 text-sm font-manrope">
+                    Найдено: {filteredItems.length} {filteredItems.length === 1 ? 'вид техники' : 'вида техники'}
+                  </p>
+                )}
               </form>
             </div>
           </div>
@@ -285,29 +383,22 @@ const HomePage: React.FC = () => {
          <div id="catalog" className="px-6 lg:px-6 py-6 lg:py-12" style={{paddingTop: '32px', scrollMarginTop: '220px'}}>
            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6 lg:mb-6">
              <h2 className="font-baron font-extrabold text-slate-900 text-3xl sm:text-4xl lg:text-5xl mb-2 lg:mb-0" style={{lineHeight: 1}}>каталог техники</h2>
-             <p className="font-manrope font-medium text-base lg:text-xl text-[#525252]" style={{lineHeight: 1}}>Любая техника под Ваш запрос</p>
+             <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+               <p className="font-manrope font-medium text-base lg:text-xl text-[#525252]" style={{lineHeight: 1}}>Любая техника под Ваш запрос</p>
+               {isSearchActive && (
+                 <button
+                   onClick={clearSearch}
+                   className="px-4 py-2 bg-[#3535B9] text-white rounded-full text-sm font-manrope hover:bg-[#2a2a9a] transition-colors"
+                 >
+                   Показать все
+                 </button>
+               )}
+             </div>
            </div>
            
            {/* Каталог техники - адаптивная сетка */}
-             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
-              {[
-                { name: 'Экскаваторы-погрузчики', type: 'Универсальная техника', image: '/images/экск погруз.webp' },
-                { name: 'Автокраны', type: 'Подъемные работы', image: '/images/автокр.jpg' },
-                { name: 'Манипуляторы', type: 'Погрузка/разгрузка', image: '/images/diploma.jpeg' },
-                { name: 'Самосвалы', type: 'Перевозка грузов', image: '/images/gruzovik.jpg' },
-                { name: 'Экскаваторы гусеничные', type: 'Земляные работы', image: '/images/экск гус.jpg' },
-                { name: 'Мини экскаваторы', type: 'Стесненные условия', image: '/images/миниэк.webp' },
-                { name: 'Фронтальные погрузчики', type: 'Сыпучие материалы', image: '/images/фронтпогр.webp' },
-                { name: 'Автовышки', type: 'Высотные работы', image: '/images/автовышк.webp' },
-                { name: 'Мини погрузчики', type: 'Мелкие работы', image: '/images/минипогрузl.jpg' },
-                { name: 'Экскаваторы колёсные', type: 'Дорожные работы', image: '/images/экск колесный.webp' },
-                { name: 'Тралы', type: 'Перевозка техники', image: '/images/трал.jpg' },
-                { name: 'Бульдозеры', type: 'Планировка грунта', image: '/images/бульдлозер.jpg' },
-                { name: 'Катки', type: 'Уплотнение', image: '/images/катки.jpg' },
-                { name: 'Бортовые автомобили', type: 'Доставка материалов', image: '/images/бортмаш.webp' },
-                { name: 'Длинномеры', type: 'Длинные грузы', image: '/images/длинномер.webp' },
-                { name: 'Грейдеры', type: 'Планировка дорог', image: '/images/грейдеры.webp' }
-              ].map((item, index) => {
+             <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
+              {(isSearchActive ? filteredItems : catalogItems).map((item, index) => {
                 const cardContent = (
                   <>
                     {/* Фоновое изображение */}
@@ -324,7 +415,7 @@ const HomePage: React.FC = () => {
                     {/* Контент */}
                     <div className="relative p-3 sm:p-4 lg:p-5 h-full flex flex-col justify-between text-white">
                       <div>
-                        <span className="inline-block px-2 py-1 sm:px-3 sm:py-1 bg-white/20 backdrop-blur-sm rounded-full font-medium mb-2 text-xs sm:text-sm lg:text-base">
+                        <span className="inline-block px-3 py-1 sm:px-3 sm:py-1 bg-white/20 backdrop-blur-sm rounded-[12px] sm:rounded-full font-medium mb-2 text-xs sm:text-sm lg:text-base">
                           {item.type}
                         </span>
                       </div>
@@ -392,14 +483,14 @@ const HomePage: React.FC = () => {
                   <Link 
                     key={index}
                     to={linkPath}
-                    className="relative rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 block h-32 sm:h-40 lg:h-48"
+                    className="relative rounded-[16px] sm:rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 block h-40 sm:h-40 lg:h-48"
                   >
                     {cardContent}
                   </Link>
                 ) : (
                   <div 
                     key={index}
-                    className="relative rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 h-32 sm:h-40 lg:h-48"
+                    className="relative rounded-[16px] sm:rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 h-40 sm:h-40 lg:h-48"
                   >
                     {cardContent}
                   </div>
@@ -569,23 +660,23 @@ const HomePage: React.FC = () => {
          <Link to="/articles" className="text-white/80 hover:text-white underline font-manrope font-medium text-xl">Все статьи</Link>
        </div>
      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
-       <Link to="/articles/top-5-vostrebovannyh-vidov-spectehniki-moskva-2025" className="bg-white/25 border border-white/40 rounded-2xl p-5 block hover:bg-white/35 hover:border-white/60 transition-all">
-         <div className="font-semibold text-lg">Топ-5 самых востребованных видов спецтехники в Москве и МО в 2025 году</div>
+       <Link to="/articles/top-5-vostrebovannyh-vidov-spectehniki-moskva-2025" className="bg-white/25 border border-white/40 rounded-2xl p-5 block hover:bg-white/35 hover:border-white/60 transition-all h-full flex flex-col">
+         <div className="font-semibold text-lg leading-tight flex-1">Топ-5 самых востребованных видов спецтехники в Москве и МО в 2025 году</div>
          <div className="text-white/75 text-sm mt-2">Рейтинг самых популярных видов техники в Москве и МО</div>
        </Link>
-       <Link to="/articles/arenda-samosvala-moskva-2025-vybor-tehniki-gruntov" className="bg-white/25 border border-white/40 rounded-2xl p-5 block hover:bg-white/35 hover:border-white/60 transition-all">
-         <div className="font-semibold text-lg">Аренда самосвала в Москве и МО 2025: выбор техники для различных грунтов и задач</div>
+       <Link to="/articles/arenda-samosvala-moskva-2025-vybor-tehniki-gruntov" className="bg-white/25 border border-white/40 rounded-2xl p-5 block hover:bg-white/35 hover:border-white/60 transition-all h-full flex flex-col">
+         <div className="font-semibold text-lg leading-tight flex-1">Аренда самосвала в Москве и МО 2025: выбор техники для различных грунтов и задач</div>
          <div className="text-white/75 text-sm mt-2">Подбор техники для различных грунтов и типов работ</div>
        </Link>
-       <Link to="/articles/arenda-mini-ekskavatora-moskva-2025-razresheniya-stoimost" className="bg-white/25 border border-white/40 rounded-2xl p-5 block hover:bg-white/35 hover:border-white/60 transition-all">
-         <div className="font-semibold text-lg">Аренда мини-экскаватора в Москве и МО: разрешения и реальная стоимость в 2025</div>
+       <Link to="/articles/arenda-mini-ekskavatora-moskva-2025-razresheniya-stoimost" className="bg-white/25 border border-white/40 rounded-2xl p-5 block hover:bg-white/35 hover:border-white/60 transition-all h-full flex flex-col">
+         <div className="font-semibold text-lg leading-tight flex-1">Аренда мини-экскаватора в Москве и МО: разрешения и реальная стоимость в 2025</div>
          <div className="text-white/75 text-sm mt-2">Разрешения, ограничения и реальная стоимость аренды</div>
        </Link>
      </div>
     </section>
 
      {/* Футер */}
-     <footer id="contacts" className="py-8 lg:py-16" style={{scrollMarginTop: '220px'}}>
+     <footer id="contacts" className="py-8 lg:py-16 mt-12 lg:mt-0" style={{scrollMarginTop: '220px'}}>
        <div className="container mx-auto px-4 sm:px-6">
          <div className="flex flex-col lg:flex-row lg:justify-between lg:items-end mb-8">
            {/* Логотип и описание */}
@@ -598,9 +689,9 @@ const HomePage: React.FC = () => {
            </div>
            
            {/* Контакты */}
-           <div className="lg:mr-6" style={{transform: 'translateY(-20px) translateX(24px)'}}>
-             <h3 className="font-baron font-bold text-white text-3xl lg:text-5xl mb-8 lg:mb-16 text-right" style={{lineHeight: 1, transform: 'translateY(-12px)'}}>наши контакты</h3>
-             <div className="flex justify-end" style={{transform: 'translateY(-12px)'}}>
+           <div className="lg:mr-6 lg:transform lg:translateY(-20px) lg:translateX(24px)">
+             <h3 className="font-baron font-bold text-white text-3xl lg:text-5xl mb-6 lg:mb-16 text-left lg:text-right" style={{lineHeight: 1, transform: 'translateY(0px)'}}>наши контакты</h3>
+             <div className="flex justify-start lg:justify-end" style={{transform: 'translateY(0px)'}}>
                <a 
                  href="tel:+79857671500" 
                  className="flex items-center space-x-3 hover:opacity-80 transition-opacity cursor-pointer"
@@ -620,18 +711,86 @@ const HomePage: React.FC = () => {
          <div className="border-t border-white/20 mb-6"></div>
          
          {/* Нижняя часть футера */}
-         <div className="flex flex-col md:flex-row justify-between items-center">
-           <p className="text-white/80 font-manrope mb-4 md:mb-0 text-sm lg:text-base">
+         <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center space-y-4 lg:space-y-0">
+           <p className="text-white/80 font-manrope text-sm lg:text-base">
              © 2025 ООО "СТЕФАН". Все права защищены.
            </p>
-           <div className="flex flex-col sm:flex-row gap-4 sm:gap-12">
-             <p className="text-white/80 font-manrope text-sm lg:text-base">
-               Все модели техники представлены исключительно для ознакомления
-             </p>
-           </div>
+           <p className="text-white/80 font-manrope text-sm lg:text-base">
+             Все модели техники представлены исключительно для ознакомления
+           </p>
          </div>
        </div>
      </footer>
+
+    {/* Кнопка "Позвонить" */}
+    <a 
+      href="tel:+79857671500" 
+      className="fixed bottom-8 right-8 z-50 w-28 h-28 bg-white rounded-full shadow-lg hover:shadow-xl flex items-center justify-center"
+       style={{ 
+         borderRadius: '50%',
+         transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out'
+       }}
+       aria-label="Позвонить"
+       onMouseEnter={(e) => {
+         e.currentTarget.style.transform = 'scale(1.2)';
+         e.currentTarget.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25)';
+       }}
+       onMouseLeave={(e) => {
+         e.currentTarget.style.transform = 'scale(1)';
+         e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
+       }}
+     >
+       <svg 
+         xmlns="http://www.w3.org/2000/svg" 
+         viewBox="0 0 24 24" 
+         width="32" 
+         height="32" 
+         fill="none" 
+         stroke="#3535B9" 
+         strokeLinecap="round" 
+         strokeLinejoin="round" 
+         strokeWidth="2"
+       >
+         <path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+       </svg>
+     </a>
+
+     {/* Кнопка "Наверх" */}
+     {showScrollToTop && (
+       <button
+         onClick={scrollToTop}
+         className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-40 bg-white shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300"
+         style={{
+           width: '60px',
+           height: '48px',
+           borderRadius: '24px',
+           transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out'
+         }}
+         aria-label="Наверх"
+         onMouseEnter={(e) => {
+           e.currentTarget.style.transform = 'translateX(-50%) scale(1.1)'
+           e.currentTarget.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
+         }}
+         onMouseLeave={(e) => {
+           e.currentTarget.style.transform = 'translateX(-50%) scale(1)'
+           e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+         }}
+       >
+         <svg 
+           xmlns="http://www.w3.org/2000/svg" 
+           viewBox="0 0 24 24" 
+           width="20" 
+           height="20" 
+           fill="none" 
+           stroke="#3535B9" 
+           strokeLinecap="round" 
+           strokeLinejoin="round" 
+           strokeWidth="2"
+         >
+           <path d="M12 19V5M5 12l7-7 7 7" />
+         </svg>
+       </button>
+     )}
    </div>
  )
 }
