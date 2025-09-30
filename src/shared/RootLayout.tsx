@@ -158,7 +158,7 @@ const NavBar: React.FC = () => {
           </div>
 
           {/* Desktop Contact Info */}
-          <div className="hidden lg:flex items-center gap-6">
+          <div className="hidden xl:flex items-center gap-6">
             <a href="tel:+79857671500" className="text-white font-manrope font-medium hover:opacity-80 transition-opacity" style={{fontSize: 18}}>Позвоните нам! +7 (985) 767-15-00</a>
             <a href="https://wa.me/79857671500" target="_blank" rel="noreferrer" className="hidden sm:inline-flex items-center justify-center bg-white rounded-full" style={{width:50,height:50}}>
               <img src={new URL('../icons/svg chat bubble.svg', import.meta.url).toString()} alt="Чат" width={18} height={18} />
@@ -166,8 +166,7 @@ const NavBar: React.FC = () => {
           </div>
 
           {/* Laptop Contact Info */}
-          <div className="hidden md:flex lg:hidden items-center gap-4">
-            <a href="tel:+79857671500" className="text-white font-manrope font-medium hover:opacity-80 transition-opacity" style={{fontSize: 16}}>+7 (985) 767-15-00</a>
+          <div className="hidden md:flex xl:hidden items-center gap-4">
             <a href="https://wa.me/79857671500" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center bg-white rounded-full" style={{width:45,height:45}}>
               <img src={new URL('../icons/svg chat bubble.svg', import.meta.url).toString()} alt="Чат" width={16} height={16} />
             </a>
