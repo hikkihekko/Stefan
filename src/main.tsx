@@ -116,6 +116,7 @@ const router = createBrowserRouter([
     ],
   },
 ], {
+  basename: '/Stefan/',
   future: {
     v7_startTransition: true,
   },
