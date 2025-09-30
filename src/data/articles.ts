@@ -240,7 +240,7 @@ export const sampleArticles: Article[] = [
 <p>Рекомендуется обращаться к проверенным компаниям, предоставляющим услуги аренды спецтехники. Они помогут подобрать подходящую модель с учётом вашего груза, маршрута и условий работы, например можете обратиться к нам!</p>`,
     author: 'Стефан',
     publishedAt: new Date('2025-09-18'),
-    category: categories.find(c => c.id === 'long-vehicles') || categories[0],
+    category: categories.find(c => c.id === 'long-vehicles') as ArticleCategory,
     tags: ['длинномер', 'аренда', 'строительство', 'грузоперевозки', 'спецтехника'],
     readingTime: 15,
     featured: true,
@@ -581,7 +581,7 @@ export const sampleArticles: Article[] = [
 </div>`,
     author: 'Стефан',
     publishedAt: new Date('2024-01-18'),
-    category: categories[0],
+    category: categories[0] as ArticleCategory,
     tags: ['колёсный экскаватор', 'городское строительство', 'аренда техники', 'строительная техника', 'экскаваторы 2025'],
     readingTime: 14,
     featured: false,
@@ -854,7 +854,7 @@ export const sampleArticles: Article[] = [
     `,
     author: 'Стефан',
     publishedAt: new Date('2024-01-20'),
-    category: categories[0],
+    category: categories[0] as ArticleCategory,
     tags: ['гусеничный экскаватор', 'аренда техники', 'строительная техника', 'экскаваторы', 'навесное оборудование'],
     readingTime: 15,
     featured: false,
@@ -1223,7 +1223,7 @@ export const sampleArticles: Article[] = [
     `,
     author: 'Стефан',
     publishedAt: new Date('2025-09-18'),
-    category: categories[11], // aerial-platforms category
+    category: categories[11] as ArticleCategory, // aerial-platforms category
     tags: ['автовышка', 'аренда', '2025', 'высотные работы', 'безопасность', 'АГП', 'коленчатая', 'телескопическая'],
     readingTime: 15,
     featured: true,
@@ -1591,7 +1591,7 @@ export const sampleArticles: Article[] = [
     `,
     author: 'Стефан',
     publishedAt: new Date('2025-09-18'),
-    category: categories[8], // loaders category
+    category: categories[8] as ArticleCategory, // loaders category
     tags: ['погрузчик', 'аренда', '2025', 'фронтальный погрузчик', 'телескопический погрузчик', 'складская техника'],
     readingTime: 15,
     featured: true,
@@ -1825,7 +1825,7 @@ export const sampleArticles: Article[] = [
     `,
     author: 'Стефан',
     publishedAt: new Date('2025-09-15'),
-    category: categories[1],
+    category: categories[1] as ArticleCategory,
     tags: ['бульдозер', 'аренда', '2025', 'земляные работы', 'планировка грунта', 'строительная техника'],
     readingTime: 12,
     featured: true,
@@ -2109,7 +2109,7 @@ export const sampleArticles: Article[] = [
     `,
     author: 'Стефан',
     publishedAt: new Date('2025-09-15'),
-    category: categories[5],
+    category: categories[5] as ArticleCategory,
     tags: ['автогрейдер', 'аренда', '2025', 'планировка грунта', 'GPS нивелирование', 'дорожное строительство'],
     readingTime: 15,
     featured: true,
@@ -2350,7 +2350,7 @@ export const sampleArticles: Article[] = [
     `,
     author: 'Стефан',
     publishedAt: new Date('2025-09-15'),
-    category: categories[9], // auto-cranes category
+    category: categories[9] as ArticleCategory, // auto-cranes category
     tags: ['автокран', 'аренда', '2025', 'выбор техники', 'грузоподъемность', 'строительные работы', 'крановщик'],
     readingTime: 15,
     featured: false,
@@ -2489,7 +2489,7 @@ export const sampleArticles: Article[] = [
     `,
     author: 'Стефан',
     publishedAt: new Date('2025-09-15'),
-    category: categories[10], // manipulators category
+    category: categories[10] as ArticleCategory, // manipulators category
     tags: ['манипулятор', 'КМУ', 'аренда', '2025', 'кран-борт', 'выбор техники', 'грузоподъемность'],
     readingTime: 15,
     featured: true,
@@ -2669,7 +2669,7 @@ export const sampleArticles: Article[] = [
     `,
     author: 'Стефан',
     publishedAt: new Date('2025-09-11'),
-    category: categories[0],
+    category: categories[0] as ArticleCategory,
     tags: ['экскаватор-погрузчик', 'аренда', '2025', 'универсальная техника', 'земляные работы', 'гидромолот'],
     readingTime: 8,
     featured: true,
@@ -3456,7 +3456,7 @@ export const sampleArticles: Article[] = [
 `,
     author: 'Стефан',
     publishedAt: new Date('2025-09-18'),
-    category: categories[0], // excavators category
+    category: categories[0] as ArticleCategory, // excavators category
     tags: ['экскаваторы', 'гусеничный экскаватор', 'колёсный экскаватор', 'сравнение техники', 'выбор экскаватора', 'аренда', '2025', 'проходимость', 'мобильность'],
     readingTime: 15,
     featured: true,
@@ -3922,7 +3922,7 @@ WhatsApp: +7 (985) 767-15-00<br>
 Telegram: @stefan_spectexnika</p>`,
     author: 'Стефан',
     publishedAt: new Date('2025-01-15'),
-    category: categories[0], // excavators category
+    category: categories[0] as ArticleCategory, // excavators category
     tags: ['гусеничный экскаватор', 'экскаватор', 'мягкий грунт', 'зимние работы', 'сложные условия', 'аренда экскаватора', 'Москва', 'Подмосковье', '2025', 'спецтехника', 'строительная техника'],
     readingTime: 15,
     featured: false,
@@ -5252,7 +5252,7 @@ Telegram: @stefan_spectexnika</p>
 </div>`,
     author: 'Стефан',
     publishedAt: new Date('2025-01-15'),
-    category: categories[8], // loaders category
+    category: categories[8] as ArticleCategory, // loaders category
     tags: ['мини-погрузчик', 'skid-steer', 'гусеничный погрузчик', 'аренда мини-погрузчика', 'навесное оборудование', 'High-Flow', 'ROC', 'высота выгрузки', 'Москва', 'Подмосковье', '2025', 'спецтехника', 'строительная техника'],
     readingTime: 16,
     featured: false,
@@ -5562,7 +5562,7 @@ Telegram: @stefan_spectexnika</p>
 </div>`,
     author: 'Стефан',
     publishedAt: new Date('2025-01-15'),
-    category: categories[9], // auto-cranes category
+    category: categories[9] as ArticleCategory, // auto-cranes category
     tags: ['автокран', 'классический автокран', 'гидравлический автокран', 'аренда автокрана', 'монтажные работы', 'грузоподъемность', 'высота подъема', 'Москва', 'Подмосковье', '2025', 'спецтехника', 'строительная техника'],
     readingTime: 14,
     featured: false,

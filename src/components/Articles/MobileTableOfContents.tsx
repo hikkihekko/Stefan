@@ -94,7 +94,8 @@ const MobileTableOfContents: React.FC<MobileTableOfContentsProps> = ({ content }
       
       for (let i = headings.length - 1; i >= 0; i--) {
         const heading = headings[i];
-        const element = heading.element!;
+        if (!heading || !heading.element) continue;
+        const element = heading.element;
         const offsetTop = element.offsetTop;
         
         if (scrollPosition >= offsetTop - 100) {
