@@ -147,27 +147,27 @@ const MobileTableOfContents: React.FC<MobileTableOfContentsProps> = ({ content }
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
             </svg>
           </div>
-          <h3 className="text-base font-semibold text-white">Содержание</h3>
+          <h3 className="text-lg sm:text-lg font-semibold text-white">Содержание</h3>
           <div className="ml-auto flex items-center space-x-2">
-            <div className="text-xs text-white/50 bg-white/10 px-2 py-1 rounded-lg">
+            <div className="text-sm sm:text-base text-white/50 bg-white/10 px-2 py-1 rounded-lg">
               {tocItems.length}
             </div>
-            {isOpen && (
-              <svg 
-                className="w-4 h-4 text-white/70 transform transition-transform duration-300 rotate-180"
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            )}
+            <svg 
+              className={`w-4 h-4 text-white/70 transform transition-all duration-500 ease-out ${
+                isOpen ? 'rotate-180' : 'rotate-0'
+              }`}
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
           </div>
         </button>
       </div>
       
       {/* Скроллируемая область навигации с анимацией */}
-      <div className={`transition-all duration-500 ease-in-out overflow-hidden ${
+      <div className={`transition-all duration-700 ease-out overflow-hidden ${
         isOpen ? 'max-h-[50vh] opacity-100' : 'max-h-0 opacity-0'
       }`}>
         <div 
@@ -181,7 +181,7 @@ const MobileTableOfContents: React.FC<MobileTableOfContentsProps> = ({ content }
                 data-heading-id={item.id}
                 onClick={() => scrollToHeading(item.id)}
                 className={`
-                  block w-full text-left py-2 px-3 rounded-xl text-xs transition-all duration-300 group relative overflow-hidden cursor-pointer
+                  block w-full text-left py-2 px-3 rounded-xl text-sm sm:text-base transition-all duration-300 group relative overflow-hidden cursor-pointer
                   ${activeId === item.id 
                     ? 'bg-gradient-to-r from-white/25 to-white/15 text-white font-medium shadow-glass-active transform scale-[1.02] border border-white/40' 
                     : 'text-white/75 hover:text-white hover:bg-white/10 hover:transform hover:scale-[1.01] border border-transparent hover:border-white/20'
@@ -201,7 +201,7 @@ const MobileTableOfContents: React.FC<MobileTableOfContentsProps> = ({ content }
                 
                 <div className="flex items-start">
                   <span className={`
-                    inline-flex items-center justify-center w-4 h-4 rounded-full text-xs font-medium mr-2 mt-0.5 flex-shrink-0
+                    inline-flex items-center justify-center w-4 h-4 rounded-full text-sm sm:text-base font-medium mr-2 mt-0.5 flex-shrink-0
                     ${activeId === item.id 
                       ? 'bg-white/30 text-white' 
                       : 'bg-white/10 text-white/60 group-hover:bg-white/20 group-hover:text-white/80'
@@ -221,28 +221,15 @@ const MobileTableOfContents: React.FC<MobileTableOfContentsProps> = ({ content }
         {/* Нижние кнопки */}
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-white/10"></div>
-          <div className="relative px-4 py-3 border-t border-white/15 space-y-2">
-            {/* Кнопка "Наверх" */}
-            <button
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="flex items-center justify-center w-full py-2 px-3 text-xs text-white/80 hover:text-white hover:bg-white/15 rounded-xl transition-all duration-300 group hover:shadow-glass hover:transform hover:scale-[1.02] border border-white/10 hover:border-white/25"
-            >
-              <div className="flex items-center justify-center w-4 h-4 rounded-full bg-white/10 mr-2 group-hover:bg-white/20 transition-colors">
-                <svg className="w-3 h-3 group-hover:transform group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                </svg>
-              </div>
-              <span className="font-medium">Наверх</span>
-            </button>
-            
+          <div className="relative px-4 py-3 border-t border-white/15">
             {/* Кнопка "Свернуть" */}
             <button
               onClick={() => setIsOpen(false)}
-              className="flex items-center justify-center w-full py-2 px-3 text-xs text-white/80 hover:text-white hover:bg-white/15 rounded-xl transition-all duration-300 group hover:shadow-glass hover:transform hover:scale-[1.02] border border-white/10 hover:border-white/25"
+              className="flex items-center justify-center w-full py-2 px-3 text-sm sm:text-base text-white/80 hover:text-white hover:bg-white/15 rounded-xl transition-all duration-500 ease-out group hover:shadow-glass hover:transform hover:scale-[1.02] border border-white/10 hover:border-white/25"
             >
               <span className="font-medium mr-2">Свернуть</span>
               <svg 
-                className="w-4 h-4 group-hover:transform group-hover:-translate-y-0.5 transition-transform" 
+                className="w-4 h-4 group-hover:transform group-hover:-translate-y-0.5 transition-all duration-500 ease-out" 
                 fill="none" 
                 stroke="currentColor" 
                 viewBox="0 0 24 24"
@@ -259,11 +246,11 @@ const MobileTableOfContents: React.FC<MobileTableOfContentsProps> = ({ content }
         <div className="px-5 py-3">
           <button
             onClick={() => setIsOpen(true)}
-            className="w-full flex items-center justify-center py-2 px-3 text-xs text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 group border border-white/10 hover:border-white/25"
+            className="w-full flex items-center justify-center py-2 px-3 text-sm sm:text-base text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-500 ease-out group border border-white/10 hover:border-white/25"
           >
             <span className="font-medium mr-2">Развернуть содержание</span>
             <svg 
-              className="w-4 h-4 group-hover:transform group-hover:translate-y-0.5 transition-transform" 
+              className="w-4 h-4 group-hover:transform group-hover:translate-y-0.5 transition-all duration-500 ease-out" 
               fill="none" 
               stroke="currentColor" 
               viewBox="0 0 24 24"

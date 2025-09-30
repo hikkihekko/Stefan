@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { sampleArticles } from '../../data/articles';
 import { updatePageMeta, generateArticleStructuredData } from '../../utils/seo.ts';
@@ -8,6 +8,7 @@ import MobileTableOfContents from '../../components/Articles/MobileTableOfConten
 
 const ArticleDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
   
   const article = useMemo(() => {
     return sampleArticles.find(a => a.slug === slug);
@@ -29,6 +30,25 @@ const ArticleDetail: React.FC = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' });
   }, [slug]);
+
+  // Отслеживание прокрутки для кнопки "наверх"
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+      setShowScrollToTop(scrollTop > 300) // Показываем кнопку после прокрутки на 300px
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Функция прокрутки наверх
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
 
   // SEO и структурированные данные
   useEffect(() => {
@@ -83,13 +103,13 @@ const ArticleDetail: React.FC = () => {
           {/* Основной контент */}
           <div className="max-w-none">
             {/* Оглавление сверху статьи для всех размеров экрана */}
-            <div className="mb-8">
+            <div className="mb-8 mt-6">
               <MobileTableOfContents content={article.content} />
             </div>
             
             {/* Заголовок статьи */}
             <header>
-              <h1 className="text-3xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+              <h1 className="article-title text-3xl lg:text-5xl font-bold text-white mb-6 leading-tight">
               {article.title}
             </h1>
             
@@ -185,6 +205,43 @@ const ArticleDetail: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Кнопка "Наверх" */}
+      {showScrollToTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-40 bg-white shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300"
+          style={{
+            width: '60px',
+            height: '48px',
+            borderRadius: '24px',
+            transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out'
+          }}
+          aria-label="Наверх"
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateX(-50%) scale(1.1)'
+            e.currentTarget.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateX(-50%) scale(1)'
+            e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+          }}
+        >
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 24 24" 
+            width="20" 
+            height="20" 
+            fill="none" 
+            stroke="#3535B9" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            strokeWidth="2"
+          >
+            <path d="M12 19V5M5 12l7-7 7 7" />
+          </svg>
+        </button>
+      )}
     </div>
   );
 };

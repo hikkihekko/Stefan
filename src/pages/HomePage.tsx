@@ -9,17 +9,43 @@ import medal from '../icons/медалька.svg'
 import chart from '../icons/график.svg'
 import people from '../icons/люди.svg'
 import stefanLogo from '../icons/stefan.svg'
+import Reviews from '../components/Reviews/Reviews'
 
 const HomePage: React.FC = () => {
   const [techType, setTechType] = useState('')
   const [location, setLocation] = useState('')
   const [workType, setWorkType] = useState('')
   const [searchQuery, setSearchQuery] = useState('')
+  const [openFAQ, setOpenFAQ] = useState<number | null>(null)
+  const [searchError, setSearchError] = useState('')
+  const [filteredItems, setFilteredItems] = useState<any[]>([])
+  const [isSearchActive, setIsSearchActive] = useState(false)
+  const [showScrollToTop, setShowScrollToTop] = useState(false)
   
   // Анимированный текст
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
   const [isVisible, setIsVisible] = useState(true)
   const words = ['с оператором', 'своя техника', 'в москве и мо', 'точно вовремя']
+
+  // Данные каталога техники
+  const catalogItems = [
+    { name: 'Экскаваторы-погрузчики', type: 'Универсальная техника', image: '/images/экск погруз.webp' },
+    { name: 'Автокраны', type: 'Подъемные работы', image: '/images/автокр.jpg' },
+    { name: 'Манипуляторы', type: 'Погрузка/разгрузка', image: '/images/diploma.jpeg' },
+    { name: 'Самосвалы', type: 'Перевозка грузов', image: '/images/gruzovik.jpg' },
+    { name: 'Экскаваторы гусеничные', type: 'Земляные работы', image: '/images/экск гус.jpg' },
+    { name: 'Мини экскаваторы', type: 'Стесненные условия', image: '/images/миниэк.webp' },
+    { name: 'Фронтальные погрузчики', type: 'Сыпучие материалы', image: '/images/фронтпогр.webp' },
+    { name: 'Автовышки', type: 'Высотные работы', image: '/images/автовышк.webp' },
+    { name: 'Мини погрузчики', type: 'Мелкие работы', image: '/images/минипогрузl.jpg' },
+    { name: 'Экскаваторы колёсные', type: 'Дорожные работы', image: '/images/экск колесный.webp' },
+    { name: 'Тралы', type: 'Перевозка техники', image: '/images/трал.jpg' },
+    { name: 'Бульдозеры', type: 'Планировка грунта', image: '/images/бульдлозер.jpg' },
+    { name: 'Катки', type: 'Уплотнение', image: '/images/катки.jpg' },
+    { name: 'Бортовые автомобили', type: 'Доставка материалов', image: '/images/бортмаш.webp' },
+    { name: 'Длинномеры', type: 'Длинные грузы', image: '/images/длинномер.webp' },
+    { name: 'Грейдеры', type: 'Планировка дорог', image: '/images/грейдеры.webp' }
+  ]
 
   const generateWhatsAppMessage = () => {
     const message = `Здравствуйте, хочу заказать технику. Техника: ${techType || 'не указана'}. Местоположение: ${location || 'не указано'}. Фронт работ: ${workType || 'не указан'}.`
@@ -33,11 +59,77 @@ const HomePage: React.FC = () => {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
-    if (searchQuery.trim()) {
-      // Переход на страницу каталога с поисковым запросом
-      window.location.href = `/catalog?search=${encodeURIComponent(searchQuery.trim())}`
+    setSearchError('')
+    
+    if (!searchQuery.trim()) {
+      setSearchError('Введите название техники для поиска')
+      return
     }
+
+    const query = searchQuery.trim().toLowerCase()
+    const filtered = catalogItems.filter(item => 
+      item.name.toLowerCase().includes(query) || 
+      item.type.toLowerCase().includes(query)
+    )
+
+    if (filtered.length === 0) {
+      setSearchError('Техника не найдена. Попробуйте другие ключевые слова')
+      return
+    }
+
+    setFilteredItems(filtered)
+    setIsSearchActive(true)
+    
+    // Плавный переход к каталогу
+    setTimeout(() => {
+      const catalogElement = document.getElementById('catalog')
+      if (catalogElement) {
+        catalogElement.scrollIntoView({ behavior: 'smooth' })
+      }
+    }, 100)
   }
+
+  const clearSearch = () => {
+    setSearchQuery('')
+    setSearchError('')
+    setFilteredItems([])
+    setIsSearchActive(false)
+  }
+
+  const toggleFAQ = (index: number) => {
+    setOpenFAQ(openFAQ === index ? null : index)
+  }
+
+  const faqData = [
+    {
+      question: "Сколько стоит аренда спецтехники в Москве?",
+      answer: "Стоимость зависит от типа техники, её мощности, срока аренды, расстояния доставки и необходимости оператора. Мы дадим точную цену после уточнения всех параметров."
+    },
+    {
+      question: "Минимальный срок аренды — сколько времени?",
+      answer: "Мы сдаём спецтехнику минимум на одну рабочую смену (обычно 8 часов), также возможна почасовая аренда и аренда на длительный срок."
+    },
+    {
+      question: "Предоставляете ли вы технику с оператором (машинистом)?",
+      answer: "Да — большинство наших машин сдаются с квалифицированным оператором. Если вам нужна техника без оператора, уточните, возможно ли это для конкретной модели."
+    },
+    {
+      question: "Как осуществляется доставка техники на объект и сколько времени это займёт?",
+      answer: "Мы доставляем технику собственным транспортом — тралами или эвакуаторами, в зависимости от габаритов. В пределах Москвы доставка обычно занимает от 1 до 2 часов после заказа и согласования."
+    },
+    {
+      question: "Что происходит, если техника ломается во время аренды?",
+      answer: "В случае неисправности мы заменяем технику на аналогичную или производим ремонт на объекте, если это возможно, за наш счёт."
+    },
+    {
+      question: "Как происходит оплата, и какие способы вы принимаете?",
+      answer: "Принимаем как безналичный расчёт (для компаний), так и наличный. Возможна предоплата. Счёт и договор предоставляются заранее."
+    },
+    {
+      question: "Действуете ли вы за пределами МКАД / Московская область?",
+      answer: "Да — мы доставляем технику также в области, но ее стоимость и условия аренды лучше согласовать индивидуально. Пожалуйста, свяжитесь с нами для получения более точного расчета."
+    }
+  ]
 
   // Анимация смены слов
   useEffect(() => {
@@ -53,93 +145,230 @@ const HomePage: React.FC = () => {
 
     return () => clearInterval(interval)
   }, [words.length])
+
+  // Отслеживание прокрутки для кнопки "наверх"
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+      setShowScrollToTop(scrollTop > 300) // Показываем кнопку после прокрутки на 300px
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Функция прокрутки наверх
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
   return (
-    <div className="container mx-auto px-4 sm:px-6">
+    <div className="container mx-auto px-4 sm:px-6" style={{scrollMarginTop: '120px'}}>
       {/* Hero Section */}
-      <section className="grid lg:grid-cols-2 items-start gap-4 lg:gap-6 mt-8 lg:mt-12">
-        <div className="py-6 lg:py-10 px-6 lg:px-0">
-          <h1 className="font-baron font-extrabold leading-tight normal-case text-4xl sm:text-5xl md:text-6xl lg:text-7xl" style={{textTransform: 'none'}}>
-            спецтехника<br/>
-            <span className="whitespace-nowrap">
-              в аренду: <span 
-                className="text-white/70 inline-block transition-all duration-300 ease-in-out" 
-                style={{
-                  opacity: isVisible ? 1 : 0,
-                  transform: isVisible ? 'translateY(0)' : 'translateY(-10px)',
-                  minWidth: '280px',
-                  textAlign: 'left'
-                }}
-              >
-                {words[currentWordIndex]}
+      <section className="mt-8 lg:mt-12">
+        {/* Mobile Layout: Stack vertically */}
+        <div className="lg:hidden">
+          <div className="py-6 px-6">
+            <h1 id="top" className="font-baron font-extrabold leading-tight normal-case text-4xl sm:text-5xl md:text-6xl" style={{textTransform: 'none'}}>
+              спецтехника<br/>
+              <span className="block sm:inline">
+                в аренду: <span 
+                  className="text-white/70 inline-block transition-all duration-300 ease-in-out" 
+                  style={{
+                    opacity: isVisible ? 1 : 0,
+                    transform: isVisible ? 'translateY(0)' : 'translateY(-10px)',
+                    minWidth: 'auto',
+                    textAlign: 'left'
+                  }}
+                >
+                  {words[currentWordIndex]}
+                </span>
               </span>
-            </span>
-          </h1>
-          <p className="mt-4 lg:mt-6 text-white/85 max-w-xl font-medium text-base lg:text-lg">Собственный парк техники, проверенные операторы, выгодные условия. Просто супер, самая лучшая компания, ручаемся за результат.</p>
-          
-          {/* Поисковая строка */}
-          <div className="mt-4 lg:mt-6">
-            <form onSubmit={handleSearch}>
-              <div className="relative max-w-md">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center justify-center pointer-events-none">
-                  <svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <path d="m21 21-4.35-4.35"></path>
-                  </svg>
+            </h1>
+            <p className="mt-4 text-white/85 max-w-xl font-medium text-base">Собственный парк техники, проверенные операторы, выгодные условия. Просто супер, самая лучшая компания, ручаемся за результат.</p>
+            
+            {/* Поисковая строка */}
+            <div className="mt-4">
+              <form onSubmit={handleSearch}>
+                <div className="relative max-w-md mx-auto">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center justify-center pointer-events-none">
+                    <svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                      <circle cx="11" cy="11" r="8"></circle>
+                      <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                  </div>
+                  <input
+                    type="text"
+                    className="w-full h-[50px] pl-12 pr-4 rounded-full bg-white/25 border border-white/40 text-white placeholder-white/70 text-[16px] font-manrope focus:bg-white/35 focus:border-white/60 focus:outline-none transition-all"
+                    placeholder="Поиск техники в каталоге..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
                 </div>
-                <input
-                  type="text"
-                  className="w-full h-[50px] pl-12 pr-4 rounded-full bg-white/25 border border-white/40 text-white placeholder-white/70 text-[16px] font-manrope focus:bg-white/35 focus:border-white/60 focus:outline-none transition-all"
-                  placeholder="Поиск техники в каталоге..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
+              </form>
+            </div>
+          </div>
+          
+          {/* Form Card - Centered on mobile */}
+          <div className="flex justify-center px-6 pb-6">
+            <div className="rounded-[24px] bg-white text-slate-900 w-full max-w-md h-auto">
+              <div className="h-full flex flex-col px-6 py-6">
+                <div className="flex flex-col items-center">
+                  <h3 className="font-baron font-bold text-center text-xl mb-6" style={{lineHeight: 1}}>подобрать технику</h3>
+                  <div className="w-full flex flex-col items-center mb-6">
+                    <div className="mb-4 w-full max-w-[344px]">
+                      <label className="block text-[#2D3748] font-manrope font-medium text-sm mb-2" style={{lineHeight: 1}}>Тип техники</label>
+                      <input 
+                        className="w-full h-[48px] rounded-[24px] bg-slate-100 border border-slate-200 px-4 text-sm font-manrope font-normal focus:border-[#ADB8FF] focus:outline-none" 
+                        placeholder="Желаемые характеристики техники"
+                        value={techType}
+                        onChange={(e) => setTechType(e.target.value)}
+                      />
+                    </div>
+                    <div className="mb-4 w-full max-w-[344px]">
+                      <label className="block text-[#2D3748] font-manrope font-medium text-sm mb-2" style={{lineHeight: 1}}>Местоположение</label>
+                      <input 
+                        className="w-full h-[48px] rounded-[24px] bg-slate-100 border border-slate-200 px-4 text-sm font-manrope font-normal focus:border-[#ADB8FF] focus:outline-none" 
+                        placeholder="Адрес работ"
+                        value={location}
+                        onChange={(e) => setLocation(e.target.value)}
+                      />
+                    </div>
+                    <div className="w-full max-w-[344px]">
+                      <label className="block text-[#2D3748] font-manrope font-medium text-sm mb-2" style={{lineHeight: 1}}>Фронт работ</label>
+                      <input 
+                        className="w-full h-[48px] rounded-[24px] bg-slate-100 border border-slate-200 px-4 text-sm font-manrope font-normal focus:border-[#ADB8FF] focus:outline-none" 
+                        placeholder="Краткое описание задачи"
+                        value={workType}
+                        onChange={(e) => setWorkType(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <button 
+                    className="w-full max-w-[344px] h-[50px] rounded-[24px] bg-black hover:bg-[#0C1C8F] text-white font-manrope font-medium text-sm transition-colors" 
+                    onClick={handleSubmit}
+                    type="button"
+                  >
+                    Написать менеджеру
+                  </button>
+                </div>
               </div>
-            </form>
+            </div>
           </div>
         </div>
-        
-        {/* Form Card */}
-        <div className="lg:justify-self-end">
-          <div className="rounded-[24px] bg-white text-slate-900 w-full max-w-md mx-auto lg:mx-0 lg:w-[392px] h-auto lg:h-[440px] mt-6 lg:mt-6 mr-0 lg:mr-6">
-            <div className="h-full flex flex-col px-6 py-6 lg:py-6">
-              <div className="flex flex-col items-center">
-                <h3 className="font-baron font-bold text-center text-xl lg:text-3xl mb-6" style={{lineHeight: 1}}>подобрать технику</h3>
-                <div className="w-full flex flex-col items-center mb-6">
-                  <div className="mb-4 lg:mb-6 w-full max-w-[344px]">
-                    <label className="block text-[#2D3748] font-manrope font-medium text-sm lg:text-base mb-2" style={{lineHeight: 1}}>Тип техники</label>
-                    <input 
-                      className="w-full h-[48px] rounded-[24px] bg-slate-100 border border-slate-200 px-4 text-sm lg:text-base font-manrope font-normal focus:border-[#ADB8FF] focus:outline-none" 
-                      placeholder="Желаемые характеристики техники"
-                      value={techType}
-                      onChange={(e) => setTechType(e.target.value)}
-                    />
-                  </div>
-                  <div className="mb-4 lg:mb-6 w-full max-w-[344px]">
-                    <label className="block text-[#2D3748] font-manrope font-medium text-sm lg:text-base mb-2" style={{lineHeight: 1}}>Местоположение</label>
-                    <input 
-                      className="w-full h-[48px] rounded-[24px] bg-slate-100 border border-slate-200 px-4 text-sm lg:text-base font-manrope font-normal focus:border-[#ADB8FF] focus:outline-none" 
-                      placeholder="Адрес работ"
-                      value={location}
-                      onChange={(e) => setLocation(e.target.value)}
-                    />
-                  </div>
-                  <div className="w-full max-w-[344px]">
-                    <label className="block text-[#2D3748] font-manrope font-medium text-sm lg:text-base mb-2" style={{lineHeight: 1}}>Фронт работ</label>
-                    <input 
-                      className="w-full h-[48px] rounded-[24px] bg-slate-100 border border-slate-200 px-4 text-sm lg:text-base font-manrope font-normal focus:border-[#ADB8FF] focus:outline-none" 
-                      placeholder="Краткое описание задачи"
-                      value={workType}
-                      onChange={(e) => setWorkType(e.target.value)}
-                    />
-                  </div>
-                </div>
-                <button 
-                  className="w-full max-w-[344px] h-[50px] rounded-[24px] bg-black hover:bg-[#0C1C8F] text-white font-manrope font-medium text-sm lg:text-base transition-colors" 
-                  onClick={handleSubmit}
-                  type="button"
+
+        {/* Desktop Layout: Side by side */}
+        <div className="hidden lg:grid lg:grid-cols-2 items-start gap-6">
+          <div className="py-10">
+            <h1 id="top" className="font-baron font-extrabold leading-tight normal-case text-7xl" style={{textTransform: 'none'}}>
+              спецтехника<br/>
+              <span className="whitespace-nowrap">
+                в аренду: <span 
+                  className="text-white/70 inline-block transition-all duration-300 ease-in-out" 
+                  style={{
+                    opacity: isVisible ? 1 : 0,
+                    transform: isVisible ? 'translateY(0)' : 'translateY(-10px)',
+                    minWidth: 'auto',
+                    textAlign: 'left'
+                  }}
                 >
-                  Написать менеджеру
-                </button>
+                  {words[currentWordIndex]}
+                </span>
+              </span>
+            </h1>
+            <p className="mt-6 text-white/85 max-w-xl font-medium text-lg">Собственный парк техники, проверенные операторы, выгодные условия. Просто супер, самая лучшая компания, ручаемся за результат.</p>
+            
+            {/* Поисковая строка */}
+            <div className="mt-6">
+              <form onSubmit={handleSearch}>
+                <div className="relative max-w-md">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center justify-center pointer-events-none">
+                    <svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                      <circle cx="11" cy="11" r="8"></circle>
+                      <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                  </div>
+                  <input
+                    type="text"
+                    className={`w-full h-[50px] pl-12 pr-12 rounded-full bg-white/25 border text-white placeholder-white/70 text-[16px] font-manrope focus:bg-white/35 focus:outline-none transition-all ${
+                      searchError ? 'border-red-400 focus:border-red-500' : 'border-white/40 focus:border-white/60'
+                    }`}
+                    placeholder="Поиск техники в каталоге..."
+                    value={searchQuery}
+                    onChange={(e) => {
+                      setSearchQuery(e.target.value)
+                      setSearchError('')
+                    }}
+                  />
+                  {searchQuery && (
+                    <button
+                      type="button"
+                      onClick={clearSearch}
+                      className="absolute inset-y-0 right-0 pr-4 flex items-center justify-center text-white/60 hover:text-white transition-colors"
+                    >
+                      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  )}
+                </div>
+                {searchError && (
+                  <p className="mt-2 text-red-400 text-sm font-manrope">{searchError}</p>
+                )}
+                {isSearchActive && filteredItems.length > 0 && (
+                  <p className="mt-2 text-white/80 text-sm font-manrope">
+                    Найдено: {filteredItems.length} {filteredItems.length === 1 ? 'вид техники' : 'вида техники'}
+                  </p>
+                )}
+              </form>
+            </div>
+          </div>
+          
+          {/* Form Card - Desktop */}
+          <div className="justify-self-end">
+            <div className="rounded-[24px] bg-white text-slate-900 w-[392px] h-[440px] mt-6 mr-6">
+              <div className="h-full flex flex-col px-6 py-6">
+                <div className="flex flex-col items-center">
+                  <h3 className="font-baron font-bold text-center text-3xl mb-6" style={{lineHeight: 1}}>подобрать технику</h3>
+                  <div className="w-full flex flex-col items-center mb-6">
+                    <div className="mb-6 w-full max-w-[344px]">
+                      <label className="block text-[#2D3748] font-manrope font-medium text-base mb-2" style={{lineHeight: 1}}>Тип техники</label>
+                      <input 
+                        className="w-full h-[48px] rounded-[24px] bg-slate-100 border border-slate-200 px-4 text-base font-manrope font-normal focus:border-[#ADB8FF] focus:outline-none" 
+                        placeholder="Желаемые характеристики техники"
+                        value={techType}
+                        onChange={(e) => setTechType(e.target.value)}
+                      />
+                    </div>
+                    <div className="mb-6 w-full max-w-[344px]">
+                      <label className="block text-[#2D3748] font-manrope font-medium text-base mb-2" style={{lineHeight: 1}}>Местоположение</label>
+                      <input 
+                        className="w-full h-[48px] rounded-[24px] bg-slate-100 border border-slate-200 px-4 text-base font-manrope font-normal focus:border-[#ADB8FF] focus:outline-none" 
+                        placeholder="Адрес работ"
+                        value={location}
+                        onChange={(e) => setLocation(e.target.value)}
+                      />
+                    </div>
+                    <div className="w-full max-w-[344px]">
+                      <label className="block text-[#2D3748] font-manrope font-medium text-base mb-2" style={{lineHeight: 1}}>Фронт работ</label>
+                      <input 
+                        className="w-full h-[48px] rounded-[24px] bg-slate-100 border border-slate-200 px-4 text-base font-manrope font-normal focus:border-[#ADB8FF] focus:outline-none" 
+                        placeholder="Краткое описание задачи"
+                        value={workType}
+                        onChange={(e) => setWorkType(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <button 
+                    className="w-full max-w-[344px] h-[50px] rounded-[24px] bg-black hover:bg-[#0C1C8F] text-white font-manrope font-medium text-base transition-colors" 
+                    onClick={handleSubmit}
+                    type="button"
+                  >
+                    Написать менеджеру
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -151,32 +380,25 @@ const HomePage: React.FC = () => {
        <div className="bg-white rounded-[24px]" style={{padding: 0}}>
          
          {/* Каталог техники */}
-         <div className="px-6 lg:px-6 py-6 lg:py-12">
+         <div id="catalog" className="px-6 lg:px-6 py-6 lg:py-12" style={{paddingTop: '32px', scrollMarginTop: '220px'}}>
            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6 lg:mb-6">
              <h2 className="font-baron font-extrabold text-slate-900 text-3xl sm:text-4xl lg:text-5xl mb-2 lg:mb-0" style={{lineHeight: 1}}>каталог техники</h2>
-             <p className="font-manrope font-medium text-base lg:text-xl text-[#525252]" style={{lineHeight: 1}}>Любая техника под Ваш запрос</p>
+             <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+               <p className="font-manrope font-medium text-base lg:text-xl text-[#525252]" style={{lineHeight: 1}}>Любая техника под Ваш запрос</p>
+               {isSearchActive && (
+                 <button
+                   onClick={clearSearch}
+                   className="px-4 py-2 bg-[#3535B9] text-white rounded-full text-sm font-manrope hover:bg-[#2a2a9a] transition-colors"
+                 >
+                   Показать все
+                 </button>
+               )}
+             </div>
            </div>
            
            {/* Каталог техники - адаптивная сетка */}
-             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
-              {[
-                { name: 'Экскаваторы-погрузчики', type: 'Универсальная техника', image: '/images/экск погруз.webp' },
-                { name: 'Автокраны', type: 'Подъемные работы', image: '/images/автокр.jpg' },
-                { name: 'Манипуляторы', type: 'Погрузка/разгрузка', image: '/images/diploma.jpeg' },
-                { name: 'Самосвалы', type: 'Перевозка грузов', image: '/images/gruzovik.jpg' },
-                { name: 'Экскаваторы гусеничные', type: 'Земляные работы', image: '/images/экск гус.jpg' },
-                { name: 'Мини экскаваторы', type: 'Стесненные условия', image: '/images/миниэк.webp' },
-                { name: 'Фронтальные погрузчики', type: 'Сыпучие материалы', image: '/images/фронтпогр.webp' },
-                { name: 'Автовышки', type: 'Высотные работы', image: '/images/автовышк.webp' },
-                { name: 'Мини погрузчики', type: 'Мелкие работы', image: '/images/минипогрузl.jpg' },
-                { name: 'Экскаваторы колёсные', type: 'Дорожные работы', image: '/images/экск колесный.webp' },
-                { name: 'Тралы', type: 'Перевозка техники', image: '/images/трал.jpg' },
-                { name: 'Бульдозеры', type: 'Планировка грунта', image: '/images/бульдлозер.jpg' },
-                { name: 'Катки', type: 'Уплотнение', image: '/images/катки.jpg' },
-                { name: 'Бортовые автомобили', type: 'Доставка материалов', image: '/images/бортмаш.webp' },
-                { name: 'Длинномеры', type: 'Длинные грузы', image: '/images/длинномер.webp' },
-                { name: 'Грейдеры', type: 'Планировка дорог', image: '/images/грейдеры.webp' }
-              ].map((item, index) => {
+             <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
+              {(isSearchActive ? filteredItems : catalogItems).map((item, index) => {
                 const cardContent = (
                   <>
                     {/* Фоновое изображение */}
@@ -193,7 +415,7 @@ const HomePage: React.FC = () => {
                     {/* Контент */}
                     <div className="relative p-3 sm:p-4 lg:p-5 h-full flex flex-col justify-between text-white">
                       <div>
-                        <span className="inline-block px-2 py-1 sm:px-3 sm:py-1 bg-white/20 backdrop-blur-sm rounded-full font-medium mb-2 text-xs sm:text-sm lg:text-base">
+                        <span className="inline-block px-3 py-1 sm:px-3 sm:py-1 bg-white/20 backdrop-blur-sm rounded-[12px] sm:rounded-full font-medium mb-2 text-xs sm:text-sm lg:text-base">
                           {item.type}
                         </span>
                       </div>
@@ -261,14 +483,14 @@ const HomePage: React.FC = () => {
                   <Link 
                     key={index}
                     to={linkPath}
-                    className="relative rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 block h-32 sm:h-40 lg:h-48"
+                    className="relative rounded-[16px] sm:rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 block h-40 sm:h-40 lg:h-48"
                   >
                     {cardContent}
                   </Link>
                 ) : (
                   <div 
                     key={index}
-                    className="relative rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 h-32 sm:h-40 lg:h-48"
+                    className="relative rounded-[16px] sm:rounded-[24px] overflow-hidden group cursor-pointer hover:scale-105 transition-all duration-300 h-40 sm:h-40 lg:h-48"
                   >
                     {cardContent}
                   </div>
@@ -278,15 +500,15 @@ const HomePage: React.FC = () => {
          </div>
 
                  {/* Блок отзывов */}
-       <div className="mt-8 lg:mt-8">
+       <div id="about" className="mt-8 lg:mt-8" style={{scrollMarginTop: '250px'}}>
          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6 lg:mb-6 px-6 lg:px-6">
            <h2 className="font-baron font-extrabold text-slate-900 text-3xl sm:text-4xl lg:text-5xl mb-2 lg:mb-0" style={{lineHeight: 1, margin: 0}}>почему выбирают нас</h2>
-           <p className="font-manrope font-medium text-base lg:text-xl text-[#525252]" style={{lineHeight: 1, margin: 0}}>Тут отзывы Яндекса</p>
+           <p className="font-manrope font-medium text-base lg:text-xl text-[#525252]" style={{lineHeight: 1, margin: 0}}>Отзывы наших клиентов</p>
          </div>
            
-           {/* Место для отзывов - пока пустое */}
-           <div className="flex items-center justify-center bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200 mx-6 lg:mx-6 h-64 sm:h-80 lg:h-96">
-             <p className="text-gray-400 font-manrope text-base lg:text-lg">Отзывы будут добавлены позже</p>
+           {/* Компонент отзывов */}
+           <div className="px-6 lg:px-6" style={{marginTop: '32px'}}>
+             <Reviews />
            </div>
          </div>
 
@@ -384,6 +606,51 @@ const HomePage: React.FC = () => {
            </div>
          </div>
 
+         {/* Блок FAQ */}
+         <div className="mt-8 lg:mt-12 px-6 lg:px-6" style={{paddingBottom: '32px'}}>
+           <div className="flex items-center justify-between mb-6 lg:mb-8">
+             <h2 className="font-baron font-extrabold text-slate-900 text-3xl sm:text-4xl lg:text-5xl" style={{lineHeight: 1, margin: 0}}>часто задаваемые вопросы</h2>
+           </div>
+           
+           <div className="space-y-4">
+             {faqData.map((faq, index) => (
+               <div 
+                 key={index}
+                 className="rounded-2xl overflow-hidden bg-white/80 backdrop-blur-sm hover:bg-white transition-all duration-300"
+                 style={{border: '1px solid #ADB8FF'}}
+               >
+                 <button
+                   onClick={() => toggleFAQ(index)}
+                   className="w-full text-left flex items-center justify-between hover:bg-slate-50 transition-colors"
+                   style={{
+                     paddingTop: '24px',
+                     paddingBottom: openFAQ === index ? '0px' : '24px',
+                     paddingLeft: '24px', 
+                     paddingRight: '24px'
+                   }}
+                 >
+                   <h3 className="font-manrope font-semibold text-lg lg:text-xl pr-4" style={{fontSize: '20px', lineHeight: 1.3, color: '#3535B9'}}>
+                     {faq.question}
+                   </h3>
+                   <div className={`flex-shrink-0 w-6 h-6 flex items-center justify-center transition-transform duration-300 ${openFAQ === index ? 'rotate-180' : ''}`}>
+                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{color: '#3535B9'}}>
+                       <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                     </svg>
+                   </div>
+                 </button>
+                 
+                 <div className={`transition-all duration-300 overflow-hidden ${openFAQ === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+                   <div style={{paddingTop: '24px', paddingLeft: '24px', paddingRight: '24px', paddingBottom: '24px'}}>
+                     <p className="font-manrope font-normal text-slate-700" style={{fontSize: '18px', lineHeight: 1}}>
+                       {faq.answer}
+                     </p>
+                   </div>
+                 </div>
+               </div>
+             ))}
+           </div>
+         </div>
+
        </div>
      </section>
 
@@ -393,46 +660,49 @@ const HomePage: React.FC = () => {
          <Link to="/articles" className="text-white/80 hover:text-white underline font-manrope font-medium text-xl">Все статьи</Link>
        </div>
      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
-       <Link to="/articles/top-5-vostrebovannyh-vidov-spectehniki-moskva-2025" className="glass rounded-2xl p-5 block hover:bg-white/15 transition-colors">
-         <div className="font-semibold text-lg">Топ-5 самых востребованных видов спецтехники в Москве и МО в 2025 году</div>
+       <Link to="/articles/top-5-vostrebovannyh-vidov-spectehniki-moskva-2025" className="bg-white/25 border border-white/40 rounded-2xl p-5 block hover:bg-white/35 hover:border-white/60 transition-all h-full flex flex-col">
+         <div className="font-semibold text-lg leading-tight flex-1">Топ-5 самых востребованных видов спецтехники в Москве и МО в 2025 году</div>
          <div className="text-white/75 text-sm mt-2">Рейтинг самых популярных видов техники в Москве и МО</div>
        </Link>
-       <Link to="/articles/arenda-samosvala-moskva-2025-vybor-tehniki-gruntov" className="glass rounded-2xl p-5 block hover:bg-white/15 transition-colors">
-         <div className="font-semibold text-lg">Аренда самосвала в Москве и МО 2025: выбор техники для различных грунтов и задач</div>
+       <Link to="/articles/arenda-samosvala-moskva-2025-vybor-tehniki-gruntov" className="bg-white/25 border border-white/40 rounded-2xl p-5 block hover:bg-white/35 hover:border-white/60 transition-all h-full flex flex-col">
+         <div className="font-semibold text-lg leading-tight flex-1">Аренда самосвала в Москве и МО 2025: выбор техники для различных грунтов и задач</div>
          <div className="text-white/75 text-sm mt-2">Подбор техники для различных грунтов и типов работ</div>
        </Link>
-       <Link to="/articles/arenda-mini-ekskavatora-moskva-2025-razresheniya-stoimost" className="glass rounded-2xl p-5 block hover:bg-white/15 transition-colors">
-         <div className="font-semibold text-lg">Аренда мини-экскаватора в Москве и МО: разрешения и реальная стоимость в 2025</div>
+       <Link to="/articles/arenda-mini-ekskavatora-moskva-2025-razresheniya-stoimost" className="bg-white/25 border border-white/40 rounded-2xl p-5 block hover:bg-white/35 hover:border-white/60 transition-all h-full flex flex-col">
+         <div className="font-semibold text-lg leading-tight flex-1">Аренда мини-экскаватора в Москве и МО: разрешения и реальная стоимость в 2025</div>
          <div className="text-white/75 text-sm mt-2">Разрешения, ограничения и реальная стоимость аренды</div>
        </Link>
      </div>
     </section>
 
      {/* Футер */}
-     <footer className="py-8 lg:py-16">
+     <footer id="contacts" className="py-8 lg:py-16 mt-12 lg:mt-0" style={{scrollMarginTop: '220px'}}>
        <div className="container mx-auto px-4 sm:px-6">
          <div className="flex flex-col lg:flex-row lg:justify-between lg:items-end mb-8">
            {/* Логотип и описание */}
            <div className="flex-1 mb-8 lg:mb-0">
              <img src={stefanLogo} alt="СТЕФАН" className="h-10 lg:h-12 mb-6 lg:mb-14" />
-             <p className="text-white/90 font-manrope text-base lg:text-lg leading-relaxed">
-               Надежная аренда спецтехники в Москве и Московской области.<br/>
-               Полный спектр подъемной техники для любых задач.
-             </p>
+            <p className="text-white/90 font-manrope text-base lg:text-lg leading-relaxed">
+              Надежная аренда спецтехники в Москве и Московской области.<br/>
+              Полный спектр техники для любых задач.
+            </p>
            </div>
            
            {/* Контакты */}
-           <div className="lg:mr-6">
-             <h3 className="font-baron font-bold text-white text-3xl lg:text-5xl mb-8 lg:mb-16 text-right" style={{lineHeight: 1}}>наши контакты</h3>
-             <div className="flex justify-end">
-               <div className="flex items-center space-x-3">
+           <div className="lg:mr-6 lg:transform lg:translateY(-20px) lg:translateX(24px)">
+             <h3 className="font-baron font-bold text-white text-3xl lg:text-5xl mb-6 lg:mb-16 text-left lg:text-right" style={{lineHeight: 1, transform: 'translateY(0px)'}}>наши контакты</h3>
+             <div className="flex justify-start lg:justify-end" style={{transform: 'translateY(0px)'}}>
+               <a 
+                 href="tel:+79857671500" 
+                 className="flex items-center space-x-3 hover:opacity-80 transition-opacity cursor-pointer"
+               >
                  <div className="w-5 h-5 lg:w-6 lg:h-6 flex items-center justify-center">
                    <svg className="text-white w-5 h-5 lg:w-6 lg:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                    </svg>
                  </div>
                  <span className="text-white font-manrope text-base lg:text-xl">+7 (985) 767-15-00</span>
-               </div>
+               </a>
              </div>
            </div>
          </div>
@@ -441,21 +711,86 @@ const HomePage: React.FC = () => {
          <div className="border-t border-white/20 mb-6"></div>
          
          {/* Нижняя часть футера */}
-         <div className="flex flex-col md:flex-row justify-between items-center">
-           <p className="text-white/80 font-manrope mb-4 md:mb-0 text-sm lg:text-base">
+         <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center space-y-4 lg:space-y-0">
+           <p className="text-white/80 font-manrope text-sm lg:text-base">
              © 2025 ООО "СТЕФАН". Все права защищены.
            </p>
-           <div className="flex flex-col sm:flex-row gap-4 sm:gap-12">
-             <a href="#" className="text-white/80 hover:text-white font-manrope transition-colors text-sm lg:text-base">
-               Пользовательское соглашение
-             </a>
-             <a href="#" className="text-white/80 hover:text-white font-manrope transition-colors text-sm lg:text-base">
-               Политика конфиденциальности
-             </a>
-           </div>
+           <p className="text-white/80 font-manrope text-sm lg:text-base">
+             Все модели техники представлены исключительно для ознакомления
+           </p>
          </div>
        </div>
      </footer>
+
+    {/* Кнопка "Позвонить" */}
+    <a 
+      href="tel:+79857671500" 
+      className="fixed bottom-8 right-8 z-50 w-28 h-28 bg-white rounded-full shadow-lg hover:shadow-xl flex items-center justify-center"
+       style={{ 
+         borderRadius: '50%',
+         transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out'
+       }}
+       aria-label="Позвонить"
+       onMouseEnter={(e) => {
+         e.currentTarget.style.transform = 'scale(1.2)';
+         e.currentTarget.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25)';
+       }}
+       onMouseLeave={(e) => {
+         e.currentTarget.style.transform = 'scale(1)';
+         e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
+       }}
+     >
+       <svg 
+         xmlns="http://www.w3.org/2000/svg" 
+         viewBox="0 0 24 24" 
+         width="32" 
+         height="32" 
+         fill="none" 
+         stroke="#3535B9" 
+         strokeLinecap="round" 
+         strokeLinejoin="round" 
+         strokeWidth="2"
+       >
+         <path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+       </svg>
+     </a>
+
+     {/* Кнопка "Наверх" */}
+     {showScrollToTop && (
+       <button
+         onClick={scrollToTop}
+         className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-40 bg-white shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300"
+         style={{
+           width: '60px',
+           height: '48px',
+           borderRadius: '24px',
+           transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out'
+         }}
+         aria-label="Наверх"
+         onMouseEnter={(e) => {
+           e.currentTarget.style.transform = 'translateX(-50%) scale(1.1)'
+           e.currentTarget.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
+         }}
+         onMouseLeave={(e) => {
+           e.currentTarget.style.transform = 'translateX(-50%) scale(1)'
+           e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+         }}
+       >
+         <svg 
+           xmlns="http://www.w3.org/2000/svg" 
+           viewBox="0 0 24 24" 
+           width="20" 
+           height="20" 
+           fill="none" 
+           stroke="#3535B9" 
+           strokeLinecap="round" 
+           strokeLinejoin="round" 
+           strokeWidth="2"
+         >
+           <path d="M12 19V5M5 12l7-7 7 7" />
+         </svg>
+       </button>
+     )}
    </div>
  )
 }

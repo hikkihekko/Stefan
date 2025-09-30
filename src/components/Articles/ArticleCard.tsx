@@ -18,7 +18,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
     }).format(date);
   };
 
-  const cardClasses = "group relative overflow-hidden rounded-xl bg-white/10 backdrop-blur-md border border-white/20 shadow-glass hover:shadow-glass-hover transition-all duration-300 hover:scale-[1.02] hover:bg-white/15 h-[360px]";
+  const cardClasses = "article-card group relative overflow-hidden rounded-xl bg-white/10 backdrop-blur-md border border-white/20 shadow-glass hover:shadow-glass-hover transition-all duration-300 hover:scale-[1.02] hover:bg-white/15 h-full flex flex-col";
 
   // Placeholder для изображения
   const PlaceholderIcon = () => (
@@ -33,7 +33,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
     <Link to={`/articles/${article.slug}`} className="block">
       <article className={`${cardClasses} cursor-pointer`}>
       {/* Изображение */}
-      <div className="relative h-48 overflow-hidden">
+      <div className="relative h-56 sm:h-48 overflow-hidden" style={{ height: window.innerWidth < 640 ? '224px' : '192px' }}>
         {/* Placeholder пока изображение загружается */}
         {(!imageLoaded || imageError) && <PlaceholderIcon />}
         
@@ -45,6 +45,13 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
             className={`w-full h-full object-cover transition-all duration-300 group-hover:scale-110 ${
               imageLoaded ? 'opacity-100' : 'opacity-0'
             }`}
+            style={{ 
+              width: '100%', 
+              height: '100%', 
+              objectFit: 'cover',
+              maxWidth: 'none',
+              maxHeight: 'none'
+            }}
             loading="lazy"
             onLoad={() => setImageLoaded(true)}
             onError={() => setImageError(true)}
@@ -74,14 +81,14 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
       </div>
 
       {/* Контент */}
-      <div className="p-5 flex flex-col h-[184px]">
+      <div className="p-5 flex flex-col flex-1">
         {/* Заголовок */}
-        <h2 className="text-lg font-bold text-white mb-4 group-hover:text-stefan-blue transition-colors line-clamp-2 leading-tight">
+        <h2 className="text-lg font-bold text-white mb-4 group-hover:text-stefan-blue transition-colors leading-tight">
           {article.title}
         </h2>
 
         {/* Excerpt */}
-        <p className="text-white/85 text-sm leading-relaxed line-clamp-5 flex-grow">
+        <p className="text-white/85 text-sm leading-relaxed flex-grow">
           {article.excerpt}
         </p>
       </div>

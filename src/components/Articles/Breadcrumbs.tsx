@@ -15,14 +15,14 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items }) => {
           className="glass transition-all duration-300 ease-in-out"
           style={{ 
             minWidth: 'fit-content',
-            maxWidth: 'fit-content',
+            maxWidth: '100%',
             borderRadius: 12, 
             padding: '10px 16px'
           }}
         >
-        <ol className="flex items-center space-x-2 text-base font-manrope">
+        <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-base font-manrope">
           {items.map((item, index) => (
-            <li key={index} className="flex items-center whitespace-nowrap">
+            <li key={index} className="flex items-center">
               {index > 0 && (
                 <svg 
                   className="w-2.5 h-2.5 mx-2 text-[#3535B9]/90" 
@@ -41,13 +41,13 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items }) => {
               {item.href && index < items.length - 1 ? (
                 <Link 
                   to={item.href}
-                  className="text-[#3535B9]/90 hover:text-[#3535B9] transition-colors duration-200 font-medium"
+                  className="text-[#3535B9]/90 hover:text-[#3535B9] transition-colors duration-200 font-medium break-words"
                 >
                   {item.label}
                 </Link>
               ) : (
                 <span 
-                  className="text-[#3535B9]/90 font-medium"
+                  className="text-[#3535B9]/90 font-medium break-words"
                   aria-current={index === items.length - 1 ? 'page' : undefined}
                 >
                   {item.label}

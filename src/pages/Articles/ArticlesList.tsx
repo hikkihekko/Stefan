@@ -5,7 +5,6 @@ import ArticleCard from '../../components/Articles/ArticleCard';
 
 const ArticlesList: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [showScrollTop, setShowScrollTop] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   
   const articlesPerPage = 9;
@@ -19,32 +18,16 @@ const ArticlesList: React.FC = () => {
   // SEO мета данные
   useEffect(() => {
     updatePageMeta({
-      title: 'Строительная-энциклопедия | СТЕФАН',
-      description: 'Строительная энциклопедия - полные знания о строительстве и аренде спецтехники в Москве. Полезные статьи, советы экспертов, руководства по безопасности и многое другое.',
+      title: 'Статьи о спецтехнике | СТЕФАН',
+      description: 'Полезные статьи о спецтехнике - полные знания о строительстве и аренде спецтехники в Москве. Советы экспертов, руководства по безопасности и выбору техники.',
       keywords: ['аренда спецтехники', 'статьи', 'Москва', 'экскаваторы', 'краны', 'бульдозеры', 'строительство'],
       canonicalUrl: 'https://stefan-rent.ru/articles',
       section: 'articles'
     });
   }, []);
 
-  // Обработка прокрутки для кнопки "Наверх"
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrolled = window.scrollY > 400;
-      setShowScrollTop(scrolled);
-    };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
-  // Функция прокрутки наверх
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  };
 
 
 
@@ -167,7 +150,7 @@ const ArticlesList: React.FC = () => {
       
       <div className="container-custom pb-12 px-5 sm:px-8 lg:px-14">
         {/* Статьи */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:gap-10">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:gap-10 items-stretch">
           {currentArticles.map(article => (
             <ArticleCard key={article.id} article={article} />
           ))}
@@ -233,28 +216,6 @@ const ArticlesList: React.FC = () => {
         )}
       </div>
 
-      {/* Кнопка "Наверх" */}
-      {showScrollTop && (
-        <button
-          onClick={scrollToTop}
-          className="fixed left-6 bottom-6 z-50 p-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-glass hover:shadow-glass-hover hover:bg-white/15 transition-all duration-300 hover:scale-105 group"
-          aria-label="Вернуться наверх"
-        >
-          <svg 
-            className="w-6 h-6 text-gray-600 group-hover:text-gray-700 transition-colors" 
-            fill="none" 
-            stroke="currentColor" 
-            viewBox="0 0 24 24"
-          >
-            <path 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-              strokeWidth={2} 
-              d="M5 10l7-7m0 0l7 7m-7-7v18" 
-            />
-          </svg>
-        </button>
-      )}
     </div>
   );
 };
